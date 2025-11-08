@@ -11,3 +11,9 @@ if __name__ == "__main__":
 
     env = make_env(NAME_ENV)
     print_env_info("Wrapped", env)
+    obs, info = env.reset()
+    done = False
+
+    while not done:
+        action = env.action_space.sample()  #random sample for now
+        obs, reward, done, truncated, info = env.step(action)

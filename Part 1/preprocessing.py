@@ -8,10 +8,21 @@ class ImageToPyTorch(gym.ObservationWrapper):
         super().__init__(env)
         old_shape = self.observation_space.shape
         self.observation_space = gym.spaces.Box(low=0.0, high=1.0, shape=(old_shape[-1], old_shape[0], old_shape[1]), dtype=np.float32) 
-        # change the order of the matrix (frame). For using torch we need to swap the dimensions
+        #change the order of the matrix (frame). For using torch we need to swap the dimensions
 
     def observation(self, observation):
         return np.moveaxis(observation, 2, 0)
+
+class FireResetEnv(gym.Wrapper):
+    def __init__(self, env):
+        super().__init__(env)
+
+    def reset(self, **kwargs):
+        obs, info = self.env.reset(**kwargs)
+        obs, _, terminated, truncated, info = self.env.step(1)  # FIRE
+        if terminated or truncated:
+            obs, info = self.env.reset(**kwargs)
+        return obs, info
 
 
 class ScaledFloatFrame(gym.ObservationWrapper):
@@ -30,11 +41,11 @@ def print_env_info(name, env):
 
 
 def make_env(env_name):
-    env = gym.make(env_name) # get the environment
+    env = gym.make(env_name, render_mode="human") # get the environment
     print("Standard Env.        : {}".format(env.observation_space.shape)) 
     env = MaxAndSkipObservation(env, skip=4) # all frames too similar, then take one framework every 4
     print("MaxAndSkipObservation: {}".format(env.observation_space.shape))
-    #env = FireResetEnv(env) # starting some of the atari games
+    env = FireResetEnv(env) # starting some of the atari games
     env = ResizeObservation(env, (84, 84)) # define the 84x84 frames for the observations
     print("ResizeObservation    : {}".format(env.observation_space.shape))
     env = GrayscaleObservation(env, keep_dim=True) # convert observation to gray scale
