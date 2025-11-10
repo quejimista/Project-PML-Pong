@@ -6,7 +6,7 @@ import numpy as np
 from stable_baselines3.common import atari_wrappers
 
 
-class ImageToPyTorch(gym.ObservationWrapper):
+class ImageToPyTorch(gym.ObservationWrapper): # Convert image layout from HWC --> CHW 
     def __init__(self, env):
         super(ImageToPyTorch, self).__init__(env)
         obs = self.observation_space
@@ -21,7 +21,8 @@ class ImageToPyTorch(gym.ObservationWrapper):
         return np.moveaxis(observation, 2, 0)
 
 
-class BufferWrapper(gym.ObservationWrapper):
+# Stack n_steps consecutive frames so the agent detects motion
+class BufferWrapper(gym.ObservationWrapper): 
     def __init__(self, env, n_steps):
         super(BufferWrapper, self).__init__(env)
         obs = env.observation_space
@@ -33,19 +34,21 @@ class BufferWrapper(gym.ObservationWrapper):
         self.buffer = collections.deque(maxlen=n_steps)
 
     def reset(self, *, seed: tt.Optional[int] = None, options: tt.Optional[dict[str, tt.Any]] = None):
+        # fills buffer with blank (low-value) frames except one real frame
         for _ in range(self.buffer.maxlen-1):
             self.buffer.append(self.env.observation_space.low)
         obs, extra = self.env.reset()
         return self.observation(obs), extra
 
     def observation(self, observation: np.ndarray) -> np.ndarray:
+        # Every time a new observation comes in, it appends it and returns the concatenation of the last n_steps frames.
         self.buffer.append(observation)
-        return np.concatenate(self.buffer)
+        return np.concatenate(self.buffer) # final observation shape (n_steps * C, H, W)
 
 
 def make_env(env_name: str, **kwargs):
     env = gym.make(env_name, **kwargs)
-    env = atari_wrappers.AtariWrapper(env, clip_reward=False, noop_max=0)
+    env = atari_wrappers.AtariWrapper(env, clip_reward=False, noop_max=0) # applies standard Atari preprocessing (resize, grayscale, frame skip, etc.)
     env = ImageToPyTorch(env)
     env = BufferWrapper(env, n_steps=4)
     return env
