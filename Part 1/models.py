@@ -3,15 +3,20 @@ import torch.nn as nn
 import torch.optim as optim 
 from torchsummary import summary
 import numpy as np
+import random
 import os
 from collections import deque
+from Replay_buffer import ReplayBuffer
+from utils import epsilon_soft_action
+import torch.nn.functional as F
+
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
 else:
     device = torch.device("cpu")
 
-
+#original DQN network from the paper
 def make_DQN(input_shape, output_shape):
     net = nn.Sequential(
         nn.Conv2d(input_shape[0], 32, kernel_size=8, stride=4),
@@ -27,118 +32,98 @@ def make_DQN(input_shape, output_shape):
     )
     return net
 
-
-
-
-
-
-
 class DoubleDQNAgent:
-    def __init__(self, obs_shape, n_actions, device="cpu", seed=42,
-                 replay_capacity=100000, batch_size=32, lr=1e-4, gamma=0.99,
-                 target_update_freq=1000, min_replay_size=5000, eps_start=1.0,
-                 eps_end=0.01, eps_decay_steps=1_000_000):
-        """takes a parameters: 
-        obs_shape: the shape of the observations
-        n_actions: the number of actions
-        device: the device to use
-        seed: the seed to use
-        replay_capacity: the capacity of the replay buffer
-        batch_size: the batch size to use
-        lr: the learning rate
-        gamma: the discount factor
-        target_update_freq: the frequency to update the target network
-        min_replay_size: the minimum size of the replay buffer
-        eps_start: the starting value of epsilon
-        eps_end: the ending value of epsilon
-        eps_decay_steps: the number of steps to decay epsilon
-        """
-        torch.manual_seed(seed)
-        np.random.seed(seed)
-        random.seed(seed)
-        self.device = torch.device(device)
-        self.n_actions = n_actions
-        self.batch_size = batch_size
-        self.gamma = gamma
-        self.target_update_freq = target_update_freq
-        self.min_replay_size = min_replay_size
+    def __init__(self, input_shape, n_actions, device, epsilon_scheduler=None):
+        self.device = device  # cpu, gpu, etc
+        self.n_actions = n_actions  # number of actions in the environment
 
-        C, H, W = obs_shape
-        self.q_net = CnnDQN(C, n_actions).to(self.device)
-        self.target_net = CnnDQN(C, n_actions).to(self.device)
-        self.target_net.load_state_dict(self.q_net.state_dict())
-        self.optimizer = optim.Adam(self.q_net.parameters(), lr=lr)
+        # networks
+        self.q_net = make_DQN(input_shape, n_actions).to(device)  # primary network Q
+        self.target_net = make_DQN(input_shape, n_actions).to(device)  # target network Q^
+        self.target_net.load_state_dict(self.q_net.state_dict())  # they both start with the same weights
+        self.target_net.eval()  # we train on the primary network not the target
 
-        self.replay = ReplayBuffer(replay_capacity, obs_shape, device=self.device)
-        self.steps_done = 0
+        self.optimizer = optim.Adam(self.q_net.parameters(), lr=1e-4)  # adjust primary network weights
 
-        # epsilon schedule
-        self.eps_start = eps_start
-        self.eps_end = eps_end
-        self.eps_decay_steps = eps_decay_steps
+        self.gamma = 0.99
+        self.batch_size = 32
+        self.replay_buffer = ReplayBuffer(100000)
 
-    def act(self, state):
-        # state: numpy (C,H,W)
-        eps_threshold = self.eps_by_step()
-        if random.random() < eps_threshold:
-            return random.randrange(self.n_actions)
-        with torch.no_grad():
-            s = torch.tensor(state, dtype=torch.float32, device=self.device).unsqueeze(0)
-            qvals = self.q_net(s)
-            return int(torch.argmax(qvals, dim=1).item())
+        #epsilon
+        self.epsilon_scheduler = epsilon_scheduler
+        if self.epsilon_scheduler is None:
+            #fallback: classical exponential decay
+            self.epsilon = 1.0
+            self.epsilon_min = 0.1
+            self.epsilon_decay = 0.999995
 
-    def eps_by_step(self):
-        fraction = min(float(self.steps_done) / self.eps_decay_steps, 1.0)
-        return self.eps_start + fraction * (self.eps_end - self.eps_start)
+        self.update_target_freq = 1000  # C, how often to update the target network
 
-    def store_transition(self, s, a, r, s_next, done):
-        self.replay.add(s, a, r, s_next, done)
+        self.step_count = 0
 
-    def update(self):
-        # check buffer
-        if len(self.replay) < max(self.min_replay_size, self.batch_size):
+    #select action, but using a epsilon soft-policy
+    def select_action(self, state):
+        if hasattr(self, 'epsilon_scheduler'):
+            epsilon = self.epsilon_scheduler.get() #get current epsilon
+        else:
+            epsilon = self.epsilon 
+
+        return epsilon_soft_action(self.q_net, state, self.n_actions, epsilon, self.device)
+
+    #agent training
+    def train_step(self):
+        if len(self.replay_buffer) < self.batch_size: #dont start until enough samples
             return None
 
-        batch = self.replay.sample(self.batch_size)
-        states = torch.tensor(batch["states"], device=self.device)  # (B,C,H,W)
-        actions = torch.tensor(batch["actions"], device=self.device).long().unsqueeze(1)  # (B,1)
-        rewards = torch.tensor(batch["rewards"], device=self.device).unsqueeze(1)  # (B,1)
-        next_states = torch.tensor(batch["next_states"], device=self.device)  # (B,C,H,W)
-        dones = torch.tensor(batch["dones"].astype(np.uint8), device=self.device).unsqueeze(1)  # (B,1)
+        states, actions, rewards, next_states, dones = self.replay_buffer.sample(self.batch_size) #sample from buffer
+        states, actions, rewards, next_states, dones = (
+            #move all to device
+            states.to(self.device),
+            actions.to(self.device),
+            rewards.to(self.device),
+            next_states.to(self.device),
+            dones.to(self.device),
+        )
 
-        # Q(s,a) for actions taken
-        q_values = self.q_net(states).gather(1, actions)  # (B,1)
+        #current Q(s,a)
+        q_values = self.q_net(states).gather(1, actions)
 
-        # Double DQN target:
-        # a* = argmax_a Q_main(s', a)
+        #target for double dqn
         with torch.no_grad():
-            next_q_main = self.q_net(next_states)  # (B, n_actions)
-            next_actions = next_q_main.argmax(dim=1, keepdim=True)  # (B,1)
-            next_q_target = self.target_net(next_states)  # (B, n_actions)
-            next_q_target_values = next_q_target.gather(1, next_actions)  # (B,1)
-            target = rewards + self.gamma * (1 - dones.float()) * next_q_target_values
+            #chosen action for primary network
+            next_actions = self.q_net(next_states).argmax(1, keepdim=True)
+            #evaluated values by target network
+            next_q_values = self.target_net(next_states).gather(1, next_actions)
+            target = rewards + self.gamma * (1 - dones) * next_q_values
 
-        loss = nn.functional.mse_loss(q_values, target)
+        #compute loss
+        loss = F.mse_loss(q_values, target)
 
         self.optimizer.zero_grad()
         loss.backward()
-        # gradient clipping (helpful)
-        nn.utils.clip_grad_norm_(self.q_net.parameters(), 10.0)
         self.optimizer.step()
 
-        # update steps and target network copy
-        self.steps_done += 1
-        if self.steps_done % self.target_update_freq == 0:
+        #update epsilon
+        if hasattr(self, 'epsilon_scheduler'):
+            self.epsilon_scheduler.step() #get value from the scheduler passed
+        else:
+            self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay) #in case no epsilon scheduler, do exponential decay
+
+        #every C steps, copy Q to Q^ (copy primary to target)
+        self.step_count += 1
+        if self.step_count % self.update_target_freq == 0:
             self.target_net.load_state_dict(self.q_net.state_dict())
 
         return loss.item()
-
+    
+    #saving function
     def save(self, path):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         torch.save({
             'q_state_dict': self.q_net.state_dict(),
             'target_state_dict': self.target_net.state_dict(),
             'optimizer_state': self.optimizer.state_dict()
+            #we save the state dict of the primary network and the target network and the optimizer
         }, path)
 
     def load(self, path):
