@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import gymnasium as gym
-from lib.DQN import *
-from lib.wrappers import *
-from lib.Agent import *
-from lib.ExperienceBuffer import *
+from functions.DQN import *
+from functions.wrappers import *
+from functions.Agent import *
+from functions.ExperienceBuffer import *
 
 import argparse
 import time

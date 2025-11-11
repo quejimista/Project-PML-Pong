@@ -1,5 +1,5 @@
 import gymnasium as gym
-from preprocessing import *
+from functions.preprocessing import *
 
 
 NAME_ENV = "PongNoFrameskip-v4"

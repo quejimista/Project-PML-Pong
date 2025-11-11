@@ -7,7 +7,7 @@ import typing as tt
 import torch
 
 from lib import wrappers
-from lib import dqn_model
+from lib import DQN
 
 import collections
 
@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     env = wrappers.make_env(args.env, render_mode="rgb_array")
     env = gym.wrappers.RecordVideo(env, video_folder=args.record)
-    net = dqn_model.DQN(env.observation_space.shape, env.action_space.n)
+    net = DQN.DQN(env.observation_space.shape, env.action_space.n)
     state = torch.load(args.model, map_location=lambda stg, _: stg, weights_only=True)
     net.load_state_dict(state)
 
