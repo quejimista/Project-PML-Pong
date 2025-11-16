@@ -1,0 +1,27 @@
+name: project_paradigms
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pytorch
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pytorch
+  - matplotlib
+  - numpy
+  - opencv
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pytorch
+  - ipykernel
+  - pytorch
+  - pytorch
+  - matplotlib
+  - numpy
+  - opencv
+  - conda-forge::pytorch-model-summary
+  - conda-forge::wandb
+  - conda-forge::gymnasium
