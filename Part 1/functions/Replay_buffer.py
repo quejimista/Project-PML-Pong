@@ -1,15 +1,19 @@
-
 import torch
-from collections import deque
 import random
 import numpy as np
+import collections
+
+# queue
+Experience = collections.namedtuple('Experience', field_names=['state', 'action', 'reward', 'done', 'new_state'])
 
 class ReplayBuffer:
-    def __init__(self, capacity):
-        self.buffer = deque(maxlen=capacity) #when max capacity, pop the oldest
+    def __init__(self, capacity=50000, burn_in=10000):
+        self.buffer = collections.deque(maxlen=capacity) #when max capacity, pop the oldest
+        self.burn_in = burn_in
+        self.capacity = capacity
 
-    def push(self, state, action, reward, next_state, done): #saves experience as tuple in buffer
-        self.buffer.append((state, action, reward, next_state, done)) #(S, A, R, S', D)
+    def append(self, experience): #saves experience as tuple in buffer
+        self.buffer.append(experience) #(S, A, R, S', D)
 
     def sample(self, batch_size): #random sampling from the buffer, to break correlation
         batch = random.sample(self.buffer, batch_size)
@@ -28,6 +32,10 @@ class ReplayBuffer:
     def __len__(self):
         return len(self.buffer) #number of elements in the buffer, useful to know if there are enough to train
     
+    # The buffer is filled with random experiences at the beginning of training
+    def burn_in_capacity(self):
+        return len(self.buffer) / self.burn_in
+
 #-------------------------------
 
 class PrioritizedReplayBuffer:

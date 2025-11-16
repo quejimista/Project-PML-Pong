@@ -1,7 +1,6 @@
 import numpy as np
 import gymnasium as gym
 from gymnasium.wrappers import MaxAndSkipObservation, ResizeObservation, GrayscaleObservation, FrameStackObservation, ReshapeObservation
-import ale_py
 
 class ImageToPyTorch(gym.ObservationWrapper):
     def __init__(self, env):

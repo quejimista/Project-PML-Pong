@@ -99,7 +99,7 @@ if __name__ == "__main__":
     # WanDB login
     wandb.login()
     # start a new wandb run to track this script
-    wandb.init(project="M3-2_Example_3")
+    wandb.init(project="Paradigms-Project")
 
     env = make_env(args.env)
     net = DQN(env.observation_space.shape, env.action_space.n).to(device)

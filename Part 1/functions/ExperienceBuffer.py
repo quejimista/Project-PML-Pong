@@ -4,8 +4,6 @@ import collections
 import numpy as np
 import typing as tt
 import torch
-import torch.nn as nn
-import torch.optim as optim
 
 
 State = np.ndarray

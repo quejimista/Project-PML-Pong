@@ -3,10 +3,8 @@ import torch.nn as nn
 import torch.optim as optim 
 from torchsummary import summary
 import numpy as np
-import random
 import os
-from collections import deque
-from Replay_buffer import ReplayBuffer
+from functions.Replay_buffer import ReplayBuffer
 from utils import epsilon_soft_action
 import torch.nn.functional as F
 
@@ -15,6 +13,66 @@ if torch.cuda.is_available():
     device = torch.device("cuda")
 else:
     device = torch.device("cpu")
+
+
+class DQN(torch.nn.Module):
+    
+    def __init__(self, env, learning_rate=1e-3, device='cpu'):
+        super(DQN, self).__init__()
+        self.device = device
+        self.n_inputs = env.observation_space.shape[0]
+        self.n_outputs = env.action_space.n
+        self.actions = np.arange(env.action_space.n)
+        self.learning_rate = learning_rate
+        
+        ### Construction of the neural network
+        self.net = nn.Sequential(
+            nn.Conv2d(self.n_inputs[0], 32, kernel_size=8, stride=4),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.ReLU(),
+            nn.Flatten(),
+            nn.Linear(64*7*7, 512),
+            nn.ReLU(),
+            nn.Linear(512, self.n_outputs)
+        )
+        
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
+        
+        ### Work with CUDA is allowed
+        if self.device == 'cuda':
+            self.net.cuda()
+            
+    
+    def get_action(self, state, epsilon=0.05):
+        """
+        e-greedy method
+        """
+        if np.random.random() < epsilon:
+            # random action
+            action = np.random.choice(self.actions)  
+        else:
+            # Q-value based action
+            qvals = self.get_qvals(state)  
+            action= torch.max(qvals, dim=-1)[1].item()
+        
+        return action
+    
+    
+    def get_qvals(self, state):
+        if type(state) is tuple:
+            state = np.array([np.ravel(s) for s in state])
+        
+        state_t = torch.FloatTensor(state).to(device=self.device)
+        
+        return self.net(state_t)
+    
+
+
+
+
 
 #original DQN network from the paper
 def make_DQN(input_shape, output_shape):
