@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn        
 import torch.optim as optim 
-from torchsummary import summary
+# from torchsummary import summary
 import numpy as np
 import os
 from functions.Replay_buffer import ReplayBuffer
-from utils import epsilon_soft_action
+from functions.utils import epsilon_soft_action
 import torch.nn.functional as F
 
 

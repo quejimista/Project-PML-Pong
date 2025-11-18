@@ -1,5 +1,5 @@
 import gymnasium as gym
-from models import *
+from functions.models import *
 from functions.Replay_buffer import Experience, ReplayBuffer
 import numpy as np
 import torch

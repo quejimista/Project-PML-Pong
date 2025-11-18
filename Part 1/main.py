@@ -1,6 +1,5 @@
-import gymnasium as gym
 from functions.preprocessing import *
-from models import *
+from functions.models import *
 from functions.Agent import *
 from functions.Replay_buffer import *
 import wandb
@@ -13,7 +12,7 @@ lr = 0.001            # Learning rate
 MEMORY_SIZE = 100000  # Maximum buffer capacity
 MAX_EPISODES = 5000   # Maximum number of episodes (the agent must learn before reaching this value)
 EPSILON = 1           # Initial value of epsilon
-EPSILON_DECAY = .99   # epsilon decay
+EPSILON_DECAY = 0.99   # epsilon decay
 GAMMA = 0.99          # Gamma value of the Bellman equation
 BATCH_SIZE = 32       # Number of elements to extract from the buffer
 BURN_IN = 1000        # Number of initial episodes used to fill the buffer before training
