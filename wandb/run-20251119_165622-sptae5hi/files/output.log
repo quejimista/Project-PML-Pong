@@ -1,0 +1,17 @@
+>>> Training starts at  2025-11-19 16:56:25.959386
+Filling replay buffer...
+Training...
+Traceback (most recent call last):
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\main.py", line 45, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 92, in train
+    # The agent takes an action
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 189, in update
+    return loss
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\autograd\__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\autograd\graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

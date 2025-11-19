@@ -1,0 +1,23 @@
+>>> Training starts at  2025-11-19 16:32:40.501792
+Filling replay buffer...
+Training...
+Traceback (most recent call last):
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\main.py", line 44, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 88, in train
+    self.update()
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 164, in update
+    self.net.optimizer.step()
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\optimizer.py", line 487, in wrapper
+    out = func(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\adam.py", line 223, in step
+    adam(
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\optimizer.py", line 154, in maybe_fallback
+    return func(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\adam.py", line 784, in adam
+    func(
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\optim\adam.py", line 378, in _single_tensor_adam
+    exp_avg.lerp_(grad, 1 - beta1)
+KeyboardInterrupt

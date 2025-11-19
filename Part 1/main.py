@@ -2,6 +2,7 @@ from functions.preprocessing import *
 from functions.models import *
 from functions.Agent import *
 from functions.Replay_buffer import *
+from functions.utils import *
 import wandb
 import datetime
 
@@ -44,6 +45,9 @@ if __name__ == "__main__":
     agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,
                 dnn_sync_frequency=DNN_SYNC)
+    
+    plot_training_results(agent) # Saves the static plot locally
+    wandb.finish()
 
     # Saving the trained model
     torch.save(net.state_dict(), NAME_ENV + ".dat")

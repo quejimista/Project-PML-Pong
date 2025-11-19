@@ -3,6 +3,7 @@ from functions.Replay_buffer import Experience, ReplayBuffer
 import numpy as np
 import torch
 from copy import deepcopy, copy
+import wandb
 
 
 class Agent:
@@ -31,6 +32,9 @@ class Agent:
         self.step_count = 0
         self.state = self.env.reset()[0]
 
+        self.training_loss_history = []
+        self.epsilon_history = []
+
 
     @torch.no_grad()
     def play_step(self, mode : str = 'train', device: torch.device = 'cpu', epsilon: float = 0.0):
@@ -38,14 +42,19 @@ class Agent:
 
         if np.random.random() < epsilon or mode =='explore':
             action = self.env.action_space.sample()
+            print("Exploration mode or epsilon --> random action= ", action)
         else:
             state_v = torch.as_tensor(self.state).to(device)
             state_v.unsqueeze_(0)
+            print(f'Size state_v = {state_v.shape()}')
             q_vals_v = self.net(state_v) # getting all the q values of that state
+            print(f"Q values of state are {q_vals_v}")
             _, act_v = torch.max(q_vals_v, dim=1) # selecting the maximum value
             action = int(act_v.item())
+            print(f'Action taken {action}')
             self.step_count += 1
 
+        print(f'Doing step...\n')
         # do step in the environment
         new_state, reward, terminated, truncated, _ = self.env.step(action)
         is_done = terminated or truncated
@@ -95,6 +104,35 @@ class Agent:
                     episode += 1
                     # Save the rewards
                     self.training_rewards.append(self.total_reward) 
+                    # 1. Save Epsilon
+                    self.epsilon_history.append(self.epsilon)
+                    
+                    # 2. Calculate and Save Average Loss for this episode
+                    if len(self.update_loss) > 0:
+                        avg_loss = np.mean(self.update_loss)
+                        self.training_loss_history.append(avg_loss)
+                    else:
+                        self.training_loss_history.append(0) # No training steps this episode
+                    
+                    # LOGGING
+                    wandb.log({
+                        "episode": episode,
+                        "reward": self.total_reward,
+                        "mean_reward": mean_rewards,
+                        "avg_loss": avg_loss,  # Variable calculated in Step 1
+                        "epsilon": self.epsilon
+                    })
+                    print(f"Episode: {episode} | "
+                          f"Steps: {self.step_count} | "
+                          f"Reward: {self.total_reward:.2f} | "
+                          f"Avg Reward: {mean_rewards:.2f} | "
+                          f"Loss: {avg_loss:.5f} | "
+                          f"Epsilon: {self.epsilon:.3f}")
+                    print("\nLogging data to wandb...\n")
+
+                    # 3. NOW reset the temp loss list
+                    self.update_loss = []
+                    
                     self.update_loss = []
                     # Calculate the average reward for the last X episodes
                     mean_rewards = np.mean(self.training_rewards[-self.nblock:])
@@ -135,11 +173,15 @@ class Agent:
         
         # Obtain the target Q values.
         # The detach() parameter prevents these values from updating the target network
-        qvals_next = torch.max(self.target_network.get_qvals(next_states), dim=-1)[0].detach()
+        qvals_next = torch.max(self.target_network.get_qvals(next_states), dim=-1)[0].detach().unsqueeze(1) # shape [32,1]
         # 0 in terminal states
-        qvals_next[dones_t] = 0 
+        # qvals_next[dones_t] = 0 
         
+        # Apply terminal mask to qvals_next
+        qvals_next = qvals_next * (1 - dones) # dones is now the float tensor [32, 1]
+
         # Calculate the Bellman equation
+        # Now, [32, 1] + [32, 1] works without broadcasting
         expected_qvals = self.gamma * qvals_next + rewards_vals
         
         # Calculate the loss
