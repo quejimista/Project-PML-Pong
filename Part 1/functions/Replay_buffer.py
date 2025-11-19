@@ -15,18 +15,27 @@ class ReplayBuffer:
     def append(self, experience): #saves experience as tuple in buffer
         self.buffer.append(experience) #(S, A, R, S', D)
 
-    def sample(self, batch_size): #random sampling from the buffer, to break correlation
+    def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
-        states, actions, rewards, next_states, dones = zip(*batch) #states = [s1, s2, ...], actions = [a1, a2, ...], etc.
-        #result is a tuple like this: batch = 3: 
-        # [(s1, a1, r1, s1_next, d1), (s2, a2, r2, s2_next, d2),(s3, a3, r3, s3_next, d3)], etc.
-        
+        states, actions, rewards, dones, next_states = zip(*batch)
+
+        # Convert lists → numpy arrays
+        states = np.array(states)
+        next_states = np.array(next_states)
+
+        # Remove extra leading dimension (1, 4, 84, 84) → (4, 84, 84) ---
+        # if states.ndim == 5 and states.shape[1] == 1:
+        #     states = states[:, 0, :, :, :]
+
+        # if next_states.ndim == 5 and next_states.shape[1] == 1:
+        #     next_states = next_states[:, 0, :, :, :]
+
         return (
-            torch.tensor(np.array(states), dtype=torch.float32), #current state
-            torch.tensor(actions, dtype=torch.int64).unsqueeze(1), #actions (column vector)
-            torch.tensor(rewards, dtype=torch.float32).unsqueeze(1), #rewards (column vector)
-            torch.tensor(np.array(next_states), dtype=torch.float32), #next states
-            torch.tensor(dones, dtype=torch.float32).unsqueeze(1) #episode is done or not flags.
+            torch.tensor(states, dtype=torch.float32),
+            torch.tensor(actions, dtype=torch.int64).unsqueeze(1),
+            torch.tensor(rewards, dtype=torch.float32).unsqueeze(1),
+            torch.tensor(next_states, dtype=torch.float32),
+            torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
         )
 
     def __len__(self):

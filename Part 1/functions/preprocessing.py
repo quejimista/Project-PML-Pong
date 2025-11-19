@@ -33,10 +33,10 @@ class ScaledFloatFrame(gym.ObservationWrapper):
 
 def print_env_info(name, env):
     obs, _ = env.reset()
-    print("*** {} Environment ***".format(name))
+    print("\n\n*** {} Environment ***".format(name))
     print("Environment obs. : {}".format(env.observation_space.shape))
     print("Observation shape: {}, type: {} and range [{},{}]".format(obs.shape, obs.dtype, np.min(obs), np.max(obs)))
-    print("Observation sample:\n{}".format(obs))
+    # print("Observation sample:\n{}".format(obs))
 
 
 

@@ -20,7 +20,7 @@ class DQN(torch.nn.Module):
     def __init__(self, env, learning_rate=1e-3, device='cpu'):
         super(DQN, self).__init__()
         self.device = device
-        self.n_inputs = env.observation_space.shape[0]
+        self.n_inputs = env.observation_space.shape
         self.n_outputs = env.action_space.n
         self.actions = np.arange(env.action_space.n)
         self.learning_rate = learning_rate

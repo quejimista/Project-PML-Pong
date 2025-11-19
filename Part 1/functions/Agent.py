@@ -1,4 +1,3 @@
-import gymnasium as gym
 from functions.models import *
 from functions.Replay_buffer import Experience, ReplayBuffer
 import numpy as np
@@ -71,7 +70,7 @@ class Agent:
         # Fill the buffer with N random experiences
         print("Filling replay buffer...")
         while self.buffer.burn_in_capacity() < 1:
-            self.play_step(self.epsilon, mode='explore')
+            self.play_step(epsilon=self.epsilon, mode='explore')
  
         episode = 0
         training = True
@@ -82,7 +81,7 @@ class Agent:
             gamedone = False
             while gamedone == False:
                 # The agent takes an action
-                gamedone = self.play_step(self.epsilon, mode='train')
+                gamedone = self.play_step(epsilon=self.epsilon, mode='train')
                
                 # Upgrade main network
                 if self.step_count % dnn_update_frequency == 0:
@@ -122,11 +121,15 @@ class Agent:
     ## Loss calculation           
     def calculate_loss(self, batch):
         # Separate the variables of the experience and convert them to tensors
-        states, actions, rewards, dones, next_states = [i for i in batch] 
+        states, actions, rewards, next_states, dones = [i for i in batch] 
+
         rewards_vals = torch.FloatTensor(rewards).to(device=self.net.device) 
         actions_vals = torch.LongTensor(np.array(actions)).reshape(-1,1).to(device=self.net.device)
-        dones_t = torch.BoolTensor(dones).to(device=self.net.device)
-        
+
+        # Convert dones (floats) to boolean mask
+        # dones_t = torch.tensor([bool(d) for d in dones], dtype=torch.bool, device=self.net.device)
+        dones_t = dones.flatten().bool().to(device=self.net.device)
+
         # Obtain the Q values of the main network
         qvals = torch.gather(self.net.get_qvals(states), 1, actions_vals)
         

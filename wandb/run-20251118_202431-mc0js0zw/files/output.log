@@ -1,0 +1,17 @@
+>>> Training starts at  2025-11-18 20:24:36.933847
+Filling replay buffer...
+Training...
+c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Replay_buffer.py:38: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at C:\cb\pytorch_1000000000000\work\torch\csrc\utils\tensor_new.cpp:281.)
+  torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
+Traceback (most recent call last):
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\main.py", line 44, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 88, in train
+    self.update()
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 155, in update
+    loss = self.calculate_loss(batch)
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 130, in calculate_loss
+    dones_t = torch.tensor([bool(d) for d in dones], dtype=torch.bool, device=self.net.device)
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 130, in <listcomp>
+    dones_t = torch.tensor([bool(d) for d in dones], dtype=torch.bool, device=self.net.device)
+RuntimeError: Boolean value of Tensor with more than one value is ambiguous
