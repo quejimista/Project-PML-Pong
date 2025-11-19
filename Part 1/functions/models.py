@@ -44,6 +44,9 @@ class DQN(torch.nn.Module):
         ### Work with CUDA is allowed
         if self.device == 'cuda':
             self.net.cuda()
+    
+    def forward(self, x):
+        return self.net(x)
             
     
     def get_action(self, state, epsilon=0.05):

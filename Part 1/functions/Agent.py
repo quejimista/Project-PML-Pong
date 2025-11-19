@@ -40,21 +40,23 @@ class Agent:
     def play_step(self, mode : str = 'train', device: torch.device = 'cpu', epsilon: float = 0.0):
         done_reward = None
 
-        if np.random.random() < epsilon or mode =='explore':
+        # if np.random.random() < epsilon or mode =='explore':
+        if mode == 'explore':
             action = self.env.action_space.sample()
-            print("Exploration mode or epsilon --> random action= ", action)
+            # print("Exploration mode or epsilon --> random action= ", action)
         else:
             state_v = torch.as_tensor(self.state).to(device)
             state_v.unsqueeze_(0)
-            print(f'Size state_v = {state_v.shape()}')
+            # print(f'Size state_v = {state_v.size()}')
             q_vals_v = self.net(state_v) # getting all the q values of that state
-            print(f"Q values of state are {q_vals_v}")
+            # print(f"Q values of state are {q_vals_v}")
             _, act_v = torch.max(q_vals_v, dim=1) # selecting the maximum value
             action = int(act_v.item())
-            print(f'Action taken {action}')
+            # print(f'Action taken {action}')
             self.step_count += 1
+            # print(f'Doing step {self.step_count}...\n')
 
-        print(f'Doing step...\n')
+
         # do step in the environment
         new_state, reward, terminated, truncated, _ = self.env.step(action)
         is_done = terminated or truncated
@@ -95,6 +97,7 @@ class Agent:
                 # Upgrade main network
                 if self.step_count % dnn_update_frequency == 0:
                     self.update()
+                    print(f'Copying values to target network...')
                 # Synchronize the main network and the target network
                 if self.step_count % dnn_sync_frequency == 0:
                     self.target_network.load_state_dict(self.net.state_dict())
@@ -119,7 +122,7 @@ class Agent:
                         "episode": episode,
                         "reward": self.total_reward,
                         "mean_reward": mean_rewards,
-                        "avg_loss": avg_loss,  # Variable calculated in Step 1
+                        "avg_loss": avg_loss, 
                         "epsilon": self.epsilon
                     })
                     print(f"Episode: {episode} | "

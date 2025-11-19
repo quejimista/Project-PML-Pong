@@ -1,0 +1,28 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.10.19",
+  "startedAt": "2025-11-19T16:12:27.355735Z",
+  "program": "c:\\Users\\ainav\\OneDrive\\Documents\\Uni\\4th_year\\1st_semester\\paradigms_ml\\project\\Project-PML-Pong\\Part 1\\main.py",
+  "codePath": "Part 1\\main.py",
+  "codePathLocal": "Part 1\\main.py",
+  "git": {
+    "remote": "https://github.com/quejimista/Project-PML-Pong.git",
+    "commit": "2c8df8d192a552a58968d9895962b772b2675db6"
+  },
+  "email": "1670797uab@gmail.com",
+  "root": "C:\\Users\\ainav\\OneDrive\\Documents\\Uni\\4th_year\\1st_semester\\paradigms_ml\\project\\Project-PML-Pong",
+  "host": "LAPTOP-3ELO2U09",
+  "executable": "C:\\Users\\ainav\\anaconda3\\envs\\project_paradigms\\python.exe",
+  "cpu_count": 16,
+  "cpu_count_logical": 22,
+  "disk": {
+    "/": {
+      "total": "1022387097600",
+      "used": "496957132800"
+    }
+  },
+  "memory": {
+    "total": "16505966592"
+  },
+  "writerId": "ngq0bzhd4wwdpn13nf1ndajr7eq4nfi8"
+}
