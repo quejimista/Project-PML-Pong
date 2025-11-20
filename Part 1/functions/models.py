@@ -41,9 +41,8 @@ class DQN(torch.nn.Module):
         
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
         
-        ### Work with CUDA is allowed
-        if self.device == 'cuda':
-            self.net.cuda()
+        # Move entire model to the specified device
+        self.to(self.device)
     
     def forward(self, x):
         return self.net(x)
@@ -65,12 +64,20 @@ class DQN(torch.nn.Module):
     
     
     def get_qvals(self, state):
-        if type(state) is tuple:
-            state = np.array([np.ravel(s) for s in state])
+        # if the state is a numpu array convert it to torch
+        if isinstance(state, np.ndarray):
+            state = torch.tensor(state, dtype=torch.float32)
+            
+        if isinstance(state, torch.Tensor):
+            # Move to device if not already there
+            if state.device != self.device:
+                state = state.to(self.device)
+                
+        # Add batch dimension if missing (single state inference)
+        if state.ndim == 3: 
+             state = state.unsqueeze(0)
         
-        state_t = torch.FloatTensor(state).to(device=self.device)
-        
-        return self.net(state_t)
+        return self.net(state)
     
 
 
