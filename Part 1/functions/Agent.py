@@ -67,6 +67,13 @@ class Agent:
         
         self.buffer.append(exp)
         self.state = new_state
+
+        wandb.log({
+                    "step": self.step_count,
+                    "total_reward": self.total_reward,
+                    "reward": reward,
+                    })
+
         if is_done:
             done_reward = self.total_reward
             self.state = self.env.reset()[0]
@@ -97,12 +104,13 @@ class Agent:
                 # Upgrade main network
                 if self.step_count % dnn_update_frequency == 0:
                     self.update()
-                    print(f'Copying values to target network...')
+                    print(f'Upgrade main network in step {self.step_count}...\n')
                 # Synchronize the main network and the target network
                 if self.step_count % dnn_sync_frequency == 0:
                     self.target_network.load_state_dict(self.net.state_dict())
                     self.sync_eps.append(episode)
-                    
+                    print(f'Copying values to target network...\n')
+
                 if gamedone:                   
                     episode += 1
                     # Save the rewards
