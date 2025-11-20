@@ -1,0 +1,54 @@
+>>> Training starts at  2025-11-20 20:55:18.485294
+Filling replay buffer...
+Training...
+Steps: 500 | Reward: 0.00 | Eps: 0.000
+C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\numpy\_core\fromnumeric.py:3860: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\numpy\_core\_methods.py:145: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+Steps: 1000 | Reward: 0.00 | Eps: 0.000
+Steps: 1500 | Reward: 0.00 | Eps: 0.000
+Steps: 2000 | Reward: 0.00 | Eps: 0.000
+Steps: 2500 | Reward: 0.00 | Eps: 0.000
+Steps: 3000 | Reward: 0.00 | Eps: 0.000
+Steps: 3500 | Reward: 0.00 | Eps: 0.000
+Steps: 4000 | Reward: 0.00 | Eps: 0.000
+Steps: 4500 | Reward: 0.00 | Eps: 0.000
+Steps: 5000 | Reward: 0.00 | Eps: 0.000
+Steps: 5500 | Reward: 0.00 | Eps: 0.000
+Steps: 6000 | Reward: 0.00 | Eps: 0.000
+Steps: 6500 | Reward: 0.00 | Eps: 0.000
+Steps: 7000 | Reward: 0.00 | Eps: 0.000
+Steps: 7500 | Reward: 0.00 | Eps: 0.000
+Steps: 8000 | Reward: 0.00 | Eps: 0.000
+Steps: 8500 | Reward: 0.00 | Eps: 0.000
+Steps: 9000 | Reward: 0.00 | Eps: 0.000
+Traceback (most recent call last):
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\main.py", line 57, in <module>
+    "dnn_sync_freq": DNN_SYNC,
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 100, in train
+    episode = 0
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 173, in update
+    states, actions, rewards, next_states, dones = batch
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 157, in calculate_loss
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\models.py", line 48, in forward
+    return self.net(x)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\container.py", line 250, in forward
+    input = module(input)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "C:\Users\ainav\anaconda3\envs\project_paradigms\lib\site-packages\torch\nn\modules\conv.py", line 549, in _conv_forward
+    return F.conv2d(
+KeyboardInterrupt

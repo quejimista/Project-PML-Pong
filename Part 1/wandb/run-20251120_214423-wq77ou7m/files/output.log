@@ -1,0 +1,22 @@
+>>> Training starts at 2025-11-20 21:44:27.185560
+>>> Initial Epsilon: 1.0
+>>> Epsilon Decay: 0.995
+>>> Min Epsilon: 0.01
+Filling replay buffer...
+Buffer filled with 10000 experiences
+Training...
+Steps: 10500 | Reward: -10.00 | Mean reward: 0.00 | Eps: 1.000
+
+======================================================================
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 10881 | Episode Steps: 881
+Episode Reward: -21.00 | Mean(100): -21.00
+Loss: 0.00247 | Epsilon: 1.000
+======================================================================
+Traceback (most recent call last):
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\main.py", line 66, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "c:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part 1\functions\Agent.py", line 174, in train
+    if mean_rewards >= self.reward_threshold:
+TypeError: '>=' not supported between instances of 'float' and 'NoneType'
