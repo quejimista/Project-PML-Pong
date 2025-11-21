@@ -58,8 +58,9 @@ class Agent:
         is_done = terminated or truncated
         self.total_reward += float(reward)
 
-        exp = Experience(state=self.state, action=action, reward=float(reward),
-            done=is_done, new_state=new_state )
+        clipped_reward = np.sign(reward)  # -1, 0, or +1
+        exp = Experience(state=self.state, action=action, reward=float(clipped_reward),
+                    done=is_done, new_state=new_state)
         
         self.buffer.append(exp)
         self.state = new_state
@@ -68,17 +69,17 @@ class Agent:
             mean_reward = (np.mean(self.training_rewards[-self.nblock:]) 
                               if len(self.training_rewards) > 0 else 0.0)
             
-            print(f"Steps: {self.step_count} | "
-                  f"Reward: {self.total_reward:.2f} | "
-                  f"Mean reward: {mean_reward:.2f} | "
-                  f"Eps: {self.epsilon:.3f}")
+            # print(f"Steps: {self.step_count} | "
+            #       f"Reward: {self.total_reward:.2f} | "
+            #       f"Mean reward: {mean_reward:.2f} | "
+            #       f"Eps: {self.epsilon:.3f}")
             
-            wandb.log({
-                "step": self.step_count,
-                "current_reward": self.total_reward,
-                "mean_reward": mean_reward,
-                "epsilon": self.epsilon
-            })
+            # wandb.log({
+            #     "step": self.step_count,
+            #     "current_reward": self.total_reward,
+            #     "mean_reward": mean_reward,
+            #     "epsilon": self.epsilon
+            # })
 
         # Handle episode end
         if is_done:
@@ -97,6 +98,7 @@ class Agent:
             self.play_step(epsilon=1.0, mode='explore')
         
         print(f"Buffer filled with {len(self.buffer)} experiences")
+        self.check_buffer_diversity()
  
         episode = 0
         training = True
@@ -119,7 +121,7 @@ class Agent:
                 if self.step_count % dnn_sync_frequency == 0:
                     self.target_network.load_state_dict(self.net.state_dict())
                     self.sync_eps.append(episode)
-                    print(f">>> Target network synced at step {self.step_count}")
+                    # print(f">>> Target network synced at step {self.step_count}")
 
                 # Episode finished
                 if reward_if_done is not None:   
@@ -144,21 +146,21 @@ class Agent:
                         "episode": episode,
                         "episode_reward": final_reward,
                         "episode_steps": self.episode_step_count,
-                        "mean_reward_100": mean_rewards,
+                        "mean_reward_episode": mean_rewards,
                         "avg_loss": avg_loss, 
                         "epsilon": self.epsilon
                     })
 
-                    print(f"\n{'='*70}")
+                    # print(f"\n{'='*70}")
                     print(f"EPISODE {episode} COMPLETED")
                     print(f"{'='*70}")
                     print(f"Total Steps: {self.step_count} | "
                           f"Episode Steps: {self.episode_step_count}")
                     print(f"Episode Reward: {final_reward:.2f} | "
-                          f"Mean(100): {mean_rewards:.2f}")
+                          f"Mean Reward: {mean_rewards:.2f}")
                     print(f"Loss: {avg_loss:.5f} | "
-                          f"Epsilon: {self.epsilon:.3f}")
-                    print(f"{'='*70}\n")
+                          f"Epsilon: {self.epsilon:.3f}\n\n")
+                    # print(f"{'='*70}\n")
 
                     self.update_loss = []
                     
@@ -200,6 +202,7 @@ class Agent:
         expected_qvals = rewards + self.gamma * qvals_next * (1 - dones)
         
         loss = torch.nn.MSELoss()(qvals, expected_qvals)
+        # loss = torch.nn.SmoothL1Loss()(qvals, expected_qvals) # Huber loss
         return loss
     
 
@@ -218,3 +221,22 @@ class Agent:
         
         self.net.optimizer.step() 
         self.update_loss.append(loss.item())
+    
+    def check_buffer_diversity(self):
+        """Check if buffer has diverse experiences"""
+        if len(self.buffer.buffer) < 100:
+            return
+        
+        sample_states = [exp.state for exp in list(self.buffer.buffer)[:100]]
+        sample_array = np.array(sample_states)
+        
+        print("\n=== BUFFER DIVERSITY CHECK ===")
+        print(f"Sample states shape: {sample_array.shape}")
+        print(f"State mean: {sample_array.mean():.4f}")
+        print(f"State std: {sample_array.std():.4f}")
+        print(f"Unique values check: {len(np.unique(sample_array[:10].flatten()))}")
+        
+        # Check if states are too similar (potential frame stacking bug)
+        if sample_array.std() < 0.01:
+            print("WARNING: States have very low variance! Check frame stacking.")
+        print("=== CHECK COMPLETE ===\n")

@@ -1,0 +1,12 @@
+{"time":"2025-11-20T23:02:56.1806217+01:00","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-20T23:02:56.5395334+01:00","level":"INFO","msg":"stream: created new stream","id":"p8z6d004"}
+{"time":"2025-11-20T23:02:56.5395334+01:00","level":"INFO","msg":"handler: started","stream_id":"p8z6d004"}
+{"time":"2025-11-20T23:02:56.5434071+01:00","level":"INFO","msg":"stream: started","id":"p8z6d004"}
+{"time":"2025-11-20T23:02:56.5450543+01:00","level":"INFO","msg":"writer: started","stream_id":"p8z6d004"}
+{"time":"2025-11-20T23:02:56.5450543+01:00","level":"INFO","msg":"sender: started","stream_id":"p8z6d004"}
+{"time":"2025-11-21T01:54:15.2081194+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/1670797uab-universitat-aut-noma-de-barcelona/Project_Paradigms/p8z6d004/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-11-21T07:59:59.3907486+01:00","level":"INFO","msg":"stream: closing","id":"p8z6d004"}
+{"time":"2025-11-21T08:00:00.2112034+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-21T08:00:01.0147925+01:00","level":"INFO","msg":"handler: closed","stream_id":"p8z6d004"}
+{"time":"2025-11-21T08:00:01.0158952+01:00","level":"INFO","msg":"sender: closed","stream_id":"p8z6d004"}
+{"time":"2025-11-21T08:00:01.0158952+01:00","level":"INFO","msg":"stream: closed","id":"p8z6d004"}

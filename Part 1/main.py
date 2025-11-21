@@ -9,7 +9,7 @@ import torch
 
 NAME_ENV = "PongNoFrameskip-v4"
 
-lr = 0.00025          # Standard DQN learning rate (from paper)
+lr = 0.0001         # Standard DQN learning rate (from paper)
 MEMORY_SIZE = 100000  # Buffer capacity
 MAX_EPISODES = 5000   # Maximum number of episodes
 EPSILON = 1.0         # Start with full exploration
@@ -18,7 +18,7 @@ MIN_EPSILON = 0.01    # Minimum exploration rate
 GAMMA = 0.99          # Discount factor
 BATCH_SIZE = 32       # Batch size
 BURN_IN = 10000       # Initial random experiences
-DNN_UPD = 4           # Update every 4 steps (more stable)
+DNN_UPD = 8           # Update every 4 steps (more stable)
 DNN_SYNC = 1000       # Target network sync frequency
 
 if __name__ == "__main__":
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     
     wandb.init(
         project="Project_Paradigms",
-        name=run_name,  # Custom run name
+        name=run_name,  
         config={
             "learning_rate": lr,
             "batch_size": BATCH_SIZE,
@@ -66,9 +66,10 @@ if __name__ == "__main__":
     )
 
     print(">>> Training starts at", datetime.datetime.now())
-    print(f">>> Initial Epsilon: {EPSILON}")
-    print(f">>> Epsilon Decay: {EPSILON_DECAY}")
-    print(f">>> Min Epsilon: {MIN_EPSILON}")
+    print(f">>> Hyperparameters:")
+    print(f"    LR: {lr}, Batch: {BATCH_SIZE}, Gamma: {GAMMA}")
+    print(f"    Epsilon: {EPSILON} -> {MIN_EPSILON} (decay: {EPSILON_DECAY})")
+    print(f"    Update freq: {DNN_UPD}, Sync freq: {DNN_SYNC}")
 
     agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,

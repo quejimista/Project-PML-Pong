@@ -44,6 +44,7 @@ class ReplayBuffer:
     # The buffer is filled with random experiences at the beginning of training
     def burn_in_capacity(self):
         return len(self.buffer) / self.burn_in
+    
 
 #-------------------------------
 
