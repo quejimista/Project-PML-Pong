@@ -6,6 +6,10 @@ from functions.utils import *
 import wandb
 import datetime
 import torch 
+import sys
+
+sys.stdout.reconfigure(line_buffering=True)
+
 
 NAME_ENV = "PongNoFrameskip-v4"
 
