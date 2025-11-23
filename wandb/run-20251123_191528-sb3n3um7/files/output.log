@@ -1,0 +1,36 @@
+>>> Training starts at 2025-11-23 19:15:32.024341
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.995)
+    Update freq: 8, Sync freq: 1000
+c:\Users\Iván\Desktop\Project-PML-Pong\Part 1\functions\Agent.py:323: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(filepath, map_location=self.net.device)
+Checkpoint loaded from checkpoints/checkpoint_ep_1000.pt
+Episode: 1000
+Steps: 2238697
+Epsilon: 0.010
+Mean reward: -4.92
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4037
+State std: 0.1905
+Unique values check: 50
+=== CHECK COMPLETE ===
+
+Training a DoubleDQN network
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 2252446 | Episode Steps: 3749
+Episode Reward: 2.00 | Mean Reward: -4.72
+Loss: 0.00266 | Epsilon: 0.010
+Traceback (most recent call last):
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Part 1\main.py", line 82, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Part 1\functions\Agent.py", line 127, in train
+    self.update()
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Part 1\functions\Agent.py", line 260, in update
+    self.update_loss.append(loss.item())
+KeyboardInterrupt

@@ -75,9 +75,11 @@ if __name__ == "__main__":
     print(f"    Epsilon: {EPSILON} -> {MIN_EPSILON} (decay: {EPSILON_DECAY})")
     print(f"    Update freq: {DNN_UPD}, Sync freq: {DNN_SYNC}")
 
+
+    last_episode = agent.load_checkpoint('checkpoints/checkpoint_ep_1000.pt') #resume from checkpoint
     agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,
-                dnn_sync_frequency=DNN_SYNC)
+                dnn_sync_frequency=DNN_SYNC, resume_from_episode=last_episode)
     
     
     plot_training_results(agent) 

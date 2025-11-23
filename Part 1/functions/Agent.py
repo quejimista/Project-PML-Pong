@@ -6,6 +6,9 @@ from copy import deepcopy
 import wandb
 import os
 import glob
+import warnings
+
+warnings.filterwarnings('ignore', category=FutureWarning, module='torch')
 
 class Agent:
     def __init__(self, env, net, buffer, epsilon=0.1, eps_decay=0.99, batch_size=32, min_epsilon=0.01, model_type = 'DQN'):
@@ -94,7 +97,8 @@ class Agent:
               dnn_update_frequency=4,
               dnn_sync_frequency=2000,
               save_frequency = 50,
-              save_dir='checkpoints'
+              save_dir='checkpoints',
+              resume_from_episode=0
               ):
         self.gamma = gamma
 
@@ -104,11 +108,13 @@ class Agent:
         
         print(f"Buffer filled with {len(self.buffer)} experiences")
         self.check_buffer_diversity()
- 
-        episode = 0
+        episode = resume_from_episode
+        
         training = True
         os.makedirs(save_dir, exist_ok=True) #create save directory
         print(f"Training a {self.model_type} network")
+        if resume_from_episode > 0:
+            print(f"Resuming training from episode {resume_from_episode}\n")
         while training:
             self.state = self.env.reset()[0]
             self.total_reward = 0
@@ -315,3 +321,23 @@ class Agent:
                 if current_mean > max(best_checkpoint['mean_training_rewards'][-100:]):
                     torch.save(checkpoint, best_path)
                     print(f"New best model! (Mean: {current_mean:.2f})")
+    def load_checkpoint(self, filepath):
+        #Loads a model checkpoint"""
+        checkpoint = torch.load(filepath, map_location=self.net.device)
+        
+        self.net.load_state_dict(checkpoint['model_state_dict'])
+        self.target_network.load_state_dict(checkpoint['target_model_state_dict'])
+        self.net.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        self.epsilon = checkpoint['epsilon']
+        self.step_count = checkpoint['step_count']
+        self.training_rewards = checkpoint['training_rewards']
+        self.mean_training_rewards = checkpoint['mean_training_rewards']
+        
+        print(f"\nCheckpoint loaded from {filepath}")
+        print(f"Episode: {checkpoint['episode']}")
+        print(f"Steps: {self.step_count}")
+        print(f"Epsilon: {self.epsilon:.3f}")
+        if len(self.mean_training_rewards) > 0:
+            print(f"Mean reward: {self.mean_training_rewards[-1]:.2f}\n")
+        
+        return checkpoint['episode']  #return episode number

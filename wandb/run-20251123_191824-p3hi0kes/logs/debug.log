@@ -1,0 +1,26 @@
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_setup.py:_flush():80] Current SDK version is 0.23.0
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_setup.py:_flush():80] Configure stats pid to 1552
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_setup.py:_flush():80] Loading settings from C:\Users\Iván\.config\wandb\settings
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_setup.py:_flush():80] Loading settings from C:\Users\Iván\Desktop\Project-PML-Pong\wandb\settings
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_init.py:setup_run_log_directory():713] Logging user logs to C:\Users\Iván\Desktop\Project-PML-Pong\wandb\run-20251123_191824-p3hi0kes\logs\debug.log
+2025-11-23 19:18:24,540 INFO    MainThread:1552 [wandb_init.py:setup_run_log_directory():714] Logging internal logs to C:\Users\Iván\Desktop\Project-PML-Pong\wandb\run-20251123_191824-p3hi0kes\logs\debug-internal.log
+2025-11-23 19:18:24,541 INFO    MainThread:1552 [wandb_init.py:init():840] calling init triggers
+2025-11-23 19:18:24,541 INFO    MainThread:1552 [wandb_init.py:init():845] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.0001, 'batch_size': 32, 'gamma': 0.99, 'epsilon_start': 1.0, 'epsilon_decay': 0.995, 'min_epsilon': 0.01, 'dnn_update_freq': 8, 'dnn_sync_freq': 1000, 'device': 'cuda', '_wandb': {}}
+2025-11-23 19:18:24,541 INFO    MainThread:1552 [wandb_init.py:init():888] starting backend
+2025-11-23 19:18:26,828 INFO    MainThread:1552 [wandb_init.py:init():891] sending inform_init request
+2025-11-23 19:18:26,838 INFO    MainThread:1552 [wandb_init.py:init():899] backend started and connected
+2025-11-23 19:18:26,856 INFO    MainThread:1552 [wandb_init.py:init():969] updated telemetry
+2025-11-23 19:18:26,886 INFO    MainThread:1552 [wandb_init.py:init():993] communicating run to backend with 90.0 second timeout
+2025-11-23 19:18:27,491 INFO    MainThread:1552 [wandb_init.py:init():1040] starting run threads in backend
+2025-11-23 19:18:27,710 INFO    MainThread:1552 [wandb_run.py:_console_start():2504] atexit reg
+2025-11-23 19:18:27,710 INFO    MainThread:1552 [wandb_run.py:_redirect():2352] redirect: wrap_raw
+2025-11-23 19:18:27,711 INFO    MainThread:1552 [wandb_run.py:_redirect():2421] Wrapping output streams.
+2025-11-23 19:18:27,711 INFO    MainThread:1552 [wandb_run.py:_redirect():2444] Redirects installed.
+2025-11-23 19:18:27,713 INFO    MainThread:1552 [wandb_init.py:init():1080] run started, returning control to user process
+2025-11-23 20:04:25,823 INFO    MainThread:1552 [wandb_run.py:_finish():2270] finishing run 1670797uab-universitat-aut-noma-de-barcelona/Project_Paradigms/p3hi0kes
+2025-11-23 20:04:25,825 INFO    MainThread:1552 [wandb_run.py:_atexit_cleanup():2469] got exitcode: 0
+2025-11-23 20:04:25,826 INFO    MainThread:1552 [wandb_run.py:_restore():2451] restore
+2025-11-23 20:04:25,826 INFO    MainThread:1552 [wandb_run.py:_restore():2457] restore done
+2025-11-23 20:04:27,029 INFO    MainThread:1552 [wandb_run.py:_footer_sync_info():3853] logging synced files
