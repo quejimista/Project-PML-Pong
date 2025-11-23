@@ -6,6 +6,10 @@ from functions.utils import *
 import wandb
 import datetime
 import torch 
+import sys
+
+sys.stdout.reconfigure(line_buffering=True)
+
 
 NAME_ENV = "PongNoFrameskip-v4"
 
@@ -75,7 +79,7 @@ if __name__ == "__main__":
                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,
                 dnn_sync_frequency=DNN_SYNC)
     
-    plot_training_results(agent) 
+    # plot_training_results(agent) 
     wandb.finish()
 
     # Saving the trained model
