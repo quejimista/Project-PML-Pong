@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # Creating the agent
     agent = Agent(env, net=net, buffer=buffer, epsilon=EPSILON, 
-                  eps_decay=EPSILON_DECAY, batch_size=BATCH_SIZE)
+                  eps_decay=EPSILON_DECAY, batch_size=BATCH_SIZE, model_type = 'DoubleDQN')
 
 
     wandb.login()
@@ -74,6 +74,7 @@ if __name__ == "__main__":
     agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,
                 dnn_sync_frequency=DNN_SYNC)
+    
     
     plot_training_results(agent) 
     wandb.finish()

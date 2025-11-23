@@ -65,7 +65,7 @@ def plot_training_results(agent, save_path="training_plot.png"):
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
     
     # 1. Rewards Plot
-    ax1.plot(episodes, agent.training_rewards, label='Episode Reward', color='lightalpha_blue', alpha=0.3)
+    ax1.plot(episodes, agent.training_rewards, label='Episode Reward', color='lightblue', alpha=0.3)
     ax1.plot(episodes, agent.mean_training_rewards, label='100-Ep Moving Avg', color='blue')
     ax1.axhline(y=agent.reward_threshold, color='r', linestyle='--', label='Solved Threshold')
     ax1.set_ylabel('Reward')

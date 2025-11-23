@@ -4,10 +4,11 @@ import numpy as np
 import torch
 from copy import deepcopy
 import wandb
-
+import os
+import glob
 
 class Agent:
-    def __init__(self, env, net, buffer, epsilon=0.1, eps_decay=0.99, batch_size=32, min_epsilon=0.01):
+    def __init__(self, env, net, buffer, epsilon=0.1, eps_decay=0.99, batch_size=32, min_epsilon=0.01, model_type = 'DQN'):
         self.env = env
         self.net = net
         self.target_network = deepcopy(net) 
@@ -18,23 +19,24 @@ class Agent:
         self.batch_size = batch_size
         self.min_epsilon = min_epsilon
         self.nblock = 100 
-        self.reward_threshold = self.env.spec.reward_threshold if self.env.spec.reward_threshold is not None else 18.0 
+        self.reward_threshold = self.env.spec.reward_threshold if self.env.spec.reward_threshold is not None else 18.0
+        self.model_type = model_type
         
         self.initialize()
     
     
-    def initialize(self):
-        self.update_loss = []
-        self.training_rewards = []
-        self.mean_training_rewards = []
-        self.sync_eps = []
-        self.total_reward = 0
-        self.step_count = 0
-        self.episode_step_count = 0
-        self.state = self.env.reset()[0]
-
-        self.training_loss_history = []
-        self.epsilon_history = []
+    def initialize(self, continue_from_checkpoint = False):
+        if not continue_from_checkpoint:
+            self.update_loss = []
+            self.training_rewards = []
+            self.mean_training_rewards = []
+            self.sync_eps = []
+            self.total_reward = 0
+            self.step_count = 0
+            self.episode_step_count = 0
+            self.state = self.env.reset()[0]
+            self.training_loss_history = []
+            self.epsilon_history = []
 
 
     @torch.no_grad()
@@ -90,7 +92,10 @@ class Agent:
     def train(self, gamma=0.99, max_episodes=50000, 
               batch_size=32,
               dnn_update_frequency=4,
-              dnn_sync_frequency=2000):
+              dnn_sync_frequency=2000,
+              save_frequency = 50,
+              save_dir='checkpoints'
+              ):
         self.gamma = gamma
 
         print("Filling replay buffer...")
@@ -102,7 +107,8 @@ class Agent:
  
         episode = 0
         training = True
-        print("Training...")
+        os.makedirs(save_dir, exist_ok=True) #create save directory
+        print(f"Training a {self.model_type} network")
         while training:
             self.state = self.env.reset()[0]
             self.total_reward = 0
@@ -161,7 +167,8 @@ class Agent:
                     print(f"Loss: {avg_loss:.5f} | "
                           f"Epsilon: {self.epsilon:.3f}\n\n")
                     # print(f"{'='*70}\n")
-
+                    if episode % save_frequency == 0:
+                        self.save_N_checkpoints(episode, save_dir, keep_last_n=5)
                     self.update_loss = []
                     
                     # Decay epsilon with minimum threshold
@@ -176,6 +183,7 @@ class Agent:
                     if mean_rewards >= self.reward_threshold:
                         training = False
                         print(f'\n>>> Environment solved in {episode} episodes!')
+                        self.save_N_checkpoints(episode, save_dir, keep_last_n=5)
                         print(f'>>> Mean reward: {mean_rewards:.2f}')
                         break
     
@@ -205,6 +213,29 @@ class Agent:
         # loss = torch.nn.SmoothL1Loss()(qvals, expected_qvals) # Huber loss
         return loss
     
+    def calculate_loss_doubleDQN(self, batch):
+        states, actions, rewards, next_states, dones = batch
+        
+        states = states.to(self.net.device)
+        actions = actions.to(self.net.device)
+        rewards = rewards.to(self.net.device)
+        next_states = next_states.to(self.net.device)
+        dones = dones.to(self.net.device)
+        
+        # Current Q-values
+        qvals = torch.gather(self.net(states), 1, actions)
+    
+        # Double DQN: separate action selection and evaluation
+        with torch.no_grad():
+            #online network selects actions
+            next_actions = torch.argmax(self.net(next_states), dim=-1, keepdim=True)
+            # Target network evaluates those actions
+            qvals_next = torch.gather(self.target_network(next_states), 1, next_actions)
+        
+        expected_qvals = rewards + self.gamma * qvals_next * (1 - dones)
+        loss = torch.nn.MSELoss()(qvals, expected_qvals)
+        
+        return loss
 
     def update(self):
         # Only update if buffer has enough samples
@@ -213,7 +244,10 @@ class Agent:
             
         self.net.optimizer.zero_grad()  
         batch = self.buffer.sample(batch_size=self.batch_size) 
-        loss = self.calculate_loss(batch) 
+        if self.model_type == 'DQN':
+            loss = self.calculate_loss(batch) 
+        elif self.model_type == 'DoubleDQN':
+            loss = self.calculate_loss_doubleDQN(batch)
         loss.backward() 
         
         # Gradient clipping for stability
@@ -240,3 +274,44 @@ class Agent:
         if sample_array.std() < 0.01:
             print("WARNING: States have very low variance! Check frame stacking.")
         print("=== CHECK COMPLETE ===\n")
+
+    def save_N_checkpoints(self, episode, save_dir='checkpoints', keep_last_n=5):
+        #function to save checkpoint and keep only last N checkpoints"""
+
+        os.makedirs(save_dir, exist_ok=True)
+        
+        checkpoint = {
+            'episode': episode,
+            'model_state_dict': self.net.state_dict(),
+            'target_model_state_dict': self.target_network.state_dict(),
+            'optimizer_state_dict': self.net.optimizer.state_dict(),
+            'epsilon': self.epsilon,
+            'step_count': self.step_count,
+            'training_rewards': self.training_rewards,
+            'mean_training_rewards': self.mean_training_rewards,
+        }
+        
+        filepath = os.path.join(save_dir, f'checkpoint_ep_{episode}.pt')
+        torch.save(checkpoint, filepath)
+        print(f"Checkpoint saved: {filepath}")
+        
+        #delete old checkpoints
+        checkpoints = sorted(glob.glob(os.path.join(save_dir, 'checkpoint_ep_*.pt'))) #use glob to use Regex to find all checkpoints
+        if len(checkpoints) > keep_last_n: #if there are more than N checkpoints
+            for old_checkpoint in checkpoints[:-keep_last_n]: #delete all but the last N
+                os.remove(old_checkpoint)
+                print(f"Removed old checkpoint: {old_checkpoint}")
+        
+        #save best model, (Won't be erased if there are more than N checkpoints)
+        if len(self.mean_training_rewards) > 0:
+            current_mean = self.mean_training_rewards[-1]
+            best_path = os.path.join(save_dir, 'best_model.pt')
+            
+            if not os.path.exists(best_path):
+                torch.save(checkpoint, best_path)
+                print(f"Best model saved!")
+            else:
+                best_checkpoint = torch.load(best_path)
+                if current_mean > max(best_checkpoint['mean_training_rewards'][-100:]):
+                    torch.save(checkpoint, best_path)
+                    print(f"New best model! (Mean: {current_mean:.2f})")
