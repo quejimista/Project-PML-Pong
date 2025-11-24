@@ -63,16 +63,16 @@ class Agent:
         is_done = terminated or truncated
         self.total_reward += float(reward)
 
-        clipped_reward = np.sign(reward)  # -1, 0, or +1
-        exp = Experience(state=self.state, action=action, reward=float(clipped_reward),
+        # clipped_reward = np.sign(reward)  # -1, 0, or +1
+        exp = Experience(state=self.state, action=action, reward=float(reward),
                     done=is_done, new_state=new_state)
         
         self.buffer.append(exp)
         self.state = new_state
 
-        if self.step_count % 500 == 0 and mode == 'train':
-            mean_reward = (np.mean(self.training_rewards[-self.nblock:]) 
-                              if len(self.training_rewards) > 0 else 0.0)
+        # if self.step_count % 500 == 0 and mode == 'train':
+        #     mean_reward = (np.mean(self.training_rewards[-self.nblock:]) 
+        #                       if len(self.training_rewards) > 0 else 0.0)
             
             # print(f"Steps: {self.step_count} | "
             #       f"Reward: {self.total_reward:.2f} | "
@@ -91,6 +91,7 @@ class Agent:
             done_reward = self.total_reward
             
         return done_reward
+    
     
     def train(self, gamma=0.99, max_episodes=50000, 
               batch_size=32,
@@ -173,8 +174,11 @@ class Agent:
                     print(f"Loss: {avg_loss:.5f} | "
                           f"Epsilon: {self.epsilon:.3f}\n\n")
                     # print(f"{'='*70}\n")
+
+
                     if episode % save_frequency == 0:
                         self.save_N_checkpoints(episode, save_dir, keep_last_n=5)
+
                     self.update_loss = []
                     
                     # Decay epsilon with minimum threshold
@@ -219,6 +223,7 @@ class Agent:
         # loss = torch.nn.SmoothL1Loss()(qvals, expected_qvals) # Huber loss
         return loss
     
+
     def calculate_loss_doubleDQN(self, batch):
         states, actions, rewards, next_states, dones = batch
         
@@ -243,6 +248,7 @@ class Agent:
         
         return loss
 
+
     def update(self):
         # Only update if buffer has enough samples
         if len(self.buffer) < self.batch_size:
@@ -262,6 +268,7 @@ class Agent:
         self.net.optimizer.step() 
         self.update_loss.append(loss.item())
     
+
     def check_buffer_diversity(self):
         """Check if buffer has diverse experiences"""
         if len(self.buffer.buffer) < 100:
@@ -280,6 +287,7 @@ class Agent:
         if sample_array.std() < 0.01:
             print("WARNING: States have very low variance! Check frame stacking.")
         print("=== CHECK COMPLETE ===\n")
+
 
     def save_N_checkpoints(self, episode, save_dir='checkpoints', keep_last_n=5):
         #function to save checkpoint and keep only last N checkpoints"""
@@ -321,6 +329,8 @@ class Agent:
                 if current_mean > max(best_checkpoint['mean_training_rewards'][-100:]):
                     torch.save(checkpoint, best_path)
                     print(f"New best model! (Mean: {current_mean:.2f})")
+                
+
     def load_checkpoint(self, filepath):
         #Loads a model checkpoint"""
         checkpoint = torch.load(filepath, map_location=self.net.device)
