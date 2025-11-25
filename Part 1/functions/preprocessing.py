@@ -40,9 +40,9 @@ def print_env_info(name, env):
 
 
 
-def make_env(env_name):
+def make_env(env_name, render = None):
     gym.register_envs(ale_py)
-    env = gym.make(env_name, render_mode=None) # get the environment
+    env = gym.make(env_name, render_mode=render) # get the environment
     print("Standard Env.        : {}".format(env.observation_space.shape)) 
     env = MaxAndSkipObservation(env, skip=4) # all frames too similar, then take one framework every 4
     print("MaxAndSkipObservation: {}".format(env.observation_space.shape))
