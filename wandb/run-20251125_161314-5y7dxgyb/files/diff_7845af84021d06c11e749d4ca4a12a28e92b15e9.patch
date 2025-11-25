@@ -1,0 +1,58 @@
+diff --git a/Part 1/functions/Agent.py b/Part 1/functions/Agent.py
+index fd1cf86..365aaad 100644
+--- a/Part 1/functions/Agent.py	
++++ b/Part 1/functions/Agent.py	
+@@ -113,9 +113,12 @@ class Agent:
+         
+         training = True
+         os.makedirs(save_dir, exist_ok=True) #create save directory
++        
+         print(f"Training a {self.model_type} network")
++
+         if resume_from_episode > 0:
+             print(f"Resuming training from episode {resume_from_episode}\n")
++
+         while training:
+             self.state = self.env.reset()[0]
+             self.total_reward = 0
+diff --git a/Part 1/functions/__pycache__/Agent.cpython-310.pyc b/Part 1/functions/__pycache__/Agent.cpython-310.pyc
+index 26ab164..8e9a22b 100644
+Binary files a/Part 1/functions/__pycache__/Agent.cpython-310.pyc and b/Part 1/functions/__pycache__/Agent.cpython-310.pyc differ
+diff --git a/Part 1/functions/__pycache__/Replay_buffer.cpython-310.pyc b/Part 1/functions/__pycache__/Replay_buffer.cpython-310.pyc
+index 9b87822..3dc39ef 100644
+Binary files a/Part 1/functions/__pycache__/Replay_buffer.cpython-310.pyc and b/Part 1/functions/__pycache__/Replay_buffer.cpython-310.pyc differ
+diff --git a/Part 1/functions/__pycache__/models.cpython-310.pyc b/Part 1/functions/__pycache__/models.cpython-310.pyc
+index 4be8a3d..8749a01 100644
+Binary files a/Part 1/functions/__pycache__/models.cpython-310.pyc and b/Part 1/functions/__pycache__/models.cpython-310.pyc differ
+diff --git a/Part 1/functions/__pycache__/preprocessing.cpython-310.pyc b/Part 1/functions/__pycache__/preprocessing.cpython-310.pyc
+index 629a376..d26786b 100644
+Binary files a/Part 1/functions/__pycache__/preprocessing.cpython-310.pyc and b/Part 1/functions/__pycache__/preprocessing.cpython-310.pyc differ
+diff --git a/Part 1/functions/__pycache__/utils.cpython-310.pyc b/Part 1/functions/__pycache__/utils.cpython-310.pyc
+index 253c475..2a6dc3c 100644
+Binary files a/Part 1/functions/__pycache__/utils.cpython-310.pyc and b/Part 1/functions/__pycache__/utils.cpython-310.pyc differ
+diff --git a/Part 1/main.py b/Part 1/main.py
+index 6d5a9e5..da4ce36 100644
+--- a/Part 1/main.py	
++++ b/Part 1/main.py	
+@@ -24,6 +24,7 @@ BATCH_SIZE = 32       # Batch size
+ BURN_IN = 10000       # Initial random experiences
+ DNN_UPD = 8           # Update every 4 steps (more stable)
+ DNN_SYNC = 1000       # Target network sync frequency
++MODEL_LOADED = None
+ 
+ if __name__ == "__main__":
+     # 1. DEVICE DETECTION
+@@ -75,8 +76,11 @@ if __name__ == "__main__":
+     print(f"    Epsilon: {EPSILON} -> {MIN_EPSILON} (decay: {EPSILON_DECAY})")
+     print(f"    Update freq: {DNN_UPD}, Sync freq: {DNN_SYNC}")
+ 
+-
+-    last_episode = agent.load_checkpoint('checkpoints/checkpoint_ep_1000.pt') #resume from checkpoint
++    if MODEL_LOADED:
++        last_episode = agent.load_checkpoint('checkpoints/checkpoint_ep_1000.pt') #resume from checkpoint
++    else:
++        last_episode = 0
++     
+     agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+                 batch_size=BATCH_SIZE, dnn_update_frequency=DNN_UPD,
+                 dnn_sync_frequency=DNN_SYNC, resume_from_episode=last_episode)
