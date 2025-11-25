@@ -1402,3 +1402,107 @@ Total Steps: 174101 | Episode Steps: 1227
 Episode Reward: -20.00 | Mean Reward: -20.17
 Loss: 0.00301 | Epsilon: 0.422
 Beta: 1.000
+
+
+EPISODE 174 COMPLETED
+======================================================================
+Total Steps: 175333 | Episode Steps: 1232
+Episode Reward: -19.00 | Mean Reward: -20.17
+Loss: 0.00286 | Epsilon: 0.420
+Beta: 1.000
+
+
+EPISODE 175 COMPLETED
+======================================================================
+Total Steps: 176474 | Episode Steps: 1141
+Episode Reward: -18.00 | Mean Reward: -20.15
+Loss: 0.00319 | Epsilon: 0.418
+Beta: 1.000
+
+
+EPISODE 176 COMPLETED
+======================================================================
+Total Steps: 177567 | Episode Steps: 1093
+Episode Reward: -19.00 | Mean Reward: -20.15
+Loss: 0.00375 | Epsilon: 0.416
+Beta: 1.000
+
+
+EPISODE 177 COMPLETED
+======================================================================
+Total Steps: 178435 | Episode Steps: 868
+Episode Reward: -21.00 | Mean Reward: -20.15
+Loss: 0.00345 | Epsilon: 0.414
+Beta: 1.000
+
+
+EPISODE 178 COMPLETED
+======================================================================
+Total Steps: 179247 | Episode Steps: 812
+Episode Reward: -21.00 | Mean Reward: -20.15
+Loss: 0.00312 | Epsilon: 0.412
+Beta: 1.000
+
+
+EPISODE 179 COMPLETED
+======================================================================
+Total Steps: 180430 | Episode Steps: 1183
+Episode Reward: -19.00 | Mean Reward: -20.14
+Loss: 0.00384 | Epsilon: 0.410
+Beta: 1.000
+
+
+EPISODE 180 COMPLETED
+======================================================================
+Total Steps: 181677 | Episode Steps: 1247
+Episode Reward: -17.00 | Mean Reward: -20.11
+Loss: 0.00322 | Epsilon: 0.408
+Beta: 1.000
+
+
+EPISODE 181 COMPLETED
+======================================================================
+Total Steps: 182760 | Episode Steps: 1083
+Episode Reward: -20.00 | Mean Reward: -20.10
+Loss: 0.00302 | Epsilon: 0.406
+Beta: 1.000
+
+
+EPISODE 182 COMPLETED
+======================================================================
+Total Steps: 184181 | Episode Steps: 1421
+Episode Reward: -20.00 | Mean Reward: -20.09
+Loss: 0.00304 | Epsilon: 0.404
+Beta: 1.000
+
+
+EPISODE 183 COMPLETED
+======================================================================
+Total Steps: 184963 | Episode Steps: 782
+Episode Reward: -21.00 | Mean Reward: -20.09
+Loss: 0.00304 | Epsilon: 0.402
+Beta: 1.000
+
+
+EPISODE 184 COMPLETED
+======================================================================
+Total Steps: 186083 | Episode Steps: 1120
+Episode Reward: -21.00 | Mean Reward: -20.09
+Loss: 0.00303 | Epsilon: 0.400
+Beta: 1.000
+
+
+EPISODE 185 COMPLETED
+======================================================================
+Total Steps: 186966 | Episode Steps: 883
+Episode Reward: -21.00 | Mean Reward: -20.10
+Loss: 0.00339 | Epsilon: 0.398
+Beta: 1.000
+
+
+EPISODE 186 COMPLETED
+======================================================================
+Total Steps: 187901 | Episode Steps: 935
+Episode Reward: -21.00 | Mean Reward: -20.10
+Loss: 0.00333 | Epsilon: 0.396
+Beta: 1.000

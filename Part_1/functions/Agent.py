@@ -164,7 +164,6 @@ class Agent:
                     
                     wandb.log(log_dict)
 
-                    # print(f"\n{'='*70}")
                     print(f"EPISODE {episode} COMPLETED")
                     print(f"{'='*70}")
                     print(f"Total Steps: {self.step_count} | "
@@ -175,8 +174,8 @@ class Agent:
                           f"Epsilon: {self.epsilon:.3f}")
                     
                     if self.use_prioritized_replay:
-                        print(f"Beta: {self.beta:.3f}\n\n")
-                    # print(f"{'='*70}\n")
+                        print(f"Beta: {self.beta:.3f}")
+                    print(f"\n\n")
 
 
                     if episode % save_frequency == 0:
@@ -339,9 +338,9 @@ class Agent:
             
             # Calculate loss with standard replay
             if self.model_type == 'DQN':
-                loss, _ = self.calculate_loss(batch)
+                loss = self.calculate_loss(batch)
             elif self.model_type == 'DoubleDQN':
-                loss, _ = self.calculate_loss_doubleDQN(batch)
+                loss = self.calculate_loss_doubleDQN(batch)
 
         loss.backward() 
         
