@@ -11,7 +11,8 @@ import warnings
 warnings.filterwarnings('ignore', category=FutureWarning, module='torch')
 
 class Agent:
-    def __init__(self, env, net, buffer, epsilon=0.1, eps_decay=0.99, batch_size=32, min_epsilon=0.01, model_type = 'DQN'):
+    def __init__(self, env, net, buffer, epsilon=0.1, eps_decay=0.99, batch_size=32, min_epsilon=0.01, 
+                 model_type='DQN', use_prioritized_replay=False, beta_start=0.4, beta_frames=100000):
         self.env = env
         self.net = net
         self.target_network = deepcopy(net) 
@@ -24,6 +25,12 @@ class Agent:
         self.nblock = 100 
         self.reward_threshold = self.env.spec.reward_threshold if self.env.spec.reward_threshold is not None else 18.0
         self.model_type = model_type
+
+        # PER parameters
+        self.use_prioritized_replay = use_prioritized_replay
+        self.beta_start = beta_start
+        self.beta_frames = beta_frames
+        self.beta = beta_start
         
         self.initialize()
     
@@ -63,28 +70,12 @@ class Agent:
         is_done = terminated or truncated
         self.total_reward += float(reward)
 
-        # clipped_reward = np.sign(reward)  # -1, 0, or +1
-        exp = Experience(state=self.state, action=action, reward=float(reward),
+        clipped_reward = np.sign(reward)  # -1, 0, or +1
+        exp = Experience(state=self.state, action=action, reward=float(clipped_reward),
                     done=is_done, new_state=new_state)
         
         self.buffer.append(exp)
         self.state = new_state
-
-        # if self.step_count % 500 == 0 and mode == 'train':
-        #     mean_reward = (np.mean(self.training_rewards[-self.nblock:]) 
-        #                       if len(self.training_rewards) > 0 else 0.0)
-            
-            # print(f"Steps: {self.step_count} | "
-            #       f"Reward: {self.total_reward:.2f} | "
-            #       f"Mean reward: {mean_reward:.2f} | "
-            #       f"Eps: {self.epsilon:.3f}")
-            
-            # wandb.log({
-            #     "step": self.step_count,
-            #     "current_reward": self.total_reward,
-            #     "mean_reward": mean_reward,
-            #     "epsilon": self.epsilon
-            # })
 
         # Handle episode end
         if is_done:
@@ -114,7 +105,8 @@ class Agent:
         training = True
         os.makedirs(save_dir, exist_ok=True) #create save directory
         
-        print(f"Training a {self.model_type} network")
+        buffer_type = "Prioritized" if self.use_prioritized_replay else "Standard"
+        print(f"Training a {self.model_type} network with {buffer_type} Replay Buffer")
 
         if resume_from_episode > 0:
             print(f"Resuming training from episode {resume_from_episode}\n")
@@ -158,14 +150,19 @@ class Agent:
                     self.mean_training_rewards.append(mean_rewards)
                     
                     # Log to wandb
-                    wandb.log({
+                    log_dict = {
                         "episode": episode,
                         "episode_reward": final_reward,
                         "episode_steps": self.episode_step_count,
                         "mean_reward_episode": mean_rewards,
                         "avg_loss": avg_loss, 
                         "epsilon": self.epsilon
-                    })
+                    }
+                    
+                    if self.use_prioritized_replay:
+                        log_dict["beta"] = self.beta
+                    
+                    wandb.log(log_dict)
 
                     # print(f"\n{'='*70}")
                     print(f"EPISODE {episode} COMPLETED")
@@ -175,7 +172,10 @@ class Agent:
                     print(f"Episode Reward: {final_reward:.2f} | "
                           f"Mean Reward: {mean_rewards:.2f}")
                     print(f"Loss: {avg_loss:.5f} | "
-                          f"Epsilon: {self.epsilon:.3f}\n\n")
+                          f"Epsilon: {self.epsilon:.3f}")
+                    
+                    if self.use_prioritized_replay:
+                        print(f"Beta: {self.beta:.3f}\n\n")
                     # print(f"{'='*70}\n")
 
 
@@ -250,6 +250,66 @@ class Agent:
         loss = torch.nn.MSELoss()(qvals, expected_qvals)
         
         return loss
+    
+    ## Loss calculation with Prioritized Replay
+    def calculate_loss_prioritized(self, batch):
+        states, actions, rewards, next_states, dones, weights, indices = batch
+        
+        states = states.to(self.net.device)
+        actions = actions.to(self.net.device)
+        rewards = rewards.to(self.net.device)
+        next_states = next_states.to(self.net.device)
+        dones = dones.to(self.net.device)
+        weights = weights.to(self.net.device)
+
+        # Current Q-values
+        qvals = torch.gather(self.net(states), 1, actions)
+        
+        # Target Q-values
+        with torch.no_grad():
+            qvals_next = torch.max(self.target_network(next_states), dim=-1)[0].unsqueeze(1)
+        
+        # Bellman equation
+        expected_qvals = rewards + self.gamma * qvals_next * (1 - dones)
+        
+        # Calculate TD errors for priority updates
+        td_errors = (qvals - expected_qvals).detach().cpu().numpy().flatten()
+        
+        # Weighted MSE loss
+        loss = (weights * (qvals - expected_qvals) ** 2).mean()
+        
+        return loss, (indices, td_errors)
+    
+
+    def calculate_loss_doubleDQN_prioritized(self, batch):
+        states, actions, rewards, next_states, dones, weights, indices = batch
+        
+        states = states.to(self.net.device)
+        actions = actions.to(self.net.device)
+        rewards = rewards.to(self.net.device)
+        next_states = next_states.to(self.net.device)
+        dones = dones.to(self.net.device)
+        weights = weights.to(self.net.device)
+        
+        # Current Q-values
+        qvals = torch.gather(self.net(states), 1, actions)
+    
+        # Double DQN: separate action selection and evaluation
+        with torch.no_grad():
+            # Online network selects actions
+            next_actions = torch.argmax(self.net(next_states), dim=-1, keepdim=True)
+            # Target network evaluates those actions
+            qvals_next = torch.gather(self.target_network(next_states), 1, next_actions)
+        
+        expected_qvals = rewards + self.gamma * qvals_next * (1 - dones)
+        
+        # Calculate TD errors for priority updates
+        td_errors = (qvals - expected_qvals).detach().cpu().numpy().flatten()
+        
+        # Weighted MSE loss
+        loss = (weights * (qvals - expected_qvals) ** 2).mean()
+        
+        return loss, (indices, td_errors)
 
 
     def update(self):
@@ -258,11 +318,31 @@ class Agent:
             return
             
         self.net.optimizer.zero_grad()  
-        batch = self.buffer.sample(batch_size=self.batch_size) 
-        if self.model_type == 'DQN':
-            loss = self.calculate_loss(batch) 
-        elif self.model_type == 'DoubleDQN':
-            loss = self.calculate_loss_doubleDQN(batch)
+
+        if self.use_prioritized_replay:
+            # Update beta for importance sampling
+            self.beta = min(1.0, self.beta_start + (1.0 - self.beta_start) * (self.step_count / self.beta_frames))
+            batch = self.buffer.sample(batch_size=self.batch_size, beta=self.beta)
+            
+            # Calculate loss with prioritized replay
+            if self.model_type == 'DQN':
+                loss, priority_data = self.calculate_loss_prioritized(batch)
+            elif self.model_type == 'DoubleDQN':
+                loss, priority_data = self.calculate_loss_doubleDQN_prioritized(batch)
+            
+            # Update priorities in buffer
+            if priority_data is not None:
+                indices, td_errors = priority_data
+                self.buffer.update_priorities(indices, td_errors)
+        else:
+            batch = self.buffer.sample(batch_size=self.batch_size)
+            
+            # Calculate loss with standard replay
+            if self.model_type == 'DQN':
+                loss, _ = self.calculate_loss(batch)
+            elif self.model_type == 'DoubleDQN':
+                loss, _ = self.calculate_loss_doubleDQN(batch)
+
         loss.backward() 
         
         # Gradient clipping for stability
@@ -292,9 +372,7 @@ class Agent:
         print("=== CHECK COMPLETE ===\n")
 
 
-    def save_N_checkpoints(self, episode, save_dir='checkpoints', keep_last_n=5):
-        #function to save checkpoint and keep only last N checkpoints"""
-
+    def save_N_checkpoints(self, episode, save_dir='checkpoints', keep_last_n=5, run_config=None):
         os.makedirs(save_dir, exist_ok=True)
         
         checkpoint = {
@@ -306,32 +384,51 @@ class Agent:
             'step_count': self.step_count,
             'training_rewards': self.training_rewards,
             'mean_training_rewards': self.mean_training_rewards,
+            'use_prioritized_replay': self.use_prioritized_replay,
+            'beta': self.beta if self.use_prioritized_replay else None,
+            'run_config': run_config,  # Store configuration
         }
         
-        filepath = os.path.join(save_dir, f'checkpoint_ep_{episode}.pt')
+        # Create filename with configuration
+        config_str = f"{self.model_type}_{'PER' if self.use_prioritized_replay else 'ER'}"
+        
+        filepath = os.path.join(save_dir, f'{config_str}_ep_{episode}.pt')
         torch.save(checkpoint, filepath)
         print(f"Checkpoint saved: {filepath}")
         
-        #delete old checkpoints
-        checkpoints = sorted(glob.glob(os.path.join(save_dir, 'checkpoint_ep_*.pt'))) #use glob to use Regex to find all checkpoints
-        if len(checkpoints) > keep_last_n: #if there are more than N checkpoints
-            for old_checkpoint in checkpoints[:-keep_last_n]: #delete all but the last N
+        # Delete old checkpoints (only for this configuration)
+        checkpoint_pattern = f'{config_str}_ep_*.pt'
+        checkpoints = sorted(glob.glob(os.path.join(save_dir, checkpoint_pattern)))
+        if len(checkpoints) > keep_last_n:
+            for old_checkpoint in checkpoints[:-keep_last_n]:
                 os.remove(old_checkpoint)
                 print(f"Removed old checkpoint: {old_checkpoint}")
         
-        #save best model, (Won't be erased if there are more than N checkpoints)
+        # Save best model (specific to this configuration)
         if len(self.mean_training_rewards) > 0:
             current_mean = self.mean_training_rewards[-1]
-            best_path = os.path.join(save_dir, 'best_model.pt')
+            best_path = os.path.join(save_dir, f'{config_str}_best_ep_{episode}.pt')
+            best_pattern = f'{config_str}_best_ep_*.pt'
             
-            if not os.path.exists(best_path):
+            existing_best = sorted(glob.glob(os.path.join(save_dir, best_pattern)))
+            
+            if not existing_best:
                 torch.save(checkpoint, best_path)
-                print(f"Best model saved!")
+                print(f"Best model saved: {best_path}")
             else:
-                best_checkpoint = torch.load(best_path)
-                if current_mean > max(best_checkpoint['mean_training_rewards'][-100:]):
+                # Load the most recent best checkpoint
+                latest_best = existing_best[-1]
+                best_checkpoint = torch.load(latest_best)
+                best_mean = max(best_checkpoint['mean_training_rewards'][-100:])
+                
+                if current_mean > best_mean:
+                    # Remove old best checkpoint
+                    for old_best in existing_best:
+                        os.remove(old_best)
+                    # Save new best
                     torch.save(checkpoint, best_path)
-                    print(f"New best model! (Mean: {current_mean:.2f})")
+                    print(f"New best model! (Mean: {current_mean:.2f}) - Saved: {best_path}")
+
                 
 
     def load_checkpoint(self, filepath):
@@ -345,11 +442,16 @@ class Agent:
         self.step_count = checkpoint['step_count']
         self.training_rewards = checkpoint['training_rewards']
         self.mean_training_rewards = checkpoint['mean_training_rewards']
+
+        if 'beta' in checkpoint and checkpoint['beta'] is not None:
+            self.beta = checkpoint['beta']
         
         print(f"\nCheckpoint loaded from {filepath}")
         print(f"Episode: {checkpoint['episode']}")
         print(f"Steps: {self.step_count}")
         print(f"Epsilon: {self.epsilon:.3f}")
+        if self.use_prioritized_replay:
+            print(f"Beta: {self.beta:.3f}")
         if len(self.mean_training_rewards) > 0:
             print(f"Mean reward: {self.mean_training_rewards[-1]:.2f}\n")
         

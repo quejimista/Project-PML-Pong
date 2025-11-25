@@ -1,0 +1,11 @@
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_setup.py:_flush():81] Current SDK version is 0.22.3
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_setup.py:_flush():81] Configure stats pid to 23516
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_setup.py:_flush():81] Loading settings from C:\Users\ainav\.config\wandb\settings
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_setup.py:_flush():81] Loading settings from C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\wandb\settings
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_init.py:setup_run_log_directory():706] Logging user logs to C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\wandb\run-20251125_225423-gi5r9g1s\logs\debug.log
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_init.py:setup_run_log_directory():707] Logging internal logs to C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\wandb\run-20251125_225423-gi5r9g1s\logs\debug-internal.log
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_init.py:init():833] calling init triggers
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_init.py:init():838] wandb.init called with sweep_config: {}
+config: {'model_type': 'DQN', 'use_prioritized_replay': True, 'learning_rate': 0.00025, 'batch_size': 32, 'gamma': 0.99, 'epsilon_start': 1.0, 'epsilon_decay': 0.9995, 'min_epsilon': 0.01, 'dnn_update_freq': 4, 'dnn_sync_freq': 1000, 'buffer_capacity': 100000, 'burn_in': 10000, 'device': 'cpu', '_wandb': {}}
+2025-11-25 22:54:23,754 INFO    MainThread:23516 [wandb_init.py:init():881] starting backend
