@@ -1,0 +1,8 @@
+
+>>> Creating and traininig model 'a2c'...
+Traceback (most recent call last):
+  File "C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_2\main.py", line 113, in <module>
+    train_model(env, model_name)
+  File "C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_2\main.py", line 40, in train_model
+    eval_env = make_env()
+TypeError: make_env() missing 1 required positional argument: 'env_name'

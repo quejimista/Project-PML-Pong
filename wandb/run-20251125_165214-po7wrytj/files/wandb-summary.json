@@ -1,0 +1,1 @@
+{"_runtime":155,"global_step":10000,"_timestamp":1.7640860933709595e+09,"eval/mean_reward":-21,"time/fps":79,"train/policy_loss":0.0077338545,"train/entropy_loss":-1.3049598,"train/learning_rate":0.0007,"_step":120,"_wandb":{"runtime":155},"train/explained_variance":5.7816505e-06,"train/value_loss":4.6700072e-05,"eval/mean_ep_length":763}

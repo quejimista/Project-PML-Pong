@@ -1,0 +1,53 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        code_path: code/Part_2/main.py
+        e:
+            eatuilvj2hpgacoqn992sv3ut6ululqx:
+                codePath: Part_2\main.py
+                codePathLocal: Part_2\main.py
+                cpu_count: 16
+                cpu_count_logical: 22
+                disk:
+                    /:
+                        total: "1022387097600"
+                        used: "549043544064"
+                email: 1670797uab@gmail.com
+                executable: C:\Users\ainav\anaconda3\envs\project_paradigms\python.exe
+                git:
+                    commit: 7845af84021d06c11e749d4ca4a12a28e92b15e9
+                    remote: https://github.com/quejimista/Project-PML-Pong.git
+                host: LAPTOP-3ELO2U09
+                memory:
+                    total: "16505966592"
+                os: Windows-10-10.0.26100-SP0
+                program: C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_2\main.py
+                python: CPython 3.10.19
+                root: C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong
+                startedAt: "2025-11-25T15:50:01.453706Z"
+                writerId: eatuilvj2hpgacoqn992sv3ut6ululqx
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 13
+                - 16
+                - 35
+            "4": 3.10.19
+            "5": 0.22.3
+            "8":
+                - 3
+            "12": 0.22.3
+            "13": windows-amd64
+env_name:
+    value: PongNoFrameskip-v4
+export_path:
+    value: ./exports/
+policy_type:
+    value: MlpPolicy
+total_timesteps:
+    value: 1000000
