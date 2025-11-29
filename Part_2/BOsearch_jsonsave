@@ -1,0 +1,289 @@
+import os
+import json
+import time
+import numpy as np
+import gymnasium as gym
+from gymnasium.wrappers import (
+    MaxAndSkipObservation,
+    ResizeObservation,
+    GrayscaleObservation,
+    FrameStackObservation,
+    ReshapeObservation
+)
+from datetime import datetime
+
+from stable_baselines3 import PPO
+from stable_baselines3.common.vec_env import DummyVecEnv
+from stable_baselines3.common.callbacks import BaseCallback, CheckpointCallback
+from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.logger import configure
+
+import ale_py
+
+import optuna
+
+
+############################################################
+# SAVE TRIAL METRICS AS JSON
+############################################################
+
+def save_trial_json(trial_number, hyperparams, episode_logs, output_dir="trial_logs"):
+    os.makedirs(output_dir, exist_ok=True)
+
+    data = {
+        "trial": trial_number,
+        "hyperparameters": hyperparams,
+        "episodes": episode_logs
+    }
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    filename = f"trial_{trial_number}_{timestamp}.json"
+
+    path = os.path.join(output_dir, filename)
+
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+    print(f"[INFO] Saved metrics to {path}")
+    return path
+
+
+############################################################
+# CALLBACK THAT TRACKS PER-EPISODE DATA
+############################################################
+
+class CustomLoggingCallback(BaseCallback):
+    """
+    Logs per episode:
+        - reward
+        - episode length
+        - PPO policy loss
+        - PPO value loss
+        - PPO entropy loss
+    """
+
+    def __init__(self, verbose=0):
+        super().__init__(verbose)
+        self.episode_logs = []
+
+    def _on_step(self):
+        infos = self.locals.get("infos", [])
+
+        for info in infos:
+            ep_info = info.get("episode")
+            if ep_info is not None:
+
+                reward = ep_info["r"]
+                length = ep_info["l"]
+
+                # SB3 logs training metrics during rollout phases
+                logger_dict = self.model.logger.name_to_value
+
+                policy_loss = logger_dict.get("train/policy_gradient_loss", None)
+                value_loss = logger_dict.get("train/value_loss", None)
+                entropy_loss = logger_dict.get("train/entropy_loss", None)
+
+                self.episode_logs.append({
+                    "episode": len(self.episode_logs) + 1,
+                    "reward": float(reward),
+                    "length": float(length),
+                    "policy_loss": float(policy_loss) if policy_loss is not None else None,
+                    "value_loss": float(value_loss) if value_loss is not None else None,
+                    "entropy_loss": float(entropy_loss) if entropy_loss is not None else None
+                })
+
+        return True
+
+
+############################################################
+# ENVIRONMENT PREPROCESSING
+############################################################
+
+class ImageToPyTorch(gym.ObservationWrapper):
+    def __init__(self, env):
+        super().__init__(env)
+        old_shape = self.observation_space.shape
+        self.observation_space = gym.spaces.Box(
+            low=0,
+            high=255,
+            shape=(old_shape[-1], old_shape[0], old_shape[1]),
+            dtype=np.uint8,
+        )
+
+    def observation(self, observation):
+        return np.moveaxis(observation, 2, 0)
+
+
+class FireResetEnv(gym.Wrapper):
+    def __init__(self, env):
+        super().__init__(env)
+
+    def reset(self, **kwargs):
+        obs, info = self.env.reset(**kwargs)
+        obs, _, terminated, truncated, info = self.env.step(1)
+        if terminated or truncated:
+            obs, info = self.env.reset(**kwargs)
+        return obs, info
+
+
+class ScaledFloatFrame(gym.ObservationWrapper):
+    def observation(self, obs):
+        return np.array(obs).astype(np.float32) / 255.0
+
+
+def make_env(env_name="ALE/Pong-v5", render="rgb_array"):
+    env = gym.make(env_name, render_mode=render)
+    env = MaxAndSkipObservation(env, skip=4)
+    env = FireResetEnv(env)
+    env = ResizeObservation(env, (84, 84))
+    env = GrayscaleObservation(env, keep_dim=True)
+    env = ImageToPyTorch(env)
+    env = ReshapeObservation(env, (84, 84))
+    env = FrameStackObservation(env, stack_size=4)
+    env = ScaledFloatFrame(env)
+    env = Monitor(env)
+    return env
+
+
+def make_vec_env(env_name="ALE/Pong-v5"):
+    return DummyVecEnv([lambda: make_env(env_name)])
+
+
+############################################################
+# TRAINING FUNCTION
+############################################################
+
+def train_right_agent(
+    total_timesteps,
+    learning_rate,
+    gamma,
+    batch_size,
+    save_every_episodes,
+    trial_number=None
+):
+    """
+    RETURNS:
+        final evaluation reward (for Optuna)
+        also saves .json with episode logs
+    """
+
+    export_path = "./exports/"
+    os.makedirs(export_path, exist_ok=True)
+
+    # Environment
+    env = make_vec_env()
+
+    # Logging directory
+    log_dir = "./logs/"
+    os.makedirs(log_dir, exist_ok=True)
+    sb3_logger = configure(log_dir, ["stdout"])
+
+    # Agent
+    agent = PPO(
+        "CnnPolicy",
+        env,
+        verbose=0,
+        device="cuda",
+        learning_rate=learning_rate,
+        gamma=gamma,
+        batch_size=batch_size,
+        tensorboard_log=log_dir
+    )
+    agent.set_logger(sb3_logger)
+
+    # Callbacks
+    logging_callback = CustomLoggingCallback()
+    approx_steps_per_episode = 5000
+    checkpoint_callback = CheckpointCallback(
+        save_freq=save_every_episodes * approx_steps_per_episode,
+        save_path=export_path,
+        name_prefix=f"right_agent_trial_{trial_number}"
+    )
+
+    # Train
+    agent.learn(
+        total_timesteps=total_timesteps,
+        callback=[logging_callback, checkpoint_callback]
+    )
+
+    ##################################################################
+    # Evaluate the trained agent
+    ##################################################################
+    eval_env = make_vec_env()
+    eval_reward_sum = 0
+
+    for _ in range(5):
+        obs = eval_env.reset()
+        done = False
+        ep_reward = 0
+        while not done:
+            action, _ = agent.predict(obs, deterministic=True)
+            obs, reward, done, info = eval_env.step(action)
+            ep_reward += reward
+        eval_reward_sum += ep_reward
+
+    mean_eval_reward = float(eval_reward_sum / 5)
+
+    ##################################################################
+    # Save JSON with episode logs
+    ##################################################################
+    hyperparams = {
+        "learning_rate": learning_rate,
+        "gamma": gamma,
+        "batch_size": batch_size,
+        "total_timesteps": total_timesteps
+    }
+
+    save_trial_json(
+        trial_number=trial_number,
+        hyperparams=hyperparams,
+        episode_logs=logging_callback.episode_logs
+    )
+
+    return mean_eval_reward
+
+
+############################################################
+# OPTUNA OBJECTIVE
+############################################################
+
+def objective(trial):
+    learning_rate = trial.suggest_loguniform("learning_rate", 1e-5, 5e-4)
+    gamma = trial.suggest_float("gamma", 0.95, 0.999)
+    batch_size = 4
+    total_timesteps = 2_000
+
+    result = train_right_agent(
+        total_timesteps=total_timesteps,
+        learning_rate=learning_rate,
+        gamma=gamma,
+        batch_size=batch_size,
+        save_every_episodes=30,
+        trial_number=trial.number
+    )
+
+    return result
+
+
+############################################################
+# RUN HYPERPARAMETER SEARCH
+############################################################
+
+def run_hyperparam_search(n_trials=10):
+    study = optuna.create_study(
+        direction="maximize",
+        sampler=optuna.samplers.TPESampler(seed=42)
+    )
+    study.optimize(objective, n_trials=n_trials)
+
+    print("\n===== BEST PARAMETERS =====")
+    print(study.best_params)
+    print(f"Best Evaluation Reward: {study.best_value}")
+
+
+############################################################
+# MAIN
+############################################################
+
+if __name__ == "__main__":
+    run_hyperparam_search(n_trials=10)
