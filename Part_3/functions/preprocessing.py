@@ -21,6 +21,8 @@ class GrayScaleObs(ObservationWrapper):
         gray = cv2.cvtColor(obs, cv2.COLOR_RGB2GRAY)
         return gray[..., None] #np trick to add a new dimension
 
+
+
 class ResizeObs(ObservationWrapper):
     def __init__(self, env, shape=(84, 84)):
         super().__init__(env)
@@ -54,6 +56,52 @@ class ScaledFloatFrame(gym.ObservationWrapper):
         return np.array(obs).astype(np.float32) / 255.0
     # change the range of values to [0,1]
 
+
+#the idea of this wrapper is to reduce the noise of the observation. Ex leaderboard seconds and all that stuff,
+#because it doesnt matter for the action to take
+class CropObs(ObservationWrapper):
+    def __init__(self, env, x_min=8, x_max=152, y_min=30, y_max=180):
+        super().__init__(env)
+        self.x_min = x_min
+        self.x_max = x_max
+        self.y_min = y_min
+        self.y_max = y_max
+        
+        #comput shape
+        old_shape = env.observation_space.shape
+        new_height = y_max - y_min
+        new_width = x_max - x_min
+        
+        #keep channels if they existed
+        if len(old_shape) == 3:
+            new_shape = (new_height, new_width, old_shape[2])
+        else:
+            new_shape = (new_height, new_width)
+            
+        self.observation_space = gym.spaces.Box(
+            low=0, high=255, 
+            shape=new_shape, 
+            dtype=env.observation_space.dtype
+        )
+
+    def observation(self, obs):
+        #numpy slice
+        #should work for (H, W) and (H, W, C)
+        return obs[self.y_min:self.y_max, self.x_min:self.x_max]
+
+
+
+#in our opinion better than clipping because that would make all negative rewards the same
+#ex passing seconds the same as missing a gate
+class SkiingRewardScaler(gym.RewardWrapper):
+    def __init__(self, env, scale=0.01):
+        super().__init__(env)
+        self.scale = scale
+
+    def reward(self, reward):
+        #reduce reward by dividing (ex: -8515 -> -85.15)
+        return reward * self.scale
+
 class FrameSkip(Wrapper):
     def __init__(self, env, skip=4):
         super().__init__(env)
@@ -76,8 +124,14 @@ def make_env(env_name, render=None):
     env = gym.make(env_name, render_mode=render)
     print("Standard Env.        :", env.observation_space.shape)
 
-    env = MaxAndSkipObservation(env, skip=4)
-    print("MaxAndSkipObservation:", env.observation_space.shape)
+    # env = MaxAndSkipObservation(env, skip=4)
+    # print("MaxAndSkipObservation:", env.observation_space.shape)
+
+    env = SkiingRewardScaler(env) 
+    print("Reward Scaled        : (Reward * scale factor)")
+
+    env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
+    print("CropObs              :", env.observation_space.shape)
 
     env = ResizeObservation(env, (84, 84))
     print("ResizeObservation    :", env.observation_space.shape)
@@ -112,61 +166,65 @@ def make_env(env_name, render=None):
 # print("Total reward:", total_reward)
 
 
-def capture_and_save_pipeline(env_name="SkiingNoFrameskip-v4"):
+def capture_and_save_pipeline(env_name="ALE/Skiing-v5"):
     gym.register_envs(ale_py)
     
-    #list to store (Stage Name, Observation Data, Shape)
     snapshots = []
     
-    #1.base Env
+    # 1. base Env
     env = gym.make(env_name, render_mode="rgb_array")
     obs, _ = env.reset()
     snapshots.append(("Original Env", obs, obs.shape))
 
-    #2.MaxAndSkipObservation
+    # 2. MaxAndSkip
     env = MaxAndSkipObservation(env, skip=4)
     obs, _ = env.reset()
     snapshots.append(("MaxAndSkip", obs, obs.shape))
 
-    #3.ResizeObservation
+    # 3. Reward Scaler (no visual change to the image)
+    env = SkiingRewardScaler(env, scale=0.05)
+    
+    # 4. CropObs (remove timer)
+    env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
+    obs, _ = env.reset()
+    snapshots.append(("CropObs (No Timer)", obs, obs.shape))
+
+    # 5. ResizeObservation
+    #resize the cropped img
     env = ResizeObservation(env, (84, 84))
     obs, _ = env.reset()
     snapshots.append(("Resize (84x84)", obs, obs.shape))
 
-    #4.GrayscaleObservation
+    # 6. GrayscaleObservation
     env = GrayscaleObservation(env, keep_dim=True)
     obs, _ = env.reset()
     snapshots.append(("Grayscale", obs, obs.shape))
 
-    #5.ImageToPyTorch
-    #swaps dimensions to (C, H, W)
+    # 7. ImageToPyTorch
     env = ImageToPyTorch(env)
     obs, _ = env.reset()
     snapshots.append(("ImageToPyTorch", obs, obs.shape))
 
-    #6.ReshapeObservation
-    #flattens (1, 84, 84) to (84, 84)
+    # 8. ReshapeObservation
     env = ReshapeObservation(env, (84, 84))
     obs, _ = env.reset()
     snapshots.append(("Reshape", obs, obs.shape))
 
-    #7.FrameStackObservation
-    #stacks 4 frames. Result: (4, 84, 84)
+    # 9. FrameStackObservation
     env = FrameStackObservation(env, stack_size=4)
     obs, _ = env.reset()
-    #We step the environment to fill the stack with different frames for visualization
+    
+    #fill stack a bit to see movement movement
     action = env.action_space.sample()
-    for _ in range(10):
+    for _ in range(12):
         obs, _, _, _, _ = env.step(action)
     snapshots.append(("FrameStack (4)", obs, obs.shape))
 
-    #8.ScaledFloatFrame
-    #normalizes values to 0-1
+    # 10. ScaledFloatFrame
     env = ScaledFloatFrame(env)
-    obs, _ = env.reset() #Resetting clears the stack again, but that is fine for shape checking
+    obs, _ = env.reset()
     snapshots.append(("ScaledFloat", obs, obs.shape))
 
-    #generate the plot
     save_plot(snapshots)
 
 def save_plot(snapshots):
@@ -180,36 +238,55 @@ def save_plot(snapshots):
     for i, (name, obs, shape) in enumerate(snapshots):
         ax = axes[i]
         
-        #prepare image for Matplotlib (needs H,W or H,W,C)
         img_display = obs
         
-        #handle PyTorch format (C, H, W) or stacked (Stack, H, W)
+        #manage tensors (C, H, W) or Stacks
         if len(obs.shape) == 3:
-            if obs.shape[0] in [1, 4]: 
-                #it is channel-first. We take the last frame/channel to display
+            if obs.shape[0] in [1, 4] and obs.shape[0] < obs.shape[1]: 
+                #its Channel-First -> take last frame
                 img_display = obs[-1]
             elif obs.shape[2] == 1:
-                #it is (H, W, 1). Remove the last dim
+                #(H, W, 1) -> remove extra dim
                 img_display = obs.squeeze()
         
-        #plot
         if len(img_display.shape) == 2:
             ax.imshow(img_display, cmap='gray')
         else:
             ax.imshow(img_display)
             
-        ax.set_title(f"{name}\n{shape}", fontsize=11)
+        ax.set_title(f"{name}\n{shape}", fontsize=10)
         ax.axis('off')
 
-    #hide empty subplots
     for j in range(i + 1, len(axes)):
         axes[j].axis('off')
 
     plt.tight_layout()
-    #save the figure
-    filename = "wrapper_steps.png"
+    filename = "wrapper_steps_final.png"
     plt.savefig(filename)
     print(f"Successfully saved visualization to {filename}")
     plt.close()
 
 capture_and_save_pipeline()
+
+#simulate a game to see how it moves
+env = make_env("ALE/Skiing-v5", render='human')
+obs, _ = env.reset()
+total_reward = 0
+
+print("Starting rewards calculation...")
+
+for i in range(1000):
+    
+    action = env.action_space.sample() 
+    obs, reward, done, truncated, info = env.step(action)
+    
+    total_reward += reward
+    
+    if reward != 0.0:
+        print(f"Step {i}: Reward = {reward}")
+    
+    if done or truncated:
+        break
+
+print(f"Reward Total Acumulado: {total_reward}")
+env.close()
