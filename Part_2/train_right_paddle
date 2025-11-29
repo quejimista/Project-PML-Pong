@@ -16,8 +16,13 @@ from stable_baselines3.common.callbacks import BaseCallback, CheckpointCallback
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.logger import configure
 
+import ale_py
 
+
+
+# ------------------------------------------------------
 # CUSTOM CALLBACK FOR W&B REWARDS
+# ------------------------------------------------------
 class CustomLoggingCallback(BaseCallback):
     def __init__(self, agent_name="agent", avg_window=20, verbose=0):
         super().__init__(verbose)
@@ -50,8 +55,9 @@ class CustomLoggingCallback(BaseCallback):
                 f"{self.agent_name}/avg_episode_length": avg_len,
             })
 
-
+# ------------------------------------------------------
 # ENVIRONMENT PREPROCESSING
+# ------------------------------------------------------
 class ImageToPyTorch(gym.ObservationWrapper):
     def __init__(self, env):
         super().__init__(env)
@@ -81,7 +87,7 @@ class ScaledFloatFrame(gym.ObservationWrapper):
     def observation(self, obs):
         return np.array(obs).astype(np.float32) / 255.0
 
-def make_env(env_name="ALE/Pong-v5", render=None):
+def make_env(env_name="ALE/Pong-v5", render="rgb_array"):
     env = gym.make(env_name, render_mode=render)
     env = MaxAndSkipObservation(env, skip=4)
     env = FireResetEnv(env)
@@ -99,15 +105,17 @@ def make_vec_env(env_name="ALE/Pong-v5"):
         return make_env(env_name)
     return DummyVecEnv([_init])
 
-
+# ------------------------------------------------------
 # TRAINING FUNCTION FOR RIGHT PADDLE
-def train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episodes=50,
+# ------------------------------------------------------
+def train_right_agent(total_timesteps=500_000, avg_window=20, save_every_episodes=50,
                       learning_rate=1e-4, gamma=0.99, batch_size=64):
     export_path = "./exports/"
     os.makedirs(export_path, exist_ok=True)
 
-
+    # -------------------------------
     # Initialize W&B
+    # -------------------------------
     run = wandb.init(
         project="pong_right_agent",
         config={
@@ -121,9 +129,14 @@ def train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episo
         save_code=True,
     )
 
+    # -------------------------------
+    # Environment
+    # -------------------------------
     env = make_vec_env()
 
-
+    # -------------------------------
+    # PPO Agent with logger
+    # -------------------------------
     log_dir = "./logs/"
     os.makedirs(log_dir, exist_ok=True)
     sb3_logger = configure(log_dir, ["stdout", "tensorboard"])  # tensorboard synced with W&B
@@ -139,9 +152,10 @@ def train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episo
         tensorboard_log=log_dir
     )
     agent.set_logger(sb3_logger)
-
-
+    agent.policy.to("cuda")
+    # -------------------------------
     # Callbacks
+    # -------------------------------
     logging_callback = CustomLoggingCallback(agent_name="right_agent", avg_window=avg_window)
     approx_steps_per_episode = 5000  # rough Pong episode length
     checkpoint_callback = CheckpointCallback(
@@ -150,8 +164,9 @@ def train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episo
         name_prefix="right_agent_checkpoint"
     )
 
-
+    # -------------------------------
     # Train
+    # -------------------------------  
     agent.learn(
         total_timesteps=total_timesteps,
         callback=[logging_callback, checkpoint_callback]
@@ -163,7 +178,8 @@ def train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episo
 
     run.finish()
 
-
+# ------------------------------------------------------
 # RUN TRAINING
+# ------------------------------------------------------
 if __name__ == "__main__":
     train_right_agent(total_timesteps=5_000_000, avg_window=20, save_every_episodes=50)
