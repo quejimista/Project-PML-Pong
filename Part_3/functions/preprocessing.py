@@ -19,7 +19,7 @@ class GrayScaleObs(ObservationWrapper):
 
     def observation(self, obs):
         gray = cv2.cvtColor(obs, cv2.COLOR_RGB2GRAY)
-        return gray[..., None]
+        return gray[..., None] #np trick to add a new dimension
 
 class ResizeObs(ObservationWrapper):
     def __init__(self, env, shape=(84, 84)):
