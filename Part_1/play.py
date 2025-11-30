@@ -6,8 +6,8 @@ import typing as tt
 
 import torch
 
-from lib import wrappers
-from lib import DQN
+from functions.preprocessing import *
+from functions.models import *
 
 import collections
 
@@ -22,9 +22,9 @@ if __name__ == "__main__":
     parser.add_argument("-r", "--record", required=True, help="Directory for video")
     args = parser.parse_args()
 
-    env = wrappers.make_env(args.env, render_mode="rgb_array")
+    env = make_env(args.env, render_mode="rgb_array")
     env = gym.wrappers.RecordVideo(env, video_folder=args.record)
-    net = DQN.DQN(env.observation_space.shape, env.action_space.n)
+    net = DQN(env.observation_space.shape, env.action_space.n)
     state = torch.load(args.model, map_location=lambda stg, _: stg, weights_only=True)
     net.load_state_dict(state)
 

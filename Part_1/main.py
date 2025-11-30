@@ -13,14 +13,14 @@ sys.stdout.reconfigure(line_buffering=True)
 
 NAME_ENV = "PongNoFrameskip-v4"
 
-lr = 0.00025 # 0.0001         # Standard DQN learning rate (from paper)
+lr = 0.0001         # Standard DQN learning rate (from paper)
 MEMORY_SIZE = 100000  # Buffer capacity
 MAX_EPISODES = 5000   # Maximum number of episodes
 EPSILON = 1.0         # Start with full exploration
-EPSILON_DECAY = 0.9995 # Slower decay for better exploration
+EPSILON_DECAY = 0.99 # Slower decay for better exploration
 MIN_EPSILON = 0.01    # Minimum exploration rate
 GAMMA = 0.99          # Discount factor
-BATCH_SIZE = 32       # Batch size
+BATCH_SIZE = 64       # Batch size
 BURN_IN = 10000       # Initial random experiences
 DNN_UPD = 4           # Update every 4 steps (more stable)
 DNN_SYNC = 1000       # Target network sync frequency
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     wandb.login()
 
     # run_name = f"training_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-    run_name = f"{MODEL_TYPE}_{'PER' if USE_PRIORITIZED_REPLAY else 'ER'}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    run_name = f"{MODEL_TYPE}_{'PER' if USE_PRIORITIZED_REPLAY else 'ER'}_lr{LR}_dnnupd{DNN_UPD}_epsdec{EPSILON_DECAY}_batch_{BATCH_SIZE}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     
     wandb.init(

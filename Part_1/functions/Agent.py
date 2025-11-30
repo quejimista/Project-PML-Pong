@@ -70,8 +70,8 @@ class Agent:
         is_done = terminated or truncated
         self.total_reward += float(reward)
 
-        clipped_reward = np.sign(reward)  # -1, 0, or +1
-        exp = Experience(state=self.state, action=action, reward=float(clipped_reward),
+        # clipped_reward = np.sign(reward)  # -1, 0, or +1
+        exp = Experience(state=self.state, action=action, reward=float(reward),
                     done=is_done, new_state=new_state)
         
         self.buffer.append(exp)
@@ -197,6 +197,16 @@ class Agent:
                         print(f'\n>>> Environment solved in {episode} episodes!')
                         self.save_N_checkpoints(episode, save_dir, keep_last_n=5)
                         print(f'>>> Mean reward: {mean_rewards:.2f}')
+
+                        # Save the final, solved model's state dict to the WandB run directory
+                        final_model_path = os.path.join(wandb.run.dir, "solved_model.pt")
+                        torch.save(self.net.state_dict(), final_model_path)
+                        
+                        # Use wandb.save() to upload the file to the run
+                        wandb.save(final_model_path)
+                        
+                        # (Optional: Also save existing local checkpoints just in case)
+                        wandb.save(os.path.join(wandb.run.dir, "checkpoint*"))
                         break
     
     ## Loss calculation           
