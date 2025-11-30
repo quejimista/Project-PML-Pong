@@ -13,7 +13,7 @@ sys.stdout.reconfigure(line_buffering=True)
 
 NAME_ENV = "PongNoFrameskip-v4"
 
-lr = 0.0001         # Standard DQN learning rate (from paper)
+LR = 0.0001         # Standard DQN learning rate (from paper)
 MEMORY_SIZE = 100000  # Buffer capacity
 MAX_EPISODES = 5000   # Maximum number of episodes
 EPSILON = 1.0         # Start with full exploration
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     print_env_info("Wrapped", env)
 
     # Creating the network - PASS THE DETECTED DEVICE
-    net = DQN(env, learning_rate=lr, device=device)
+    net = DQN(env, learning_rate=LR, device=device)
 
     # Creating the buffer 
     if USE_PRIORITIZED_REPLAY:
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         config={
             "model_type": MODEL_TYPE,
             "use_prioritized_replay": USE_PRIORITIZED_REPLAY,
-            "learning_rate": lr,
+            "learning_rate": LR,
             "batch_size": BATCH_SIZE,
             "gamma": GAMMA,
             "epsilon_start": EPSILON,
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     print(">>> Training starts at", datetime.datetime.now())
     print(f">>> Hyperparameters:")
-    print(f"    LR: {lr}, Batch: {BATCH_SIZE}, Gamma: {GAMMA}")
+    print(f"    LR: {LR}, Batch: {BATCH_SIZE}, Gamma: {GAMMA}")
     print(f"    Epsilon: {EPSILON} -> {MIN_EPSILON} (decay: {EPSILON_DECAY})")
     print(f"    Update freq: {DNN_UPD}, Sync freq: {DNN_SYNC}")
 
@@ -128,8 +128,7 @@ if __name__ == "__main__":
     wandb.finish()
 
     # Saving the trained model
-    # model_filename = f"{NAME_ENV}_epsilon{EPSILON}_lr{lr}.dat"
-    model_filename = f"{NAME_ENV}_{MODEL_TYPE}_{'PER' if USE_PRIORITIZED_REPLAY else 'ER'}_epsilon{EPSILON}_lr{lr}.dat"
+    model_filename = f"{NAME_ENV}_{MODEL_TYPE}_{'PER' if USE_PRIORITIZED_REPLAY else 'ER'}_epsilon{EPSILON}_lr{LR}.dat"
     torch.save(net.state_dict(), model_filename)
     print(f">>> Model saved as: {model_filename}")
     print(">>> Training ends at", datetime.datetime.now())
