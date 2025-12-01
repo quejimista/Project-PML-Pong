@@ -1,0 +1,223 @@
+>>> Training starts at 2025-11-28 15:35:45.832896
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.995)
+    Update freq: 8, Sync freq: 1000
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4037
+State std: 0.1905
+Unique values check: 50
+=== CHECK COMPLETE ===
+
+Training a DQN network with Standard Replay Buffer
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 10763 | Episode Steps: 763
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00276 | Epsilon: 1.000
+
+
+
+EPISODE 2 COMPLETED
+======================================================================
+Total Steps: 11644 | Episode Steps: 881
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00371 | Epsilon: 0.995
+
+
+
+EPISODE 3 COMPLETED
+======================================================================
+Total Steps: 12739 | Episode Steps: 1095
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00763 | Epsilon: 0.990
+
+
+
+EPISODE 4 COMPLETED
+======================================================================
+Total Steps: 13765 | Episode Steps: 1026
+Episode Reward: -20.00 | Mean Reward: -20.75
+Loss: 0.00439 | Epsilon: 0.985
+
+
+
+EPISODE 5 COMPLETED
+======================================================================
+Total Steps: 14616 | Episode Steps: 851
+Episode Reward: -21.00 | Mean Reward: -20.80
+Loss: 0.00726 | Epsilon: 0.980
+
+
+
+EPISODE 6 COMPLETED
+======================================================================
+Total Steps: 15518 | Episode Steps: 902
+Episode Reward: -20.00 | Mean Reward: -20.67
+Loss: 0.00891 | Epsilon: 0.975
+
+
+
+EPISODE 7 COMPLETED
+======================================================================
+Total Steps: 16355 | Episode Steps: 837
+Episode Reward: -20.00 | Mean Reward: -20.57
+Loss: 0.01301 | Epsilon: 0.970
+
+
+
+EPISODE 8 COMPLETED
+======================================================================
+Total Steps: 17203 | Episode Steps: 848
+Episode Reward: -21.00 | Mean Reward: -20.62
+Loss: 0.01285 | Epsilon: 0.966
+
+
+
+EPISODE 9 COMPLETED
+======================================================================
+Total Steps: 18303 | Episode Steps: 1100
+Episode Reward: -19.00 | Mean Reward: -20.44
+Loss: 0.01433 | Epsilon: 0.961
+
+
+
+EPISODE 10 COMPLETED
+======================================================================
+Total Steps: 19272 | Episode Steps: 969
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.01007 | Epsilon: 0.956
+
+
+
+EPISODE 11 COMPLETED
+======================================================================
+Total Steps: 20160 | Episode Steps: 888
+Episode Reward: -20.00 | Mean Reward: -20.45
+Loss: 0.01329 | Epsilon: 0.951
+
+
+
+EPISODE 12 COMPLETED
+======================================================================
+Total Steps: 21167 | Episode Steps: 1007
+Episode Reward: -20.00 | Mean Reward: -20.42
+Loss: 0.01003 | Epsilon: 0.946
+
+
+
+EPISODE 13 COMPLETED
+======================================================================
+Total Steps: 22223 | Episode Steps: 1056
+Episode Reward: -19.00 | Mean Reward: -20.31
+Loss: 0.01089 | Epsilon: 0.942
+
+
+
+EPISODE 14 COMPLETED
+======================================================================
+Total Steps: 23195 | Episode Steps: 972
+Episode Reward: -21.00 | Mean Reward: -20.36
+Loss: 0.01300 | Epsilon: 0.937
+
+
+
+EPISODE 15 COMPLETED
+======================================================================
+Total Steps: 24384 | Episode Steps: 1189
+Episode Reward: -19.00 | Mean Reward: -20.27
+Loss: 0.01606 | Epsilon: 0.932
+
+
+
+EPISODE 16 COMPLETED
+======================================================================
+Total Steps: 25464 | Episode Steps: 1080
+Episode Reward: -20.00 | Mean Reward: -20.25
+Loss: 0.01184 | Epsilon: 0.928
+
+
+
+EPISODE 17 COMPLETED
+======================================================================
+Total Steps: 26486 | Episode Steps: 1022
+Episode Reward: -20.00 | Mean Reward: -20.24
+Loss: 0.01261 | Epsilon: 0.923
+
+
+
+EPISODE 18 COMPLETED
+======================================================================
+Total Steps: 27431 | Episode Steps: 945
+Episode Reward: -21.00 | Mean Reward: -20.28
+Loss: 0.01637 | Epsilon: 0.918
+
+
+
+EPISODE 19 COMPLETED
+======================================================================
+Total Steps: 28363 | Episode Steps: 932
+Episode Reward: -20.00 | Mean Reward: -20.26
+Loss: 0.01706 | Epsilon: 0.914
+
+
+
+EPISODE 20 COMPLETED
+======================================================================
+Total Steps: 29524 | Episode Steps: 1161
+Episode Reward: -19.00 | Mean Reward: -20.20
+Loss: 0.01700 | Epsilon: 0.909
+
+
+
+EPISODE 21 COMPLETED
+======================================================================
+Total Steps: 30468 | Episode Steps: 944
+Episode Reward: -20.00 | Mean Reward: -20.19
+Loss: 0.01594 | Epsilon: 0.905
+
+
+
+EPISODE 22 COMPLETED
+======================================================================
+Total Steps: 31259 | Episode Steps: 791
+Episode Reward: -21.00 | Mean Reward: -20.23
+Loss: 0.01987 | Epsilon: 0.900
+
+
+
+EPISODE 23 COMPLETED
+======================================================================
+Total Steps: 32220 | Episode Steps: 961
+Episode Reward: -20.00 | Mean Reward: -20.22
+Loss: 0.01574 | Epsilon: 0.896
+
+
+
+EPISODE 24 COMPLETED
+======================================================================
+Total Steps: 33165 | Episode Steps: 945
+Episode Reward: -20.00 | Mean Reward: -20.21
+Loss: 0.01726 | Epsilon: 0.891
+
+
+
+EPISODE 25 COMPLETED
+======================================================================
+Total Steps: 34016 | Episode Steps: 851
+Episode Reward: -21.00 | Mean Reward: -20.24
+Loss: 0.01365 | Epsilon: 0.887
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 126, in train
+    self.update()
+  File "/home/anavarror/paradigms/Agent.py", line 341, in update
+    loss = self.calculate_loss(batch)
+  File "/home/anavarror/paradigms/Agent.py", line 212, in calculate_loss
+    dones = dones.to(self.net.device)
+KeyboardInterrupt

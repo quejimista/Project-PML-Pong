@@ -1,0 +1,25 @@
+>>> Training starts at 2025-11-29 13:53:59.749528
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.995)
+    Update freq: 8, Sync freq: 1000
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4037
+State std: 0.1905
+Unique values check: 56
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 102, in train
+    self.check_buffer_diversity()
+  File "/home/anavarror/paradigms/Agent.py", line 380, in check_buffer_diversity
+    if sample_array.std() < 0.01:
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/_methods.py", line 223, in _std
+    ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/_methods.py", line 191, in _var
+    x = asanyarray(arr - arrmean)
+KeyboardInterrupt

@@ -1,0 +1,106 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            ds3np4nzh58qzm3yv373lbulgivwe3ia:
+                codePath: main.py
+                codePathLocal: main.py
+                cpu_count: 24
+                cpu_count_logical: 48
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "935250427904"
+                        used: "300298960896"
+                email: 1670797uab@gmail.com
+                executable: /home/anavarror/miniconda3/envs/project_paradigms/bin/python
+                gpu: NVIDIA A40
+                gpu_count: 6
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-80e922c8-c8a7-071e-61a9-e18fdaa634d5
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-dd176a67-a673-5ed7-ba58-07c743946632
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "51527024640"
+                      name: NVIDIA RTX 6000 Ada Generation
+                      uuid: GPU-19911639-e979-b309-f31f-bf0051cc9ad0
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-45e9d660-8070-27e7-515e-e49d810107a7
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-ac4529ed-8cf5-300a-d697-d25e8f16e465
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "51527024640"
+                      name: NVIDIA RTX 6000 Ada Generation
+                      uuid: GPU-4621aed7-b2f1-9769-941e-ff888ec9385a
+                host: cudahpc43
+                memory:
+                    total: "270122897408"
+                os: Linux-5.15.0-69-generic-x86_64-with-glibc2.31
+                program: /home/anavarror/paradigms/main.py
+                python: CPython 3.10.19
+                root: /home/anavarror/paradigms
+                startedAt: "2025-11-28T17:32:03.865480Z"
+                writerId: ds3np4nzh58qzm3yv373lbulgivwe3ia
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 2
+                - 3
+                - 13
+                - 16
+            "4": 3.10.19
+            "5": 0.22.3
+            "12": 0.22.3
+            "13": linux-x86_64
+alpha:
+    value: 0.6
+batch_size:
+    value: 32
+beta_frames:
+    value: 500000
+beta_start:
+    value: 0.4
+buffer_capacity:
+    value: 100000
+burn_in:
+    value: 10000
+device:
+    value: cuda
+dnn_sync_freq:
+    value: 1000
+dnn_update_freq:
+    value: 8
+epsilon_decay:
+    value: 0.995
+epsilon_start:
+    value: 1
+gamma:
+    value: 0.99
+learning_rate:
+    value: 0.0001
+min_epsilon:
+    value: 0.01
+model_type:
+    value: DoubleDQN
+use_prioritized_replay:
+    value: true

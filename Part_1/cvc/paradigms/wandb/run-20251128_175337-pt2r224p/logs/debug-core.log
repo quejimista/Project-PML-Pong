@@ -1,0 +1,15 @@
+{"time":"2025-11-28T17:53:37.580204136+01:00","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpfjfg7uqi/port-4054011.txt","pid":4054011,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2025-11-28T17:53:37.580950176+01:00","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-4054011-4054089-823873262/socket","Net":"unix"}}
+{"time":"2025-11-28T17:53:37.586436056+01:00","level":"INFO","msg":"server: will exit if parent process dies","ppid":4054011}
+{"time":"2025-11-28T17:53:37.730451912+01:00","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2025-11-28T17:53:37.733463858+01:00","level":"INFO","msg":"handleInformInit: received","streamId":"pt2r224p","id":"1(@)"}
+{"time":"2025-11-28T17:53:38.117412091+01:00","level":"INFO","msg":"handleInformInit: stream started","streamId":"pt2r224p","id":"1(@)"}
+{"time":"2025-11-28T17:53:38.766136237+01:00","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2025-11-28T17:53:38.766195204+01:00","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2025-11-28T17:53:38.766275807+01:00","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2025-11-28T17:53:38.766292751+01:00","level":"INFO","msg":"server is shutting down"}
+{"time":"2025-11-28T17:53:38.766388528+01:00","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-4054011-4054089-823873262/socket","Net":"unix"}}
+{"time":"2025-11-28T17:53:38.948286071+01:00","level":"ERROR","msg":"processOutgoingData: flush error","error":"write unix /tmp/wandb-4054011-4054089-823873262/socket->@: use of closed network connection","id":"1(@)"}
+{"time":"2025-11-28T17:53:39.904186455+01:00","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2025-11-28T17:53:39.904214923+01:00","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2025-11-28T17:53:39.904230247+01:00","level":"INFO","msg":"server is closed"}

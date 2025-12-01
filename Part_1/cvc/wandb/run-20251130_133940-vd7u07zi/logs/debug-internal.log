@@ -1,0 +1,13 @@
+{"time":"2025-11-30T13:39:40.382842442+01:00","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-30T13:39:40.946635847+01:00","level":"INFO","msg":"stream: created new stream","id":"vd7u07zi"}
+{"time":"2025-11-30T13:39:40.946778936+01:00","level":"INFO","msg":"handler: started","stream_id":"vd7u07zi"}
+{"time":"2025-11-30T13:39:40.948700342+01:00","level":"INFO","msg":"stream: started","id":"vd7u07zi"}
+{"time":"2025-11-30T13:39:40.948717852+01:00","level":"INFO","msg":"writer: started","stream_id":"vd7u07zi"}
+{"time":"2025-11-30T13:39:40.948727072+01:00","level":"INFO","msg":"sender: started","stream_id":"vd7u07zi"}
+{"time":"2025-11-30T13:55:46.282060667+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/1670797uab-universitat-aut-noma-de-barcelona/Project_Paradigms/vd7u07zi/file_stream\": dial tcp: lookup api.wandb.ai on 127.0.0.53:53: read udp 127.0.0.1:52618->127.0.0.53:53: i/o timeout"}
+{"time":"2025-11-30T18:12:33.65252575+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-30T18:12:33.886664944+01:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-30T18:12:33.896810274+01:00","level":"INFO","msg":"stream: closing","id":"vd7u07zi"}
+{"time":"2025-11-30T18:12:33.896838321+01:00","level":"INFO","msg":"handler: closed","stream_id":"vd7u07zi"}
+{"time":"2025-11-30T18:12:33.898900971+01:00","level":"INFO","msg":"sender: closed","stream_id":"vd7u07zi"}
+{"time":"2025-11-30T18:12:33.898926474+01:00","level":"INFO","msg":"stream: closed","id":"vd7u07zi"}

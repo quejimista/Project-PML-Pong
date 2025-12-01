@@ -1,0 +1,185 @@
+>>> Training starts at 2025-11-29 19:48:16.069851
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.99)
+    Update freq: 4, Sync freq: 1000
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4037
+State std: 0.1905
+Unique values check: 50
+=== CHECK COMPLETE ===
+
+Training a DoubleDQN network with Prioritized Replay Buffer
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 10843 | Episode Steps: 843
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00368 | Epsilon: 1.000
+Beta: 0.413
+
+
+
+EPISODE 2 COMPLETED
+======================================================================
+Total Steps: 11939 | Episode Steps: 1096
+Episode Reward: -19.00 | Mean Reward: -20.00
+Loss: 0.01371 | Epsilon: 0.990
+Beta: 0.414
+
+
+
+EPISODE 3 COMPLETED
+======================================================================
+Total Steps: 12976 | Episode Steps: 1037
+Episode Reward: -20.00 | Mean Reward: -20.00
+Loss: 0.02683 | Epsilon: 0.980
+Beta: 0.416
+
+
+
+EPISODE 4 COMPLETED
+======================================================================
+Total Steps: 13907 | Episode Steps: 931
+Episode Reward: -20.00 | Mean Reward: -20.00
+Loss: 0.02593 | Epsilon: 0.970
+Beta: 0.417
+
+
+
+EPISODE 5 COMPLETED
+======================================================================
+Total Steps: 14758 | Episode Steps: 851
+Episode Reward: -21.00 | Mean Reward: -20.20
+Loss: 0.02659 | Epsilon: 0.961
+Beta: 0.418
+
+
+
+EPISODE 6 COMPLETED
+======================================================================
+Total Steps: 15763 | Episode Steps: 1005
+Episode Reward: -20.00 | Mean Reward: -20.17
+Loss: 0.02934 | Epsilon: 0.951
+Beta: 0.419
+
+
+
+EPISODE 7 COMPLETED
+======================================================================
+Total Steps: 16698 | Episode Steps: 935
+Episode Reward: -20.00 | Mean Reward: -20.14
+Loss: 0.02612 | Epsilon: 0.941
+Beta: 0.420
+
+
+
+EPISODE 8 COMPLETED
+======================================================================
+Total Steps: 17489 | Episode Steps: 791
+Episode Reward: -21.00 | Mean Reward: -20.25
+Loss: 0.02392 | Epsilon: 0.932
+Beta: 0.421
+
+
+
+EPISODE 9 COMPLETED
+======================================================================
+Total Steps: 18403 | Episode Steps: 914
+Episode Reward: -21.00 | Mean Reward: -20.33
+Loss: 0.01417 | Epsilon: 0.923
+Beta: 0.422
+
+
+
+EPISODE 10 COMPLETED
+======================================================================
+Total Steps: 19304 | Episode Steps: 901
+Episode Reward: -20.00 | Mean Reward: -20.30
+Loss: 0.01150 | Epsilon: 0.914
+Beta: 0.423
+
+
+
+EPISODE 11 COMPLETED
+======================================================================
+Total Steps: 20250 | Episode Steps: 946
+Episode Reward: -20.00 | Mean Reward: -20.27
+Loss: 0.01040 | Epsilon: 0.904
+Beta: 0.424
+
+
+
+EPISODE 12 COMPLETED
+======================================================================
+Total Steps: 21290 | Episode Steps: 1040
+Episode Reward: -20.00 | Mean Reward: -20.25
+Loss: 0.00878 | Epsilon: 0.895
+Beta: 0.426
+
+
+
+EPISODE 13 COMPLETED
+======================================================================
+Total Steps: 22224 | Episode Steps: 934
+Episode Reward: -19.00 | Mean Reward: -20.15
+Loss: 0.00842 | Epsilon: 0.886
+Beta: 0.427
+
+
+
+EPISODE 14 COMPLETED
+======================================================================
+Total Steps: 23035 | Episode Steps: 811
+Episode Reward: -21.00 | Mean Reward: -20.21
+Loss: 0.00867 | Epsilon: 0.878
+Beta: 0.428
+
+
+
+EPISODE 15 COMPLETED
+======================================================================
+Total Steps: 24033 | Episode Steps: 998
+Episode Reward: -21.00 | Mean Reward: -20.27
+Loss: 0.00831 | Epsilon: 0.869
+Beta: 0.429
+
+
+
+EPISODE 16 COMPLETED
+======================================================================
+Total Steps: 24852 | Episode Steps: 819
+Episode Reward: -21.00 | Mean Reward: -20.31
+Loss: 0.00690 | Epsilon: 0.860
+Beta: 0.430
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 122, in train
+    reward_if_done = self.play_step(epsilon=self.epsilon, mode='train')
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anavarror/paradigms/Agent.py", line 69, in play_step
+    new_state, reward, terminated, truncated, _ = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/stateful_observation.py", line 425, in step
+    obs, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 561, in step
+    return self.observation(observation), reward, terminated, truncated, info
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/transform_observation.py", line 98, in observation
+    return self.func(observation)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/transform_observation.py", line 319, in <lambda>
+    np.sum(
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 2466, in sum
+    return _wrapreduction(
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 86, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+KeyboardInterrupt
