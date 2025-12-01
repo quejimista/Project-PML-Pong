@@ -6,6 +6,7 @@ import cv2
 from gymnasium.wrappers import ResizeObservation, GrayscaleObservation, FrameStackObservation,  MaxAndSkipObservation, ReshapeObservation
 import ale_py
 import matplotlib.pyplot as plt
+from gymnasium.wrappers import TimeLimit
 
 class GrayScaleObs(ObservationWrapper):
     def __init__(self, env):
@@ -119,37 +120,46 @@ class FrameSkip(Wrapper):
                 break
         return obs, total_reward, done, truncated, info
 
-def make_env(env_name, render=None):
+def make_env(env_name = "ALE/Skiing-v5", render=None, verbose = False):
     gym.register_envs(ale_py)
     env = gym.make(env_name, render_mode=render)
-    print("Standard Env.        :", env.observation_space.shape)
+    if verbose:
+        print("Standard Env.        :", env.observation_space.shape)
 
-    # env = MaxAndSkipObservation(env, skip=4)
-    # print("MaxAndSkipObservation:", env.observation_space.shape)
+    env = MaxAndSkipObservation(env, skip=4)
+    if verbose:
+        print("MaxAndSkipObservation:", env.observation_space.shape)
 
     env = SkiingRewardScaler(env) 
-    print("Reward Scaled        : (Reward * scale factor)")
+    if verbose:
+        print("Reward Scaled        : (Reward * scale factor)")
 
     env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
-    print("CropObs              :", env.observation_space.shape)
+    if verbose:
+        print("CropObs              :", env.observation_space.shape)
 
     env = ResizeObservation(env, (84, 84))
-    print("ResizeObservation    :", env.observation_space.shape)
+    if verbose:
+        print("ResizeObservation    :", env.observation_space.shape)
 
     env = GrayscaleObservation(env, keep_dim=True)
-    print("GrayscaleObservation :", env.observation_space.shape)
+    if verbose:
+        print("GrayscaleObservation :", env.observation_space.shape)
 
-    env = ImageToPyTorch(env)
-    print("ImageToPyTorch       :", env.observation_space.shape)
+    # env = ImageToPyTorch(env)
+    # print("ImageToPyTorch       :", env.observation_space.shape)
 
     env = ReshapeObservation(env, (84, 84))
-    print("ReshapeObservation   :", env.observation_space.shape)
+    if verbose:
+        print("ReshapeObservation   :", env.observation_space.shape)
 
     env = FrameStackObservation(env, stack_size=4)
-    print("FrameStackObservation:", env.observation_space.shape)
+    if verbose:
+        print("FrameStackObservation:", env.observation_space.shape)
 
-    env = ScaledFloatFrame(env)
-    print("ScaledFloatFrame     :", env.observation_space.shape)
+    # env = ScaledFloatFrame(env)
+    # print("ScaledFloatFrame     :", env.observation_space.shape)
+    env = TimeLimit(env, max_episode_steps=25000)
 
     return env
 
@@ -266,27 +276,28 @@ def save_plot(snapshots):
     print(f"Successfully saved visualization to {filename}")
     plt.close()
 
-capture_and_save_pipeline()
 
-#simulate a game to see how it moves
-env = make_env("ALE/Skiing-v5", render='human')
-obs, _ = env.reset()
-total_reward = 0
+if __name__ == "__main__":
+    capture_and_save_pipeline()
 
-print("Starting rewards calculation...")
+    #simulate a game to see how it moves
+    env = make_env("ALE/Skiing-v5", render='human')
+    obs, _ = env.reset()
+    total_reward = 0
 
-for i in range(1000):
-    
-    action = env.action_space.sample() 
-    obs, reward, done, truncated, info = env.step(action)
-    
-    total_reward += reward
-    
-    if reward != 0.0:
-        print(f"Step {i}: Reward = {reward}")
-    
-    if done or truncated:
-        break
+    print("Starting rewards calculation...")
 
-print(f"Reward Total Acumulado: {total_reward}")
-env.close()
+
+    steps = 0
+    while True:
+        obs, reward, terminated, truncated, info = env.step(env.action_space.sample())
+        steps += 1
+        total_reward += reward
+
+        if terminated or truncated:
+            print("\n>>> Episode ended")
+            print("terminated =", terminated)
+            print("truncated =", truncated)
+            print("steps =", steps)
+            print("total_reward =", total_reward)
+            break

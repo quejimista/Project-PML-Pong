@@ -1,0 +1,103 @@
+
+>>> Creating and training model 'ppo'...
+Using cuda device
+Standard Env.        : (210, 160, 3)
+MaxAndSkipObservation: (210, 160, 3)
+Reward Scaled        : (Reward * scale factor)
+CropObs              : (150, 144, 3)
+ResizeObservation    : (84, 84, 3)
+GrayscaleObservation : (84, 84, 1)
+ReshapeObservation   : (84, 84)
+FrameStackObservation: (4, 84, 84)
+Environment reward threshold: -5000
+------------------------------
+| time/              |       |
+|    fps             | 377   |
+|    iterations      | 1     |
+|    time_elapsed    | 86    |
+|    total_timesteps | 32768 |
+------------------------------
+C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\evaluation.py:70: UserWarning: Evaluation environment is not wrapped with a ``Monitor`` wrapper. This may result in reporting modified episode lengths and rewards, if other wrappers happen to modify these. Consider wrapping environment first with ``Monitor`` wrapper.
+  warnings.warn(
+Eval num_timesteps=40000, episode_reward=-90.13 +/- 0.00
+Episode length: 132.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 132         |
+|    mean_reward          | -90.1       |
+| time/                   |             |
+|    total_timesteps      | 40000       |
+| train/                  |             |
+|    approx_kl            | 0.012760971 |
+|    clip_fraction        | 0.0412      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | 0.000311    |
+|    learning_rate        | 0.0003      |
+|    loss                 | 53.7        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.000137   |
+|    value_loss           | 132         |
+-----------------------------------------
+New best mean reward!
+------------------------------
+| time/              |       |
+|    fps             | 344   |
+|    iterations      | 2     |
+|    time_elapsed    | 190   |
+|    total_timesteps | 65536 |
+------------------------------
+Eval num_timesteps=80000, episode_reward=-90.13 +/- 0.00
+Episode length: 132.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 132          |
+|    mean_reward          | -90.1        |
+| time/                   |              |
+|    total_timesteps      | 80000        |
+| train/                  |              |
+|    approx_kl            | 0.0045480477 |
+|    clip_fraction        | 0.0589       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.09        |
+|    explained_variance   | 0.268        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 20.3         |
+|    n_updates            | 20           |
+|    policy_gradient_loss | -0.000306    |
+|    value_loss           | 80           |
+------------------------------------------
+------------------------------
+| time/              |       |
+|    fps             | 333   |
+|    iterations      | 3     |
+|    time_elapsed    | 294   |
+|    total_timesteps | 98304 |
+------------------------------
+Eval num_timesteps=120000, episode_reward=-90.13 +/- 0.00
+Episode length: 132.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 132         |
+|    mean_reward          | -90.1       |
+| time/                   |             |
+|    total_timesteps      | 120000      |
+| train/                  |             |
+|    approx_kl            | 0.010539692 |
+|    clip_fraction        | 0.161       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | 0.722       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 16.5        |
+|    n_updates            | 30          |
+|    policy_gradient_loss | 0.00366     |
+|    value_loss           | 61.2        |
+-----------------------------------------
+-------------------------------
+| time/              |        |
+|    fps             | 327    |
+|    iterations      | 4      |
+|    time_elapsed    | 400    |
+|    total_timesteps | 131072 |
+-------------------------------

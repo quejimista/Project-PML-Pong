@@ -1,0 +1,29 @@
+
+>>> Creating and training model 'ppo'...
+Using cuda device
+Traceback (most recent call last):
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 117, in <module>
+    train_model(env, model_name, thresh)
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 33, in train_model
+    model = PPO("CnnPolicy", env, verbose=1, tensorboard_log=f"runs/{run.id}", device=DEVICE, n_steps=4096, batch_size=2048,gamma=0.99)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\policies.py", line 818, in __init__
+    super().__init__(
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\policies.py", line 507, in __init__
+    self.features_extractor = self.make_features_extractor()
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\policies.py", line 120, in make_features_extractor
+    return self.features_extractor_class(self.observation_space, **self.features_extractor_kwargs)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\torch_layers.py", line 78, in __init__
+    assert is_image_space(observation_space, check_channels=False, normalized_image=normalized_image), (
+AssertionError: You should use NatureCNN only with images not with Box(0.0, 1.0, (4, 84, 84), float32)
+(you are probably using `CnnPolicy` instead of `MlpPolicy` or `MultiInputPolicy`)
+If you are using a custom environment,
+please check it using our env checker:
+https://stable-baselines3.readthedocs.io/en/master/common/env_checker.html.
+If you are using `VecNormalize` or already normalized channel-first images you should pass `normalize_images=False`:
+https://stable-baselines3.readthedocs.io/en/master/guide/custom_env.html
