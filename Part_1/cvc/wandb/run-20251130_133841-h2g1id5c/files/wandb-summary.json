@@ -1,0 +1,1 @@
+{"beta":1,"epsilon":0.01,"_step":505,"_timestamp":1.7645214981099083e+09,"episode":506,"_wandb":{"runtime":15180},"_runtime":15180,"mean_reward_episode":18.01,"episode_reward":19,"episode_steps":2130,"avg_loss":0.0003812916420326864}

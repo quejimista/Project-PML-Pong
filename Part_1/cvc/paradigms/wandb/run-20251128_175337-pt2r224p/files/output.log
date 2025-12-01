@@ -1,0 +1,6 @@
+>>> Training starts at 2025-11-28 17:53:38.762376
+>>> Hyperparameters:
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 109, in <module>
+    print(f"    LR: {lr}, Batch: {BATCH_SIZE}, Gamma: {GAMMA}")
+NameError: name 'lr' is not defined

@@ -1,0 +1,37 @@
+>>> Training starts at 2025-11-29 13:56:16.053575
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.995)
+    Update freq: 8, Sync freq: 1000
+Filling replay buffer...
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 99, in train
+    self.play_step(epsilon=1.0, mode='explore')
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anavarror/paradigms/Agent.py", line 69, in play_step
+    new_state, reward, terminated, truncated, _ = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/stateful_observation.py", line 425, in step
+    obs, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  [Previous line repeated 1 more time]
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 327, in step
+    return self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/stateful_observation.py", line 627, in step
+    max_frame = np.max(self._obs_buffer, axis=0)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 3164, in max
+    return _wrapreduction(a, np.maximum, 'max', axis, None, out,
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 70, in _wrapreduction
+    passkwargs = {k: v for k, v in kwargs.items()
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 71, in <dictcomp>
+    if v is not np._NoValue}
+KeyboardInterrupt

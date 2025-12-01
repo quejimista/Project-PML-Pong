@@ -1,0 +1,15 @@
+{"time":"2025-11-28T15:40:39.978205364+01:00","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-28T15:40:40.288141765+01:00","level":"INFO","msg":"stream: created new stream","id":"urx6tyhy"}
+{"time":"2025-11-28T15:40:40.288276153+01:00","level":"INFO","msg":"handler: started","stream_id":"urx6tyhy"}
+{"time":"2025-11-28T15:40:40.289848425+01:00","level":"INFO","msg":"stream: started","id":"urx6tyhy"}
+{"time":"2025-11-28T15:40:40.28986709+01:00","level":"INFO","msg":"writer: started","stream_id":"urx6tyhy"}
+{"time":"2025-11-28T15:40:40.28990181+01:00","level":"INFO","msg":"sender: started","stream_id":"urx6tyhy"}
+{"time":"2025-11-28T16:01:09.373026072+01:00","level":"INFO","msg":"stream: closing","id":"urx6tyhy"}
+{"time":"2025-11-28T16:01:09.572775146+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2025-11-28T16:01:09.57293034+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404: {\"data\":{\"createRunFiles\":null},\"errors\":[{\"message\":\"run Project_Paradigms/urx6tyhy not found during createRunFiles\",\"path\":[\"createRunFiles\"]}]}"}
+{"time":"2025-11-28T16:01:09.573651112+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-28T16:01:09.642732434+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/1670797uab-universitat-aut-noma-de-barcelona/Project_Paradigms/urx6tyhy/file_stream"}
+{"time":"2025-11-28T16:01:09.642784228+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/1670797uab-universitat-aut-noma-de-barcelona/Project_Paradigms/urx6tyhy/file_stream: {\"error\":\"run Project_Paradigms/urx6tyhy not found while streaming file\"}"}
+{"time":"2025-11-28T16:01:09.643245838+01:00","level":"INFO","msg":"handler: closed","stream_id":"urx6tyhy"}
+{"time":"2025-11-28T16:01:09.645491808+01:00","level":"INFO","msg":"sender: closed","stream_id":"urx6tyhy"}
+{"time":"2025-11-28T16:01:09.645512483+01:00","level":"INFO","msg":"stream: closed","id":"urx6tyhy"}

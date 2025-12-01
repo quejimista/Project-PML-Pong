@@ -1,0 +1,28 @@
+>>> Training starts at 2025-11-29 13:54:38.103348
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.995)
+    Update freq: 8, Sync freq: 1000
+Filling replay buffer...
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 99, in train
+    self.play_step(epsilon=1.0, mode='explore')
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anavarror/paradigms/Agent.py", line 69, in play_step
+    new_state, reward, terminated, truncated, _ = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/stateful_observation.py", line 429, in step
+    concatenate(self.env.observation_space, self.obs_queue, self.stacked_obs)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/functools.py", line 889, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/vector/utils/space_utils.py", line 404, in _concatenate_base
+    return np.stack(items, axis=0, out=out)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/shape_base.py", line 466, in stack
+    expanded_arrays = [arr[sl] for arr in arrays]
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/shape_base.py", line 466, in <listcomp>
+    expanded_arrays = [arr[sl] for arr in arrays]
+KeyboardInterrupt

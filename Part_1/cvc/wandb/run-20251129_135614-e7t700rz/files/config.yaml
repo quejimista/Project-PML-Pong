@@ -1,0 +1,124 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            cprtrh7pxg9nbg8f057zfdvwg5704o48:
+                codePath: paradigms/main.py
+                codePathLocal: paradigms/main.py
+                cpu_count: 24
+                cpu_count_logical: 48
+                cudaVersion: "12.8"
+                disk:
+                    /:
+                        total: "315926315008"
+                        used: "106637238272"
+                email: 1670797uab@gmail.com
+                executable: /home/anavarror/miniconda3/envs/project_paradigms/bin/python
+                gpu: NVIDIA GeForce RTX 3090
+                gpu_count: 10
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-e4ffd06d-dd73-f350-20e0-2885e110f689
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-20e62c0d-c10b-8133-8b9b-42e8ae2d5b14
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-14201850-fcb4-0fcc-75ef-797698e766c8
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-ce4967c9-c19d-1cdf-ce1b-9e8409f08f72
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-62c2f048-94ea-c5b5-293c-643a53d3de97
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp COLLECTORS EDITION
+                      uuid: GPU-23622974-777a-7dac-e1c6-c4be079c5e37
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-0b7f97f1-8ab4-9eb3-2b4a-3ba8144d7420
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-fc2df1b7-3ccd-4ab3-90fd-22622a3cfeed
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-12622dbe-97e3-deeb-57e9-a1abeb1588ab
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-ff8d9b49-f486-be8e-a59c-6ca4427545fd
+                host: cudahpc05
+                memory:
+                    total: "405634564096"
+                os: Linux-5.4.0-216-generic-x86_64-with-glibc2.31
+                program: /home/anavarror/paradigms/main.py
+                python: CPython 3.10.19
+                root: /home/anavarror
+                startedAt: "2025-11-29T12:56:14.617763Z"
+                writerId: cprtrh7pxg9nbg8f057zfdvwg5704o48
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 13
+                - 16
+            "4": 3.10.19
+            "5": 0.22.3
+            "12": 0.22.3
+            "13": linux-x86_64
+alpha:
+    value: 0.6
+batch_size:
+    value: 32
+beta_frames:
+    value: 500000
+beta_start:
+    value: 0.4
+buffer_capacity:
+    value: 100000
+burn_in:
+    value: 10000
+device:
+    value: cuda
+dnn_sync_freq:
+    value: 1000
+dnn_update_freq:
+    value: 8
+epsilon_decay:
+    value: 0.995
+epsilon_start:
+    value: 1
+gamma:
+    value: 0.99
+learning_rate:
+    value: 0.0001
+min_epsilon:
+    value: 0.01
+model_type:
+    value: DQN
+use_prioritized_replay:
+    value: true

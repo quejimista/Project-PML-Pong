@@ -1,0 +1,99 @@
+{
+  "os": "Linux-5.4.0-216-generic-x86_64-with-glibc2.31",
+  "python": "CPython 3.10.19",
+  "startedAt": "2025-11-29T12:55:39.778118Z",
+  "program": "/home/anavarror/paradigms/main.py",
+  "codePath": "paradigms/main.py",
+  "codePathLocal": "paradigms/main.py",
+  "email": "1670797uab@gmail.com",
+  "root": "/home/anavarror",
+  "host": "cudahpc05",
+  "executable": "/home/anavarror/miniconda3/envs/project_paradigms/bin/python",
+  "cpu_count": 24,
+  "cpu_count_logical": 48,
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "gpu_count": 10,
+  "disk": {
+    "/": {
+      "total": "315926315008",
+      "used": "106637234176"
+    }
+  },
+  "memory": {
+    "total": "405634564096"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3090",
+      "memoryTotal": "25769803776",
+      "cudaCores": 10496,
+      "architecture": "Ampere",
+      "uuid": "GPU-e4ffd06d-dd73-f350-20e0-2885e110f689"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 3090",
+      "memoryTotal": "25769803776",
+      "cudaCores": 10496,
+      "architecture": "Ampere",
+      "uuid": "GPU-20e62c0d-c10b-8133-8b9b-42e8ae2d5b14"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 3090",
+      "memoryTotal": "25769803776",
+      "cudaCores": 10496,
+      "architecture": "Ampere",
+      "uuid": "GPU-14201850-fcb4-0fcc-75ef-797698e766c8"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 3090",
+      "memoryTotal": "25769803776",
+      "cudaCores": 10496,
+      "architecture": "Ampere",
+      "uuid": "GPU-ce4967c9-c19d-1cdf-ce1b-9e8409f08f72"
+    },
+    {
+      "name": "NVIDIA TITAN Xp",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-62c2f048-94ea-c5b5-293c-643a53d3de97"
+    },
+    {
+      "name": "NVIDIA TITAN Xp COLLECTORS EDITION",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-23622974-777a-7dac-e1c6-c4be079c5e37"
+    },
+    {
+      "name": "NVIDIA TITAN Xp",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-0b7f97f1-8ab4-9eb3-2b4a-3ba8144d7420"
+    },
+    {
+      "name": "NVIDIA TITAN Xp",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-fc2df1b7-3ccd-4ab3-90fd-22622a3cfeed"
+    },
+    {
+      "name": "NVIDIA TITAN Xp",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-12622dbe-97e3-deeb-57e9-a1abeb1588ab"
+    },
+    {
+      "name": "NVIDIA TITAN Xp",
+      "memoryTotal": "12884901888",
+      "cudaCores": 3840,
+      "architecture": "Pascal",
+      "uuid": "GPU-ff8d9b49-f486-be8e-a59c-6ca4427545fd"
+    }
+  ],
+  "cudaVersion": "12.8",
+  "writerId": "p002iobebcp715wuzoczncae374jci88"
+}

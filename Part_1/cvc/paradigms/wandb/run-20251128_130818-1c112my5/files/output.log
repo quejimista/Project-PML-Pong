@@ -1,0 +1,95 @@
+>>> Training starts at 2025-11-28 13:08:20.231559
+>>> Hyperparameters:
+    LR: 0.00025, Batch: 32, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.9995)
+    Update freq: 4, Sync freq: 1000
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4034
+State std: 0.1905
+Unique values check: 53
+=== CHECK COMPLETE ===
+
+Training a DQN network with Prioritized Replay Buffer
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 10940 | Episode Steps: 940
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00341 | Epsilon: 1.000
+Beta: 0.413
+
+
+
+EPISODE 2 COMPLETED
+======================================================================
+Total Steps: 11838 | Episode Steps: 898
+Episode Reward: -20.00 | Mean Reward: -20.50
+Loss: 0.01064 | Epsilon: 1.000
+Beta: 0.414
+
+
+
+EPISODE 3 COMPLETED
+======================================================================
+Total Steps: 12735 | Episode Steps: 897
+Episode Reward: -20.00 | Mean Reward: -20.33
+Loss: 0.02795 | Epsilon: 0.999
+Beta: 0.415
+
+
+
+EPISODE 4 COMPLETED
+======================================================================
+Total Steps: 13677 | Episode Steps: 942
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.02905 | Epsilon: 0.999
+Beta: 0.416
+
+
+
+EPISODE 5 COMPLETED
+======================================================================
+Total Steps: 14578 | Episode Steps: 901
+Episode Reward: -20.00 | Mean Reward: -20.40
+Loss: 0.03034 | Epsilon: 0.998
+Beta: 0.417
+
+
+
+EPISODE 6 COMPLETED
+======================================================================
+Total Steps: 15510 | Episode Steps: 932
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.02972 | Epsilon: 0.998
+Beta: 0.419
+Traceback (most recent call last):
+  File "/home/anavarror/paradigms/main.py", line 122, in <module>
+    agent.train(gamma=GAMMA, max_episodes=MAX_EPISODES,
+  File "/home/anavarror/paradigms/Agent.py", line 122, in train
+    reward_if_done = self.play_step(epsilon=self.epsilon, mode='train')
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anavarror/paradigms/Agent.py", line 69, in play_step
+    new_state, reward, terminated, truncated, _ = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/stateful_observation.py", line 425, in step
+    obs, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 560, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/core.py", line 561, in step
+    return self.observation(observation), reward, terminated, truncated, info
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/transform_observation.py", line 98, in observation
+    return self.func(observation)
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/gymnasium/wrappers/transform_observation.py", line 319, in <lambda>
+    np.sum(
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 2466, in sum
+    return _wrapreduction(
+  File "/home/anavarror/miniconda3/envs/project_paradigms/lib/python3.10/site-packages/numpy/_core/fromnumeric.py", line 86, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+KeyboardInterrupt

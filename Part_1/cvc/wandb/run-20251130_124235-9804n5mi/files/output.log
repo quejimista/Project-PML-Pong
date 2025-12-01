@@ -1,0 +1,3679 @@
+>>> Training starts at 2025-11-30 12:42:36.769045
+>>> Hyperparameters:
+    LR: 0.0001, Batch: 64, Gamma: 0.99
+    Epsilon: 1.0 -> 0.01 (decay: 0.99)
+    Update freq: 4, Sync freq: 1000
+Filling replay buffer...
+Buffer filled with 10000 experiences
+
+=== BUFFER DIVERSITY CHECK ===
+Sample states shape: (100, 4, 84, 84)
+State mean: 0.4038
+State std: 0.1905
+Unique values check: 51
+=== CHECK COMPLETE ===
+
+Training a DoubleDQN network with Prioritized Replay Buffer
+EPISODE 1 COMPLETED
+======================================================================
+Total Steps: 10791 | Episode Steps: 791
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.00499 | Epsilon: 1.000
+Beta: 0.413
+
+
+
+EPISODE 2 COMPLETED
+======================================================================
+Total Steps: 11635 | Episode Steps: 844
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.01959 | Epsilon: 0.990
+Beta: 0.414
+
+
+
+EPISODE 3 COMPLETED
+======================================================================
+Total Steps: 12474 | Episode Steps: 839
+Episode Reward: -21.00 | Mean Reward: -21.00
+Loss: 0.01999 | Epsilon: 0.980
+Beta: 0.415
+
+
+
+EPISODE 4 COMPLETED
+======================================================================
+Total Steps: 13500 | Episode Steps: 1026
+Episode Reward: -19.00 | Mean Reward: -20.50
+Loss: 0.02046 | Epsilon: 0.970
+Beta: 0.416
+
+
+
+EPISODE 5 COMPLETED
+======================================================================
+Total Steps: 14473 | Episode Steps: 973
+Episode Reward: -21.00 | Mean Reward: -20.60
+Loss: 0.01207 | Epsilon: 0.961
+Beta: 0.417
+
+
+
+EPISODE 6 COMPLETED
+======================================================================
+Total Steps: 15370 | Episode Steps: 897
+Episode Reward: -20.00 | Mean Reward: -20.50
+Loss: 0.00850 | Epsilon: 0.951
+Beta: 0.418
+
+
+
+EPISODE 7 COMPLETED
+======================================================================
+Total Steps: 16240 | Episode Steps: 870
+Episode Reward: -21.00 | Mean Reward: -20.57
+Loss: 0.00771 | Epsilon: 0.941
+Beta: 0.419
+
+
+
+EPISODE 8 COMPLETED
+======================================================================
+Total Steps: 17063 | Episode Steps: 823
+Episode Reward: -21.00 | Mean Reward: -20.62
+Loss: 0.00643 | Epsilon: 0.932
+Beta: 0.420
+
+
+
+EPISODE 9 COMPLETED
+======================================================================
+Total Steps: 18156 | Episode Steps: 1093
+Episode Reward: -19.00 | Mean Reward: -20.44
+Loss: 0.00718 | Epsilon: 0.923
+Beta: 0.422
+
+
+
+EPISODE 10 COMPLETED
+======================================================================
+Total Steps: 19069 | Episode Steps: 913
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.00668 | Epsilon: 0.914
+Beta: 0.423
+
+
+
+EPISODE 11 COMPLETED
+======================================================================
+Total Steps: 20066 | Episode Steps: 997
+Episode Reward: -21.00 | Mean Reward: -20.55
+Loss: 0.00622 | Epsilon: 0.904
+Beta: 0.424
+
+
+
+EPISODE 12 COMPLETED
+======================================================================
+Total Steps: 20981 | Episode Steps: 915
+Episode Reward: -21.00 | Mean Reward: -20.58
+Loss: 0.00508 | Epsilon: 0.895
+Beta: 0.425
+
+
+
+EPISODE 13 COMPLETED
+======================================================================
+Total Steps: 22076 | Episode Steps: 1095
+Episode Reward: -19.00 | Mean Reward: -20.46
+Loss: 0.00542 | Epsilon: 0.886
+Beta: 0.426
+
+
+
+EPISODE 14 COMPLETED
+======================================================================
+Total Steps: 22839 | Episode Steps: 763
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.00513 | Epsilon: 0.878
+Beta: 0.427
+
+
+
+EPISODE 15 COMPLETED
+======================================================================
+Total Steps: 23757 | Episode Steps: 918
+Episode Reward: -20.00 | Mean Reward: -20.47
+Loss: 0.00586 | Epsilon: 0.869
+Beta: 0.429
+
+
+
+EPISODE 16 COMPLETED
+======================================================================
+Total Steps: 24582 | Episode Steps: 825
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.00512 | Epsilon: 0.860
+Beta: 0.429
+
+
+
+EPISODE 17 COMPLETED
+======================================================================
+Total Steps: 25628 | Episode Steps: 1046
+Episode Reward: -20.00 | Mean Reward: -20.47
+Loss: 0.00565 | Epsilon: 0.851
+Beta: 0.431
+
+
+
+EPISODE 18 COMPLETED
+======================================================================
+Total Steps: 26481 | Episode Steps: 853
+Episode Reward: -21.00 | Mean Reward: -20.50
+Loss: 0.00623 | Epsilon: 0.843
+Beta: 0.432
+
+
+
+EPISODE 19 COMPLETED
+======================================================================
+Total Steps: 27392 | Episode Steps: 911
+Episode Reward: -21.00 | Mean Reward: -20.53
+Loss: 0.00593 | Epsilon: 0.835
+Beta: 0.433
+
+
+
+EPISODE 20 COMPLETED
+======================================================================
+Total Steps: 28183 | Episode Steps: 791
+Episode Reward: -21.00 | Mean Reward: -20.55
+Loss: 0.00602 | Epsilon: 0.826
+Beta: 0.434
+
+
+
+EPISODE 21 COMPLETED
+======================================================================
+Total Steps: 29180 | Episode Steps: 997
+Episode Reward: -19.00 | Mean Reward: -20.48
+Loss: 0.00529 | Epsilon: 0.818
+Beta: 0.435
+
+
+
+EPISODE 22 COMPLETED
+======================================================================
+Total Steps: 30251 | Episode Steps: 1071
+Episode Reward: -20.00 | Mean Reward: -20.45
+Loss: 0.00491 | Epsilon: 0.810
+Beta: 0.436
+
+
+
+EPISODE 23 COMPLETED
+======================================================================
+Total Steps: 31259 | Episode Steps: 1008
+Episode Reward: -20.00 | Mean Reward: -20.43
+Loss: 0.00552 | Epsilon: 0.802
+Beta: 0.438
+
+
+
+EPISODE 24 COMPLETED
+======================================================================
+Total Steps: 32228 | Episode Steps: 969
+Episode Reward: -20.00 | Mean Reward: -20.42
+Loss: 0.00575 | Epsilon: 0.794
+Beta: 0.439
+
+
+
+EPISODE 25 COMPLETED
+======================================================================
+Total Steps: 33051 | Episode Steps: 823
+Episode Reward: -21.00 | Mean Reward: -20.44
+Loss: 0.00569 | Epsilon: 0.786
+Beta: 0.440
+
+
+
+EPISODE 26 COMPLETED
+======================================================================
+Total Steps: 33934 | Episode Steps: 883
+Episode Reward: -21.00 | Mean Reward: -20.46
+Loss: 0.00519 | Epsilon: 0.778
+Beta: 0.441
+
+
+
+EPISODE 27 COMPLETED
+======================================================================
+Total Steps: 34870 | Episode Steps: 936
+Episode Reward: -19.00 | Mean Reward: -20.41
+Loss: 0.00553 | Epsilon: 0.770
+Beta: 0.442
+
+
+
+EPISODE 28 COMPLETED
+======================================================================
+Total Steps: 35652 | Episode Steps: 782
+Episode Reward: -21.00 | Mean Reward: -20.43
+Loss: 0.00556 | Epsilon: 0.762
+Beta: 0.443
+
+
+
+EPISODE 29 COMPLETED
+======================================================================
+Total Steps: 36660 | Episode Steps: 1008
+Episode Reward: -20.00 | Mean Reward: -20.41
+Loss: 0.00550 | Epsilon: 0.755
+Beta: 0.444
+
+
+
+EPISODE 30 COMPLETED
+======================================================================
+Total Steps: 37636 | Episode Steps: 976
+Episode Reward: -21.00 | Mean Reward: -20.43
+Loss: 0.00521 | Epsilon: 0.747
+Beta: 0.445
+
+
+
+EPISODE 31 COMPLETED
+======================================================================
+Total Steps: 38612 | Episode Steps: 976
+Episode Reward: -20.00 | Mean Reward: -20.42
+Loss: 0.00608 | Epsilon: 0.740
+Beta: 0.446
+
+
+
+EPISODE 32 COMPLETED
+======================================================================
+Total Steps: 39491 | Episode Steps: 879
+Episode Reward: -21.00 | Mean Reward: -20.44
+Loss: 0.00614 | Epsilon: 0.732
+Beta: 0.447
+
+
+
+EPISODE 33 COMPLETED
+======================================================================
+Total Steps: 40448 | Episode Steps: 957
+Episode Reward: -20.00 | Mean Reward: -20.42
+Loss: 0.00601 | Epsilon: 0.725
+Beta: 0.449
+
+
+
+EPISODE 34 COMPLETED
+======================================================================
+Total Steps: 41539 | Episode Steps: 1091
+Episode Reward: -19.00 | Mean Reward: -20.38
+Loss: 0.00632 | Epsilon: 0.718
+Beta: 0.450
+
+
+
+EPISODE 35 COMPLETED
+======================================================================
+Total Steps: 42422 | Episode Steps: 883
+Episode Reward: -21.00 | Mean Reward: -20.40
+Loss: 0.00608 | Epsilon: 0.711
+Beta: 0.451
+
+
+
+EPISODE 36 COMPLETED
+======================================================================
+Total Steps: 43204 | Episode Steps: 782
+Episode Reward: -21.00 | Mean Reward: -20.42
+Loss: 0.00567 | Epsilon: 0.703
+Beta: 0.452
+
+
+
+EPISODE 37 COMPLETED
+======================================================================
+Total Steps: 44155 | Episode Steps: 951
+Episode Reward: -20.00 | Mean Reward: -20.41
+Loss: 0.00617 | Epsilon: 0.696
+Beta: 0.453
+
+
+
+EPISODE 38 COMPLETED
+======================================================================
+Total Steps: 45027 | Episode Steps: 872
+Episode Reward: -21.00 | Mean Reward: -20.42
+Loss: 0.00572 | Epsilon: 0.689
+Beta: 0.454
+
+
+
+EPISODE 39 COMPLETED
+======================================================================
+Total Steps: 46251 | Episode Steps: 1224
+Episode Reward: -19.00 | Mean Reward: -20.38
+Loss: 0.00601 | Epsilon: 0.683
+Beta: 0.455
+
+
+
+EPISODE 40 COMPLETED
+======================================================================
+Total Steps: 47190 | Episode Steps: 939
+Episode Reward: -20.00 | Mean Reward: -20.38
+Loss: 0.00654 | Epsilon: 0.676
+Beta: 0.457
+
+
+
+EPISODE 41 COMPLETED
+======================================================================
+Total Steps: 48255 | Episode Steps: 1065
+Episode Reward: -20.00 | Mean Reward: -20.37
+Loss: 0.00615 | Epsilon: 0.669
+Beta: 0.458
+
+
+
+EPISODE 42 COMPLETED
+======================================================================
+Total Steps: 49201 | Episode Steps: 946
+Episode Reward: -20.00 | Mean Reward: -20.36
+Loss: 0.00593 | Epsilon: 0.662
+Beta: 0.459
+
+
+
+EPISODE 43 COMPLETED
+======================================================================
+Total Steps: 50024 | Episode Steps: 823
+Episode Reward: -21.00 | Mean Reward: -20.37
+Loss: 0.00538 | Epsilon: 0.656
+Beta: 0.460
+
+
+
+EPISODE 44 COMPLETED
+======================================================================
+Total Steps: 50877 | Episode Steps: 853
+Episode Reward: -21.00 | Mean Reward: -20.39
+Loss: 0.00581 | Epsilon: 0.649
+Beta: 0.461
+
+
+
+EPISODE 45 COMPLETED
+======================================================================
+Total Steps: 51994 | Episode Steps: 1117
+Episode Reward: -19.00 | Mean Reward: -20.36
+Loss: 0.00553 | Epsilon: 0.643
+Beta: 0.462
+
+
+
+EPISODE 46 COMPLETED
+======================================================================
+Total Steps: 53126 | Episode Steps: 1132
+Episode Reward: -21.00 | Mean Reward: -20.37
+Loss: 0.00628 | Epsilon: 0.636
+Beta: 0.464
+
+
+
+EPISODE 47 COMPLETED
+======================================================================
+Total Steps: 54221 | Episode Steps: 1095
+Episode Reward: -19.00 | Mean Reward: -20.34
+Loss: 0.00674 | Epsilon: 0.630
+Beta: 0.465
+
+
+
+EPISODE 48 COMPLETED
+======================================================================
+Total Steps: 55401 | Episode Steps: 1180
+Episode Reward: -20.00 | Mean Reward: -20.33
+Loss: 0.00698 | Epsilon: 0.624
+Beta: 0.466
+
+
+
+EPISODE 49 COMPLETED
+======================================================================
+Total Steps: 56308 | Episode Steps: 907
+Episode Reward: -21.00 | Mean Reward: -20.35
+Loss: 0.00674 | Epsilon: 0.617
+Beta: 0.468
+
+
+
+EPISODE 50 COMPLETED
+======================================================================
+Total Steps: 57335 | Episode Steps: 1027
+Episode Reward: -19.00 | Mean Reward: -20.32
+Loss: 0.00651 | Epsilon: 0.611
+Beta: 0.469
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_50.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_50.pt
+/home/anavarror/paradigms/Agent.py:431: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  best_checkpoint = torch.load(latest_best)
+EPISODE 51 COMPLETED
+======================================================================
+Total Steps: 58098 | Episode Steps: 763
+Episode Reward: -21.00 | Mean Reward: -20.33
+Loss: 0.00577 | Epsilon: 0.605
+Beta: 0.470
+
+
+
+EPISODE 52 COMPLETED
+======================================================================
+Total Steps: 59122 | Episode Steps: 1024
+Episode Reward: -20.00 | Mean Reward: -20.33
+Loss: 0.00614 | Epsilon: 0.599
+Beta: 0.471
+
+
+
+EPISODE 53 COMPLETED
+======================================================================
+Total Steps: 60230 | Episode Steps: 1108
+Episode Reward: -21.00 | Mean Reward: -20.34
+Loss: 0.00637 | Epsilon: 0.593
+Beta: 0.472
+
+
+
+EPISODE 54 COMPLETED
+======================================================================
+Total Steps: 61451 | Episode Steps: 1221
+Episode Reward: -20.00 | Mean Reward: -20.33
+Loss: 0.00671 | Epsilon: 0.587
+Beta: 0.474
+
+
+
+EPISODE 55 COMPLETED
+======================================================================
+Total Steps: 62695 | Episode Steps: 1244
+Episode Reward: -17.00 | Mean Reward: -20.27
+Loss: 0.00675 | Epsilon: 0.581
+Beta: 0.475
+
+
+
+EPISODE 56 COMPLETED
+======================================================================
+Total Steps: 63595 | Episode Steps: 900
+Episode Reward: -20.00 | Mean Reward: -20.27
+Loss: 0.00630 | Epsilon: 0.575
+Beta: 0.476
+
+
+
+EPISODE 57 COMPLETED
+======================================================================
+Total Steps: 64702 | Episode Steps: 1107
+Episode Reward: -21.00 | Mean Reward: -20.28
+Loss: 0.00604 | Epsilon: 0.570
+Beta: 0.478
+
+
+
+EPISODE 58 COMPLETED
+======================================================================
+Total Steps: 65823 | Episode Steps: 1121
+Episode Reward: -19.00 | Mean Reward: -20.26
+Loss: 0.00603 | Epsilon: 0.564
+Beta: 0.479
+
+
+
+EPISODE 59 COMPLETED
+======================================================================
+Total Steps: 66975 | Episode Steps: 1152
+Episode Reward: -21.00 | Mean Reward: -20.27
+Loss: 0.00571 | Epsilon: 0.558
+Beta: 0.480
+
+
+
+EPISODE 60 COMPLETED
+======================================================================
+Total Steps: 68180 | Episode Steps: 1205
+Episode Reward: -19.00 | Mean Reward: -20.25
+Loss: 0.00585 | Epsilon: 0.553
+Beta: 0.482
+
+
+
+EPISODE 61 COMPLETED
+======================================================================
+Total Steps: 69485 | Episode Steps: 1305
+Episode Reward: -18.00 | Mean Reward: -20.21
+Loss: 0.00570 | Epsilon: 0.547
+Beta: 0.483
+
+
+
+EPISODE 62 COMPLETED
+======================================================================
+Total Steps: 70734 | Episode Steps: 1249
+Episode Reward: -19.00 | Mean Reward: -20.19
+Loss: 0.00597 | Epsilon: 0.542
+Beta: 0.485
+
+
+
+EPISODE 63 COMPLETED
+======================================================================
+Total Steps: 72100 | Episode Steps: 1366
+Episode Reward: -19.00 | Mean Reward: -20.17
+Loss: 0.00620 | Epsilon: 0.536
+Beta: 0.487
+
+
+
+EPISODE 64 COMPLETED
+======================================================================
+Total Steps: 73404 | Episode Steps: 1304
+Episode Reward: -18.00 | Mean Reward: -20.14
+Loss: 0.00596 | Epsilon: 0.531
+Beta: 0.488
+
+
+
+EPISODE 65 COMPLETED
+======================================================================
+Total Steps: 74579 | Episode Steps: 1175
+Episode Reward: -21.00 | Mean Reward: -20.15
+Loss: 0.00624 | Epsilon: 0.526
+Beta: 0.489
+
+
+
+EPISODE 66 COMPLETED
+======================================================================
+Total Steps: 75835 | Episode Steps: 1256
+Episode Reward: -20.00 | Mean Reward: -20.15
+Loss: 0.00606 | Epsilon: 0.520
+Beta: 0.491
+
+
+
+EPISODE 67 COMPLETED
+======================================================================
+Total Steps: 77108 | Episode Steps: 1273
+Episode Reward: -20.00 | Mean Reward: -20.15
+Loss: 0.00605 | Epsilon: 0.515
+Beta: 0.493
+
+
+
+EPISODE 68 COMPLETED
+======================================================================
+Total Steps: 78532 | Episode Steps: 1424
+Episode Reward: -18.00 | Mean Reward: -20.12
+Loss: 0.00604 | Epsilon: 0.510
+Beta: 0.494
+
+
+
+EPISODE 69 COMPLETED
+======================================================================
+Total Steps: 79907 | Episode Steps: 1375
+Episode Reward: -19.00 | Mean Reward: -20.10
+Loss: 0.00679 | Epsilon: 0.505
+Beta: 0.496
+
+
+
+EPISODE 70 COMPLETED
+======================================================================
+Total Steps: 81169 | Episode Steps: 1262
+Episode Reward: -19.00 | Mean Reward: -20.09
+Loss: 0.00679 | Epsilon: 0.500
+Beta: 0.497
+
+
+
+EPISODE 71 COMPLETED
+======================================================================
+Total Steps: 82180 | Episode Steps: 1011
+Episode Reward: -21.00 | Mean Reward: -20.10
+Loss: 0.00692 | Epsilon: 0.495
+Beta: 0.499
+
+
+
+EPISODE 72 COMPLETED
+======================================================================
+Total Steps: 83590 | Episode Steps: 1410
+Episode Reward: -17.00 | Mean Reward: -20.06
+Loss: 0.00700 | Epsilon: 0.490
+Beta: 0.500
+
+
+
+EPISODE 73 COMPLETED
+======================================================================
+Total Steps: 84712 | Episode Steps: 1122
+Episode Reward: -19.00 | Mean Reward: -20.04
+Loss: 0.00711 | Epsilon: 0.485
+Beta: 0.502
+
+
+
+EPISODE 74 COMPLETED
+======================================================================
+Total Steps: 85899 | Episode Steps: 1187
+Episode Reward: -20.00 | Mean Reward: -20.04
+Loss: 0.00688 | Epsilon: 0.480
+Beta: 0.503
+
+
+
+EPISODE 75 COMPLETED
+======================================================================
+Total Steps: 87437 | Episode Steps: 1538
+Episode Reward: -18.00 | Mean Reward: -20.01
+Loss: 0.00706 | Epsilon: 0.475
+Beta: 0.505
+
+
+
+EPISODE 76 COMPLETED
+======================================================================
+Total Steps: 88604 | Episode Steps: 1167
+Episode Reward: -20.00 | Mean Reward: -20.01
+Loss: 0.00730 | Epsilon: 0.471
+Beta: 0.506
+
+
+
+EPISODE 77 COMPLETED
+======================================================================
+Total Steps: 89855 | Episode Steps: 1251
+Episode Reward: -20.00 | Mean Reward: -20.01
+Loss: 0.00761 | Epsilon: 0.466
+Beta: 0.508
+
+
+
+EPISODE 78 COMPLETED
+======================================================================
+Total Steps: 91198 | Episode Steps: 1343
+Episode Reward: -21.00 | Mean Reward: -20.03
+Loss: 0.00743 | Epsilon: 0.461
+Beta: 0.509
+
+
+
+EPISODE 79 COMPLETED
+======================================================================
+Total Steps: 92519 | Episode Steps: 1321
+Episode Reward: -18.00 | Mean Reward: -20.00
+Loss: 0.00777 | Epsilon: 0.457
+Beta: 0.511
+
+
+
+EPISODE 80 COMPLETED
+======================================================================
+Total Steps: 93664 | Episode Steps: 1145
+Episode Reward: -19.00 | Mean Reward: -19.99
+Loss: 0.00768 | Epsilon: 0.452
+Beta: 0.512
+
+
+
+EPISODE 81 COMPLETED
+======================================================================
+Total Steps: 95346 | Episode Steps: 1682
+Episode Reward: -19.00 | Mean Reward: -19.98
+Loss: 0.00722 | Epsilon: 0.448
+Beta: 0.514
+
+
+
+EPISODE 82 COMPLETED
+======================================================================
+Total Steps: 97215 | Episode Steps: 1869
+Episode Reward: -18.00 | Mean Reward: -19.95
+Loss: 0.00714 | Epsilon: 0.443
+Beta: 0.517
+
+
+
+EPISODE 83 COMPLETED
+======================================================================
+Total Steps: 98355 | Episode Steps: 1140
+Episode Reward: -21.00 | Mean Reward: -19.96
+Loss: 0.00706 | Epsilon: 0.439
+Beta: 0.518
+
+
+
+EPISODE 84 COMPLETED
+======================================================================
+Total Steps: 99765 | Episode Steps: 1410
+Episode Reward: -19.00 | Mean Reward: -19.95
+Loss: 0.00710 | Epsilon: 0.434
+Beta: 0.520
+
+
+
+EPISODE 85 COMPLETED
+======================================================================
+Total Steps: 101226 | Episode Steps: 1461
+Episode Reward: -17.00 | Mean Reward: -19.92
+Loss: 0.00701 | Epsilon: 0.430
+Beta: 0.521
+
+
+
+EPISODE 86 COMPLETED
+======================================================================
+Total Steps: 102727 | Episode Steps: 1501
+Episode Reward: -19.00 | Mean Reward: -19.91
+Loss: 0.00714 | Epsilon: 0.426
+Beta: 0.523
+
+
+
+EPISODE 87 COMPLETED
+======================================================================
+Total Steps: 104370 | Episode Steps: 1643
+Episode Reward: -18.00 | Mean Reward: -19.89
+Loss: 0.00738 | Epsilon: 0.421
+Beta: 0.525
+
+
+
+EPISODE 88 COMPLETED
+======================================================================
+Total Steps: 105924 | Episode Steps: 1554
+Episode Reward: -18.00 | Mean Reward: -19.86
+Loss: 0.00719 | Epsilon: 0.417
+Beta: 0.527
+
+
+
+EPISODE 89 COMPLETED
+======================================================================
+Total Steps: 107458 | Episode Steps: 1534
+Episode Reward: -19.00 | Mean Reward: -19.85
+Loss: 0.00708 | Epsilon: 0.413
+Beta: 0.529
+
+
+
+EPISODE 90 COMPLETED
+======================================================================
+Total Steps: 109246 | Episode Steps: 1788
+Episode Reward: -15.00 | Mean Reward: -19.80
+Loss: 0.00729 | Epsilon: 0.409
+Beta: 0.531
+
+
+
+EPISODE 91 COMPLETED
+======================================================================
+Total Steps: 110669 | Episode Steps: 1423
+Episode Reward: -19.00 | Mean Reward: -19.79
+Loss: 0.00670 | Epsilon: 0.405
+Beta: 0.533
+
+
+
+EPISODE 92 COMPLETED
+======================================================================
+Total Steps: 112147 | Episode Steps: 1478
+Episode Reward: -20.00 | Mean Reward: -19.79
+Loss: 0.00669 | Epsilon: 0.401
+Beta: 0.535
+
+
+
+EPISODE 93 COMPLETED
+======================================================================
+Total Steps: 113609 | Episode Steps: 1462
+Episode Reward: -21.00 | Mean Reward: -19.81
+Loss: 0.00750 | Epsilon: 0.397
+Beta: 0.536
+
+
+
+EPISODE 94 COMPLETED
+======================================================================
+Total Steps: 115039 | Episode Steps: 1430
+Episode Reward: -18.00 | Mean Reward: -19.79
+Loss: 0.00723 | Epsilon: 0.393
+Beta: 0.538
+
+
+
+EPISODE 95 COMPLETED
+======================================================================
+Total Steps: 116437 | Episode Steps: 1398
+Episode Reward: -17.00 | Mean Reward: -19.76
+Loss: 0.00760 | Epsilon: 0.389
+Beta: 0.540
+
+
+
+EPISODE 96 COMPLETED
+======================================================================
+Total Steps: 117844 | Episode Steps: 1407
+Episode Reward: -19.00 | Mean Reward: -19.75
+Loss: 0.00766 | Epsilon: 0.385
+Beta: 0.541
+
+
+
+EPISODE 97 COMPLETED
+======================================================================
+Total Steps: 119460 | Episode Steps: 1616
+Episode Reward: -18.00 | Mean Reward: -19.73
+Loss: 0.00704 | Epsilon: 0.381
+Beta: 0.543
+
+
+
+EPISODE 98 COMPLETED
+======================================================================
+Total Steps: 121169 | Episode Steps: 1709
+Episode Reward: -18.00 | Mean Reward: -19.71
+Loss: 0.00691 | Epsilon: 0.377
+Beta: 0.545
+
+
+
+EPISODE 99 COMPLETED
+======================================================================
+Total Steps: 122825 | Episode Steps: 1656
+Episode Reward: -20.00 | Mean Reward: -19.72
+Loss: 0.00629 | Epsilon: 0.373
+Beta: 0.547
+
+
+
+EPISODE 100 COMPLETED
+======================================================================
+Total Steps: 124677 | Episode Steps: 1852
+Episode Reward: -19.00 | Mean Reward: -19.71
+Loss: 0.00633 | Epsilon: 0.370
+Beta: 0.550
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_100.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_100.pt
+EPISODE 101 COMPLETED
+======================================================================
+Total Steps: 126322 | Episode Steps: 1645
+Episode Reward: -18.00 | Mean Reward: -19.68
+Loss: 0.00629 | Epsilon: 0.366
+Beta: 0.552
+
+
+
+EPISODE 102 COMPLETED
+======================================================================
+Total Steps: 128189 | Episode Steps: 1867
+Episode Reward: -18.00 | Mean Reward: -19.65
+Loss: 0.00601 | Epsilon: 0.362
+Beta: 0.554
+
+
+
+EPISODE 103 COMPLETED
+======================================================================
+Total Steps: 130316 | Episode Steps: 2127
+Episode Reward: -16.00 | Mean Reward: -19.60
+Loss: 0.00611 | Epsilon: 0.359
+Beta: 0.556
+
+
+
+EPISODE 104 COMPLETED
+======================================================================
+Total Steps: 131914 | Episode Steps: 1598
+Episode Reward: -19.00 | Mean Reward: -19.60
+Loss: 0.00641 | Epsilon: 0.355
+Beta: 0.558
+
+
+
+EPISODE 105 COMPLETED
+======================================================================
+Total Steps: 133708 | Episode Steps: 1794
+Episode Reward: -15.00 | Mean Reward: -19.54
+Loss: 0.00647 | Epsilon: 0.352
+Beta: 0.560
+
+
+
+EPISODE 106 COMPLETED
+======================================================================
+Total Steps: 135275 | Episode Steps: 1567
+Episode Reward: -17.00 | Mean Reward: -19.51
+Loss: 0.00649 | Epsilon: 0.348
+Beta: 0.562
+
+
+
+EPISODE 107 COMPLETED
+======================================================================
+Total Steps: 137097 | Episode Steps: 1822
+Episode Reward: -16.00 | Mean Reward: -19.46
+Loss: 0.00669 | Epsilon: 0.345
+Beta: 0.565
+
+
+
+EPISODE 108 COMPLETED
+======================================================================
+Total Steps: 138953 | Episode Steps: 1856
+Episode Reward: -21.00 | Mean Reward: -19.46
+Loss: 0.00624 | Epsilon: 0.341
+Beta: 0.567
+
+
+
+EPISODE 109 COMPLETED
+======================================================================
+Total Steps: 140798 | Episode Steps: 1845
+Episode Reward: -18.00 | Mean Reward: -19.45
+Loss: 0.00629 | Epsilon: 0.338
+Beta: 0.569
+
+
+
+EPISODE 110 COMPLETED
+======================================================================
+Total Steps: 143020 | Episode Steps: 2222
+Episode Reward: -15.00 | Mean Reward: -19.39
+Loss: 0.00618 | Epsilon: 0.334
+Beta: 0.572
+
+
+
+EPISODE 111 COMPLETED
+======================================================================
+Total Steps: 145160 | Episode Steps: 2140
+Episode Reward: -17.00 | Mean Reward: -19.35
+Loss: 0.00569 | Epsilon: 0.331
+Beta: 0.574
+
+
+
+EPISODE 112 COMPLETED
+======================================================================
+Total Steps: 146602 | Episode Steps: 1442
+Episode Reward: -19.00 | Mean Reward: -19.33
+Loss: 0.00581 | Epsilon: 0.328
+Beta: 0.576
+
+
+
+EPISODE 113 COMPLETED
+======================================================================
+Total Steps: 148164 | Episode Steps: 1562
+Episode Reward: -16.00 | Mean Reward: -19.30
+Loss: 0.00614 | Epsilon: 0.324
+Beta: 0.578
+
+
+
+EPISODE 114 COMPLETED
+======================================================================
+Total Steps: 149764 | Episode Steps: 1600
+Episode Reward: -20.00 | Mean Reward: -19.29
+Loss: 0.00590 | Epsilon: 0.321
+Beta: 0.580
+
+
+
+EPISODE 115 COMPLETED
+======================================================================
+Total Steps: 151629 | Episode Steps: 1865
+Episode Reward: -15.00 | Mean Reward: -19.24
+Loss: 0.00621 | Epsilon: 0.318
+Beta: 0.582
+
+
+
+EPISODE 116 COMPLETED
+======================================================================
+Total Steps: 153902 | Episode Steps: 2273
+Episode Reward: -16.00 | Mean Reward: -19.19
+Loss: 0.00558 | Epsilon: 0.315
+Beta: 0.585
+
+
+
+EPISODE 117 COMPLETED
+======================================================================
+Total Steps: 155986 | Episode Steps: 2084
+Episode Reward: -13.00 | Mean Reward: -19.12
+Loss: 0.00585 | Epsilon: 0.312
+Beta: 0.587
+
+
+
+EPISODE 118 COMPLETED
+======================================================================
+Total Steps: 157881 | Episode Steps: 1895
+Episode Reward: -16.00 | Mean Reward: -19.07
+Loss: 0.00588 | Epsilon: 0.309
+Beta: 0.589
+
+
+
+EPISODE 119 COMPLETED
+======================================================================
+Total Steps: 159809 | Episode Steps: 1928
+Episode Reward: -17.00 | Mean Reward: -19.03
+Loss: 0.00647 | Epsilon: 0.305
+Beta: 0.592
+
+
+
+EPISODE 120 COMPLETED
+======================================================================
+Total Steps: 161784 | Episode Steps: 1975
+Episode Reward: -18.00 | Mean Reward: -19.00
+Loss: 0.00571 | Epsilon: 0.302
+Beta: 0.594
+
+
+
+EPISODE 121 COMPLETED
+======================================================================
+Total Steps: 163815 | Episode Steps: 2031
+Episode Reward: -18.00 | Mean Reward: -18.99
+Loss: 0.00592 | Epsilon: 0.299
+Beta: 0.597
+
+
+
+EPISODE 122 COMPLETED
+======================================================================
+Total Steps: 165878 | Episode Steps: 2063
+Episode Reward: -16.00 | Mean Reward: -18.95
+Loss: 0.00555 | Epsilon: 0.296
+Beta: 0.599
+
+
+
+EPISODE 123 COMPLETED
+======================================================================
+Total Steps: 168011 | Episode Steps: 2133
+Episode Reward: -15.00 | Mean Reward: -18.90
+Loss: 0.00585 | Epsilon: 0.293
+Beta: 0.602
+
+
+
+EPISODE 124 COMPLETED
+======================================================================
+Total Steps: 169923 | Episode Steps: 1912
+Episode Reward: -19.00 | Mean Reward: -18.89
+Loss: 0.00575 | Epsilon: 0.290
+Beta: 0.604
+
+
+
+EPISODE 125 COMPLETED
+======================================================================
+Total Steps: 172652 | Episode Steps: 2729
+Episode Reward: -12.00 | Mean Reward: -18.80
+Loss: 0.00570 | Epsilon: 0.288
+Beta: 0.607
+
+
+
+EPISODE 126 COMPLETED
+======================================================================
+Total Steps: 174602 | Episode Steps: 1950
+Episode Reward: -18.00 | Mean Reward: -18.77
+Loss: 0.00540 | Epsilon: 0.285
+Beta: 0.610
+
+
+
+EPISODE 127 COMPLETED
+======================================================================
+Total Steps: 176277 | Episode Steps: 1675
+Episode Reward: -20.00 | Mean Reward: -18.78
+Loss: 0.00539 | Epsilon: 0.282
+Beta: 0.612
+
+
+
+EPISODE 128 COMPLETED
+======================================================================
+Total Steps: 178943 | Episode Steps: 2666
+Episode Reward: -16.00 | Mean Reward: -18.73
+Loss: 0.00549 | Epsilon: 0.279
+Beta: 0.615
+
+
+
+EPISODE 129 COMPLETED
+======================================================================
+Total Steps: 181019 | Episode Steps: 2076
+Episode Reward: -15.00 | Mean Reward: -18.68
+Loss: 0.00564 | Epsilon: 0.276
+Beta: 0.617
+
+
+
+EPISODE 130 COMPLETED
+======================================================================
+Total Steps: 182975 | Episode Steps: 1956
+Episode Reward: -19.00 | Mean Reward: -18.66
+Loss: 0.00602 | Epsilon: 0.273
+Beta: 0.620
+
+
+
+EPISODE 131 COMPLETED
+======================================================================
+Total Steps: 184686 | Episode Steps: 1711
+Episode Reward: -19.00 | Mean Reward: -18.65
+Loss: 0.00607 | Epsilon: 0.271
+Beta: 0.622
+
+
+
+EPISODE 132 COMPLETED
+======================================================================
+Total Steps: 186224 | Episode Steps: 1538
+Episode Reward: -21.00 | Mean Reward: -18.65
+Loss: 0.00586 | Epsilon: 0.268
+Beta: 0.623
+
+
+
+EPISODE 133 COMPLETED
+======================================================================
+Total Steps: 187708 | Episode Steps: 1484
+Episode Reward: -19.00 | Mean Reward: -18.64
+Loss: 0.00539 | Epsilon: 0.265
+Beta: 0.625
+
+
+
+EPISODE 134 COMPLETED
+======================================================================
+Total Steps: 189719 | Episode Steps: 2011
+Episode Reward: -16.00 | Mean Reward: -18.61
+Loss: 0.00569 | Epsilon: 0.263
+Beta: 0.628
+
+
+
+EPISODE 135 COMPLETED
+======================================================================
+Total Steps: 191620 | Episode Steps: 1901
+Episode Reward: -15.00 | Mean Reward: -18.55
+Loss: 0.00580 | Epsilon: 0.260
+Beta: 0.630
+
+
+
+EPISODE 136 COMPLETED
+======================================================================
+Total Steps: 193826 | Episode Steps: 2206
+Episode Reward: -13.00 | Mean Reward: -18.47
+Loss: 0.00564 | Epsilon: 0.257
+Beta: 0.633
+
+
+
+EPISODE 137 COMPLETED
+======================================================================
+Total Steps: 196166 | Episode Steps: 2340
+Episode Reward: -15.00 | Mean Reward: -18.42
+Loss: 0.00527 | Epsilon: 0.255
+Beta: 0.635
+
+
+
+EPISODE 138 COMPLETED
+======================================================================
+Total Steps: 197911 | Episode Steps: 1745
+Episode Reward: -18.00 | Mean Reward: -18.39
+Loss: 0.00517 | Epsilon: 0.252
+Beta: 0.637
+
+
+
+EPISODE 139 COMPLETED
+======================================================================
+Total Steps: 199422 | Episode Steps: 1511
+Episode Reward: -20.00 | Mean Reward: -18.40
+Loss: 0.00509 | Epsilon: 0.250
+Beta: 0.639
+
+
+
+EPISODE 140 COMPLETED
+======================================================================
+Total Steps: 201400 | Episode Steps: 1978
+Episode Reward: -17.00 | Mean Reward: -18.37
+Loss: 0.00565 | Epsilon: 0.247
+Beta: 0.642
+
+
+
+EPISODE 141 COMPLETED
+======================================================================
+Total Steps: 203401 | Episode Steps: 2001
+Episode Reward: -19.00 | Mean Reward: -18.36
+Loss: 0.00562 | Epsilon: 0.245
+Beta: 0.644
+
+
+
+EPISODE 142 COMPLETED
+======================================================================
+Total Steps: 205198 | Episode Steps: 1797
+Episode Reward: -16.00 | Mean Reward: -18.32
+Loss: 0.00571 | Epsilon: 0.242
+Beta: 0.646
+
+
+
+EPISODE 143 COMPLETED
+======================================================================
+Total Steps: 207021 | Episode Steps: 1823
+Episode Reward: -19.00 | Mean Reward: -18.30
+Loss: 0.00520 | Epsilon: 0.240
+Beta: 0.648
+
+
+
+EPISODE 144 COMPLETED
+======================================================================
+Total Steps: 209639 | Episode Steps: 2618
+Episode Reward: -13.00 | Mean Reward: -18.22
+Loss: 0.00526 | Epsilon: 0.238
+Beta: 0.652
+
+
+
+EPISODE 145 COMPLETED
+======================================================================
+Total Steps: 211839 | Episode Steps: 2200
+Episode Reward: -16.00 | Mean Reward: -18.19
+Loss: 0.00557 | Epsilon: 0.235
+Beta: 0.654
+
+
+
+EPISODE 146 COMPLETED
+======================================================================
+Total Steps: 213490 | Episode Steps: 1651
+Episode Reward: -20.00 | Mean Reward: -18.18
+Loss: 0.00547 | Epsilon: 0.233
+Beta: 0.656
+
+
+
+EPISODE 147 COMPLETED
+======================================================================
+Total Steps: 215785 | Episode Steps: 2295
+Episode Reward: -11.00 | Mean Reward: -18.10
+Loss: 0.00512 | Epsilon: 0.231
+Beta: 0.659
+
+
+
+EPISODE 148 COMPLETED
+======================================================================
+Total Steps: 218235 | Episode Steps: 2450
+Episode Reward: -15.00 | Mean Reward: -18.05
+Loss: 0.00463 | Epsilon: 0.228
+Beta: 0.662
+
+
+
+EPISODE 149 COMPLETED
+======================================================================
+Total Steps: 220087 | Episode Steps: 1852
+Episode Reward: -19.00 | Mean Reward: -18.03
+Loss: 0.00461 | Epsilon: 0.226
+Beta: 0.664
+
+
+
+EPISODE 150 COMPLETED
+======================================================================
+Total Steps: 222266 | Episode Steps: 2179
+Episode Reward: -19.00 | Mean Reward: -18.03
+Loss: 0.00463 | Epsilon: 0.224
+Beta: 0.667
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_150.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_150.pt
+EPISODE 151 COMPLETED
+======================================================================
+Total Steps: 223965 | Episode Steps: 1699
+Episode Reward: -17.00 | Mean Reward: -17.99
+Loss: 0.00535 | Epsilon: 0.221
+Beta: 0.669
+
+
+
+EPISODE 152 COMPLETED
+======================================================================
+Total Steps: 225793 | Episode Steps: 1828
+Episode Reward: -17.00 | Mean Reward: -17.96
+Loss: 0.00501 | Epsilon: 0.219
+Beta: 0.671
+
+
+
+EPISODE 153 COMPLETED
+======================================================================
+Total Steps: 227979 | Episode Steps: 2186
+Episode Reward: -16.00 | Mean Reward: -17.91
+Loss: 0.00466 | Epsilon: 0.217
+Beta: 0.674
+
+
+
+EPISODE 154 COMPLETED
+======================================================================
+Total Steps: 230453 | Episode Steps: 2474
+Episode Reward: -12.00 | Mean Reward: -17.83
+Loss: 0.00470 | Epsilon: 0.215
+Beta: 0.677
+
+
+
+EPISODE 155 COMPLETED
+======================================================================
+Total Steps: 232911 | Episode Steps: 2458
+Episode Reward: -12.00 | Mean Reward: -17.78
+Loss: 0.00426 | Epsilon: 0.213
+Beta: 0.679
+
+
+
+EPISODE 156 COMPLETED
+======================================================================
+Total Steps: 234809 | Episode Steps: 1898
+Episode Reward: -19.00 | Mean Reward: -17.77
+Loss: 0.00429 | Epsilon: 0.211
+Beta: 0.682
+
+
+
+EPISODE 157 COMPLETED
+======================================================================
+Total Steps: 236962 | Episode Steps: 2153
+Episode Reward: -17.00 | Mean Reward: -17.73
+Loss: 0.00442 | Epsilon: 0.208
+Beta: 0.684
+
+
+
+EPISODE 158 COMPLETED
+======================================================================
+Total Steps: 239387 | Episode Steps: 2425
+Episode Reward: -17.00 | Mean Reward: -17.71
+Loss: 0.00439 | Epsilon: 0.206
+Beta: 0.687
+
+
+
+EPISODE 159 COMPLETED
+======================================================================
+Total Steps: 241941 | Episode Steps: 2554
+Episode Reward: -15.00 | Mean Reward: -17.65
+Loss: 0.00451 | Epsilon: 0.204
+Beta: 0.690
+
+
+
+EPISODE 160 COMPLETED
+======================================================================
+Total Steps: 244411 | Episode Steps: 2470
+Episode Reward: -9.00 | Mean Reward: -17.55
+Loss: 0.00426 | Epsilon: 0.202
+Beta: 0.693
+
+
+
+EPISODE 161 COMPLETED
+======================================================================
+Total Steps: 246514 | Episode Steps: 2103
+Episode Reward: -18.00 | Mean Reward: -17.55
+Loss: 0.00454 | Epsilon: 0.200
+Beta: 0.696
+
+
+
+EPISODE 162 COMPLETED
+======================================================================
+Total Steps: 248655 | Episode Steps: 2141
+Episode Reward: -16.00 | Mean Reward: -17.52
+Loss: 0.00424 | Epsilon: 0.198
+Beta: 0.698
+
+
+
+EPISODE 163 COMPLETED
+======================================================================
+Total Steps: 250664 | Episode Steps: 2009
+Episode Reward: -15.00 | Mean Reward: -17.48
+Loss: 0.00438 | Epsilon: 0.196
+Beta: 0.701
+
+
+
+EPISODE 164 COMPLETED
+======================================================================
+Total Steps: 253252 | Episode Steps: 2588
+Episode Reward: -15.00 | Mean Reward: -17.45
+Loss: 0.00427 | Epsilon: 0.194
+Beta: 0.704
+
+
+
+EPISODE 165 COMPLETED
+======================================================================
+Total Steps: 255589 | Episode Steps: 2337
+Episode Reward: -16.00 | Mean Reward: -17.40
+Loss: 0.00422 | Epsilon: 0.192
+Beta: 0.707
+
+
+
+EPISODE 166 COMPLETED
+======================================================================
+Total Steps: 258335 | Episode Steps: 2746
+Episode Reward: -13.00 | Mean Reward: -17.33
+Loss: 0.00459 | Epsilon: 0.190
+Beta: 0.710
+
+
+
+EPISODE 167 COMPLETED
+======================================================================
+Total Steps: 260906 | Episode Steps: 2571
+Episode Reward: -12.00 | Mean Reward: -17.25
+Loss: 0.00460 | Epsilon: 0.189
+Beta: 0.713
+
+
+
+EPISODE 168 COMPLETED
+======================================================================
+Total Steps: 263065 | Episode Steps: 2159
+Episode Reward: -18.00 | Mean Reward: -17.25
+Loss: 0.00478 | Epsilon: 0.187
+Beta: 0.716
+
+
+
+EPISODE 169 COMPLETED
+======================================================================
+Total Steps: 266223 | Episode Steps: 3158
+Episode Reward: -14.00 | Mean Reward: -17.20
+Loss: 0.00451 | Epsilon: 0.185
+Beta: 0.719
+
+
+
+EPISODE 170 COMPLETED
+======================================================================
+Total Steps: 268343 | Episode Steps: 2120
+Episode Reward: -17.00 | Mean Reward: -17.18
+Loss: 0.00453 | Epsilon: 0.183
+Beta: 0.722
+
+
+
+EPISODE 171 COMPLETED
+======================================================================
+Total Steps: 270477 | Episode Steps: 2134
+Episode Reward: -17.00 | Mean Reward: -17.14
+Loss: 0.00453 | Epsilon: 0.181
+Beta: 0.725
+
+
+
+EPISODE 172 COMPLETED
+======================================================================
+Total Steps: 272587 | Episode Steps: 2110
+Episode Reward: -16.00 | Mean Reward: -17.13
+Loss: 0.00466 | Epsilon: 0.179
+Beta: 0.727
+
+
+
+EPISODE 173 COMPLETED
+======================================================================
+Total Steps: 275280 | Episode Steps: 2693
+Episode Reward: -15.00 | Mean Reward: -17.09
+Loss: 0.00403 | Epsilon: 0.178
+Beta: 0.730
+
+
+
+EPISODE 174 COMPLETED
+======================================================================
+Total Steps: 277480 | Episode Steps: 2200
+Episode Reward: -19.00 | Mean Reward: -17.08
+Loss: 0.00414 | Epsilon: 0.176
+Beta: 0.733
+
+
+
+EPISODE 175 COMPLETED
+======================================================================
+Total Steps: 279708 | Episode Steps: 2228
+Episode Reward: -15.00 | Mean Reward: -17.05
+Loss: 0.00427 | Epsilon: 0.174
+Beta: 0.736
+
+
+
+EPISODE 176 COMPLETED
+======================================================================
+Total Steps: 281798 | Episode Steps: 2090
+Episode Reward: -16.00 | Mean Reward: -17.01
+Loss: 0.00370 | Epsilon: 0.172
+Beta: 0.738
+
+
+
+EPISODE 177 COMPLETED
+======================================================================
+Total Steps: 283829 | Episode Steps: 2031
+Episode Reward: -18.00 | Mean Reward: -16.99
+Loss: 0.00385 | Epsilon: 0.171
+Beta: 0.741
+
+
+
+EPISODE 178 COMPLETED
+======================================================================
+Total Steps: 285724 | Episode Steps: 1895
+Episode Reward: -18.00 | Mean Reward: -16.96
+Loss: 0.00401 | Epsilon: 0.169
+Beta: 0.743
+
+
+
+EPISODE 179 COMPLETED
+======================================================================
+Total Steps: 287865 | Episode Steps: 2141
+Episode Reward: -15.00 | Mean Reward: -16.93
+Loss: 0.00375 | Epsilon: 0.167
+Beta: 0.745
+
+
+
+EPISODE 180 COMPLETED
+======================================================================
+Total Steps: 290039 | Episode Steps: 2174
+Episode Reward: -17.00 | Mean Reward: -16.91
+Loss: 0.00413 | Epsilon: 0.165
+Beta: 0.748
+
+
+
+EPISODE 181 COMPLETED
+======================================================================
+Total Steps: 292536 | Episode Steps: 2497
+Episode Reward: -9.00 | Mean Reward: -16.81
+Loss: 0.00391 | Epsilon: 0.164
+Beta: 0.751
+
+
+
+EPISODE 182 COMPLETED
+======================================================================
+Total Steps: 295000 | Episode Steps: 2464
+Episode Reward: -14.00 | Mean Reward: -16.77
+Loss: 0.00388 | Epsilon: 0.162
+Beta: 0.754
+
+
+
+EPISODE 183 COMPLETED
+======================================================================
+Total Steps: 297418 | Episode Steps: 2418
+Episode Reward: -18.00 | Mean Reward: -16.74
+Loss: 0.00389 | Epsilon: 0.161
+Beta: 0.757
+
+
+
+EPISODE 184 COMPLETED
+======================================================================
+Total Steps: 299968 | Episode Steps: 2550
+Episode Reward: -15.00 | Mean Reward: -16.70
+Loss: 0.00378 | Epsilon: 0.159
+Beta: 0.760
+
+
+
+EPISODE 185 COMPLETED
+======================================================================
+Total Steps: 302429 | Episode Steps: 2461
+Episode Reward: -14.00 | Mean Reward: -16.67
+Loss: 0.00391 | Epsilon: 0.157
+Beta: 0.763
+
+
+
+EPISODE 186 COMPLETED
+======================================================================
+Total Steps: 304348 | Episode Steps: 1919
+Episode Reward: -18.00 | Mean Reward: -16.66
+Loss: 0.00374 | Epsilon: 0.156
+Beta: 0.765
+
+
+
+EPISODE 187 COMPLETED
+======================================================================
+Total Steps: 306927 | Episode Steps: 2579
+Episode Reward: -11.00 | Mean Reward: -16.59
+Loss: 0.00397 | Epsilon: 0.154
+Beta: 0.768
+
+
+
+EPISODE 188 COMPLETED
+======================================================================
+Total Steps: 310058 | Episode Steps: 3131
+Episode Reward: -11.00 | Mean Reward: -16.52
+Loss: 0.00404 | Epsilon: 0.153
+Beta: 0.772
+
+
+
+EPISODE 189 COMPLETED
+======================================================================
+Total Steps: 312176 | Episode Steps: 2118
+Episode Reward: -20.00 | Mean Reward: -16.53
+Loss: 0.00401 | Epsilon: 0.151
+Beta: 0.775
+
+
+
+EPISODE 190 COMPLETED
+======================================================================
+Total Steps: 314996 | Episode Steps: 2820
+Episode Reward: -14.00 | Mean Reward: -16.52
+Loss: 0.00398 | Epsilon: 0.150
+Beta: 0.778
+
+
+
+EPISODE 191 COMPLETED
+======================================================================
+Total Steps: 317440 | Episode Steps: 2444
+Episode Reward: -15.00 | Mean Reward: -16.48
+Loss: 0.00405 | Epsilon: 0.148
+Beta: 0.781
+
+
+
+EPISODE 192 COMPLETED
+======================================================================
+Total Steps: 320012 | Episode Steps: 2572
+Episode Reward: -16.00 | Mean Reward: -16.44
+Loss: 0.00381 | Epsilon: 0.147
+Beta: 0.784
+
+
+
+EPISODE 193 COMPLETED
+======================================================================
+Total Steps: 322770 | Episode Steps: 2758
+Episode Reward: -12.00 | Mean Reward: -16.35
+Loss: 0.00366 | Epsilon: 0.145
+Beta: 0.787
+
+
+
+EPISODE 194 COMPLETED
+======================================================================
+Total Steps: 325551 | Episode Steps: 2781
+Episode Reward: -12.00 | Mean Reward: -16.29
+Loss: 0.00335 | Epsilon: 0.144
+Beta: 0.791
+
+
+
+EPISODE 195 COMPLETED
+======================================================================
+Total Steps: 328712 | Episode Steps: 3161
+Episode Reward: -10.00 | Mean Reward: -16.22
+Loss: 0.00326 | Epsilon: 0.142
+Beta: 0.794
+
+
+
+EPISODE 196 COMPLETED
+======================================================================
+Total Steps: 331349 | Episode Steps: 2637
+Episode Reward: -13.00 | Mean Reward: -16.16
+Loss: 0.00334 | Epsilon: 0.141
+Beta: 0.798
+
+
+
+EPISODE 197 COMPLETED
+======================================================================
+Total Steps: 334967 | Episode Steps: 3618
+Episode Reward: -9.00 | Mean Reward: -16.07
+Loss: 0.00322 | Epsilon: 0.139
+Beta: 0.802
+
+
+
+EPISODE 198 COMPLETED
+======================================================================
+Total Steps: 337488 | Episode Steps: 2521
+Episode Reward: -9.00 | Mean Reward: -15.98
+Loss: 0.00317 | Epsilon: 0.138
+Beta: 0.805
+
+
+
+EPISODE 199 COMPLETED
+======================================================================
+Total Steps: 340397 | Episode Steps: 2909
+Episode Reward: -9.00 | Mean Reward: -15.87
+Loss: 0.00345 | Epsilon: 0.137
+Beta: 0.808
+
+
+
+EPISODE 200 COMPLETED
+======================================================================
+Total Steps: 343189 | Episode Steps: 2792
+Episode Reward: -12.00 | Mean Reward: -15.80
+Loss: 0.00314 | Epsilon: 0.135
+Beta: 0.812
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_200.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_200.pt
+EPISODE 201 COMPLETED
+======================================================================
+Total Steps: 346561 | Episode Steps: 3372
+Episode Reward: -3.00 | Mean Reward: -15.65
+Loss: 0.00348 | Epsilon: 0.134
+Beta: 0.816
+
+
+
+EPISODE 202 COMPLETED
+======================================================================
+Total Steps: 349912 | Episode Steps: 3351
+Episode Reward: -10.00 | Mean Reward: -15.57
+Loss: 0.00323 | Epsilon: 0.133
+Beta: 0.820
+
+
+
+EPISODE 203 COMPLETED
+======================================================================
+Total Steps: 352329 | Episode Steps: 2417
+Episode Reward: -15.00 | Mean Reward: -15.56
+Loss: 0.00338 | Epsilon: 0.131
+Beta: 0.823
+
+
+
+EPISODE 204 COMPLETED
+======================================================================
+Total Steps: 354542 | Episode Steps: 2213
+Episode Reward: -17.00 | Mean Reward: -15.54
+Loss: 0.00345 | Epsilon: 0.130
+Beta: 0.825
+
+
+
+EPISODE 205 COMPLETED
+======================================================================
+Total Steps: 357986 | Episode Steps: 3444
+Episode Reward: -5.00 | Mean Reward: -15.44
+Loss: 0.00358 | Epsilon: 0.129
+Beta: 0.830
+
+
+
+EPISODE 206 COMPLETED
+======================================================================
+Total Steps: 360826 | Episode Steps: 2840
+Episode Reward: -12.00 | Mean Reward: -15.39
+Loss: 0.00334 | Epsilon: 0.127
+Beta: 0.833
+
+
+
+EPISODE 207 COMPLETED
+======================================================================
+Total Steps: 363393 | Episode Steps: 2567
+Episode Reward: -13.00 | Mean Reward: -15.36
+Loss: 0.00332 | Epsilon: 0.126
+Beta: 0.836
+
+
+
+EPISODE 208 COMPLETED
+======================================================================
+Total Steps: 366219 | Episode Steps: 2826
+Episode Reward: -14.00 | Mean Reward: -15.29
+Loss: 0.00336 | Epsilon: 0.125
+Beta: 0.839
+
+
+
+EPISODE 209 COMPLETED
+======================================================================
+Total Steps: 369505 | Episode Steps: 3286
+Episode Reward: -8.00 | Mean Reward: -15.19
+Loss: 0.00342 | Epsilon: 0.124
+Beta: 0.843
+
+
+
+EPISODE 210 COMPLETED
+======================================================================
+Total Steps: 372858 | Episode Steps: 3353
+Episode Reward: -8.00 | Mean Reward: -15.12
+Loss: 0.00333 | Epsilon: 0.122
+Beta: 0.847
+
+
+
+EPISODE 211 COMPLETED
+======================================================================
+Total Steps: 374985 | Episode Steps: 2127
+Episode Reward: -16.00 | Mean Reward: -15.11
+Loss: 0.00315 | Epsilon: 0.121
+Beta: 0.850
+
+
+
+EPISODE 212 COMPLETED
+======================================================================
+Total Steps: 376886 | Episode Steps: 1901
+Episode Reward: -16.00 | Mean Reward: -15.08
+Loss: 0.00296 | Epsilon: 0.120
+Beta: 0.852
+
+
+
+EPISODE 213 COMPLETED
+======================================================================
+Total Steps: 379792 | Episode Steps: 2906
+Episode Reward: -9.00 | Mean Reward: -15.01
+Loss: 0.00310 | Epsilon: 0.119
+Beta: 0.856
+
+
+
+EPISODE 214 COMPLETED
+======================================================================
+Total Steps: 383335 | Episode Steps: 3543
+Episode Reward: -4.00 | Mean Reward: -14.85
+Loss: 0.00315 | Epsilon: 0.118
+Beta: 0.860
+
+
+
+EPISODE 215 COMPLETED
+======================================================================
+Total Steps: 385940 | Episode Steps: 2605
+Episode Reward: -11.00 | Mean Reward: -14.81
+Loss: 0.00283 | Epsilon: 0.116
+Beta: 0.863
+
+
+
+EPISODE 216 COMPLETED
+======================================================================
+Total Steps: 388402 | Episode Steps: 2462
+Episode Reward: -17.00 | Mean Reward: -14.82
+Loss: 0.00300 | Epsilon: 0.115
+Beta: 0.866
+
+
+
+EPISODE 217 COMPLETED
+======================================================================
+Total Steps: 391328 | Episode Steps: 2926
+Episode Reward: -10.00 | Mean Reward: -14.79
+Loss: 0.00311 | Epsilon: 0.114
+Beta: 0.870
+
+
+
+EPISODE 218 COMPLETED
+======================================================================
+Total Steps: 394181 | Episode Steps: 2853
+Episode Reward: 9.00 | Mean Reward: -14.54
+Loss: 0.00281 | Epsilon: 0.113
+Beta: 0.873
+
+
+
+EPISODE 219 COMPLETED
+======================================================================
+Total Steps: 397377 | Episode Steps: 3196
+Episode Reward: -7.00 | Mean Reward: -14.44
+Loss: 0.00289 | Epsilon: 0.112
+Beta: 0.877
+
+
+
+EPISODE 220 COMPLETED
+======================================================================
+Total Steps: 400460 | Episode Steps: 3083
+Episode Reward: -10.00 | Mean Reward: -14.36
+Loss: 0.00282 | Epsilon: 0.111
+Beta: 0.881
+
+
+
+EPISODE 221 COMPLETED
+======================================================================
+Total Steps: 403641 | Episode Steps: 3181
+Episode Reward: -5.00 | Mean Reward: -14.23
+Loss: 0.00268 | Epsilon: 0.110
+Beta: 0.884
+
+
+
+EPISODE 222 COMPLETED
+======================================================================
+Total Steps: 406762 | Episode Steps: 3121
+Episode Reward: -5.00 | Mean Reward: -14.12
+Loss: 0.00284 | Epsilon: 0.108
+Beta: 0.888
+
+
+
+EPISODE 223 COMPLETED
+======================================================================
+Total Steps: 410147 | Episode Steps: 3385
+Episode Reward: -1.00 | Mean Reward: -13.98
+Loss: 0.00284 | Epsilon: 0.107
+Beta: 0.892
+
+
+
+EPISODE 224 COMPLETED
+======================================================================
+Total Steps: 413683 | Episode Steps: 3536
+Episode Reward: -6.00 | Mean Reward: -13.85
+Loss: 0.00285 | Epsilon: 0.106
+Beta: 0.896
+
+
+
+EPISODE 225 COMPLETED
+======================================================================
+Total Steps: 417491 | Episode Steps: 3808
+Episode Reward: 3.00 | Mean Reward: -13.70
+Loss: 0.00265 | Epsilon: 0.105
+Beta: 0.901
+
+
+
+EPISODE 226 COMPLETED
+======================================================================
+Total Steps: 420446 | Episode Steps: 2955
+Episode Reward: 10.00 | Mean Reward: -13.42
+Loss: 0.00254 | Epsilon: 0.104
+Beta: 0.905
+
+
+
+EPISODE 227 COMPLETED
+======================================================================
+Total Steps: 424418 | Episode Steps: 3972
+Episode Reward: 1.00 | Mean Reward: -13.21
+Loss: 0.00276 | Epsilon: 0.103
+Beta: 0.909
+
+
+
+EPISODE 228 COMPLETED
+======================================================================
+Total Steps: 427926 | Episode Steps: 3508
+Episode Reward: 5.00 | Mean Reward: -13.00
+Loss: 0.00247 | Epsilon: 0.102
+Beta: 0.914
+
+
+
+EPISODE 229 COMPLETED
+======================================================================
+Total Steps: 431399 | Episode Steps: 3473
+Episode Reward: 8.00 | Mean Reward: -12.77
+Loss: 0.00257 | Epsilon: 0.101
+Beta: 0.918
+
+
+
+EPISODE 230 COMPLETED
+======================================================================
+Total Steps: 433553 | Episode Steps: 2154
+Episode Reward: 14.00 | Mean Reward: -12.44
+Loss: 0.00247 | Epsilon: 0.100
+Beta: 0.920
+
+
+
+EPISODE 231 COMPLETED
+======================================================================
+Total Steps: 436245 | Episode Steps: 2692
+Episode Reward: -9.00 | Mean Reward: -12.34
+Loss: 0.00239 | Epsilon: 0.099
+Beta: 0.923
+
+
+
+EPISODE 232 COMPLETED
+======================================================================
+Total Steps: 440376 | Episode Steps: 4131
+Episode Reward: -1.00 | Mean Reward: -12.14
+Loss: 0.00238 | Epsilon: 0.098
+Beta: 0.928
+
+
+
+EPISODE 233 COMPLETED
+======================================================================
+Total Steps: 443782 | Episode Steps: 3406
+Episode Reward: 5.00 | Mean Reward: -11.90
+Loss: 0.00235 | Epsilon: 0.097
+Beta: 0.933
+
+
+
+EPISODE 234 COMPLETED
+======================================================================
+Total Steps: 447308 | Episode Steps: 3526
+Episode Reward: 1.00 | Mean Reward: -11.73
+Loss: 0.00214 | Epsilon: 0.096
+Beta: 0.937
+
+
+
+EPISODE 235 COMPLETED
+======================================================================
+Total Steps: 451278 | Episode Steps: 3970
+Episode Reward: 1.00 | Mean Reward: -11.57
+Loss: 0.00230 | Epsilon: 0.095
+Beta: 0.942
+
+
+
+EPISODE 236 COMPLETED
+======================================================================
+Total Steps: 453822 | Episode Steps: 2544
+Episode Reward: -9.00 | Mean Reward: -11.53
+Loss: 0.00213 | Epsilon: 0.094
+Beta: 0.945
+
+
+
+EPISODE 237 COMPLETED
+======================================================================
+Total Steps: 456925 | Episode Steps: 3103
+Episode Reward: 5.00 | Mean Reward: -11.33
+Loss: 0.00213 | Epsilon: 0.093
+Beta: 0.948
+
+
+
+EPISODE 238 COMPLETED
+======================================================================
+Total Steps: 460207 | Episode Steps: 3282
+Episode Reward: -7.00 | Mean Reward: -11.22
+Loss: 0.00200 | Epsilon: 0.092
+Beta: 0.952
+
+
+
+EPISODE 239 COMPLETED
+======================================================================
+Total Steps: 463314 | Episode Steps: 3107
+Episode Reward: 6.00 | Mean Reward: -10.96
+Loss: 0.00197 | Epsilon: 0.091
+Beta: 0.956
+
+
+
+EPISODE 240 COMPLETED
+======================================================================
+Total Steps: 466446 | Episode Steps: 3132
+Episode Reward: 9.00 | Mean Reward: -10.70
+Loss: 0.00217 | Epsilon: 0.091
+Beta: 0.960
+
+
+
+EPISODE 241 COMPLETED
+======================================================================
+Total Steps: 468950 | Episode Steps: 2504
+Episode Reward: 16.00 | Mean Reward: -10.35
+Loss: 0.00208 | Epsilon: 0.090
+Beta: 0.963
+
+
+
+EPISODE 242 COMPLETED
+======================================================================
+Total Steps: 471642 | Episode Steps: 2692
+Episode Reward: 11.00 | Mean Reward: -10.08
+Loss: 0.00214 | Epsilon: 0.089
+Beta: 0.966
+
+
+
+EPISODE 243 COMPLETED
+======================================================================
+Total Steps: 473960 | Episode Steps: 2318
+Episode Reward: 17.00 | Mean Reward: -9.72
+Loss: 0.00218 | Epsilon: 0.088
+Beta: 0.969
+
+
+
+EPISODE 244 COMPLETED
+======================================================================
+Total Steps: 476957 | Episode Steps: 2997
+Episode Reward: 5.00 | Mean Reward: -9.54
+Loss: 0.00224 | Epsilon: 0.087
+Beta: 0.972
+
+
+
+EPISODE 245 COMPLETED
+======================================================================
+Total Steps: 479173 | Episode Steps: 2216
+Episode Reward: 18.00 | Mean Reward: -9.20
+Loss: 0.00217 | Epsilon: 0.086
+Beta: 0.975
+
+
+
+EPISODE 246 COMPLETED
+======================================================================
+Total Steps: 482270 | Episode Steps: 3097
+Episode Reward: 7.00 | Mean Reward: -8.93
+Loss: 0.00227 | Epsilon: 0.085
+Beta: 0.979
+
+
+
+EPISODE 247 COMPLETED
+======================================================================
+Total Steps: 484987 | Episode Steps: 2717
+Episode Reward: 13.00 | Mean Reward: -8.69
+Loss: 0.00233 | Epsilon: 0.084
+Beta: 0.982
+
+
+
+EPISODE 248 COMPLETED
+======================================================================
+Total Steps: 487792 | Episode Steps: 2805
+Episode Reward: 9.00 | Mean Reward: -8.45
+Loss: 0.00221 | Epsilon: 0.084
+Beta: 0.985
+
+
+
+EPISODE 249 COMPLETED
+======================================================================
+Total Steps: 490349 | Episode Steps: 2557
+Episode Reward: 13.00 | Mean Reward: -8.13
+Loss: 0.00195 | Epsilon: 0.083
+Beta: 0.988
+
+
+
+EPISODE 250 COMPLETED
+======================================================================
+Total Steps: 494193 | Episode Steps: 3844
+Episode Reward: -4.00 | Mean Reward: -7.98
+Loss: 0.00217 | Epsilon: 0.082
+Beta: 0.993
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_250.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_250.pt
+EPISODE 251 COMPLETED
+======================================================================
+Total Steps: 496593 | Episode Steps: 2400
+Episode Reward: 14.00 | Mean Reward: -7.67
+Loss: 0.00225 | Epsilon: 0.081
+Beta: 0.996
+
+
+
+EPISODE 252 COMPLETED
+======================================================================
+Total Steps: 498584 | Episode Steps: 1991
+Episode Reward: 20.00 | Mean Reward: -7.30
+Loss: 0.00202 | Epsilon: 0.080
+Beta: 0.998
+
+
+
+EPISODE 253 COMPLETED
+======================================================================
+Total Steps: 500675 | Episode Steps: 2091
+Episode Reward: 17.00 | Mean Reward: -6.97
+Loss: 0.00197 | Epsilon: 0.079
+Beta: 1.000
+
+
+
+EPISODE 254 COMPLETED
+======================================================================
+Total Steps: 503435 | Episode Steps: 2760
+Episode Reward: 12.00 | Mean Reward: -6.73
+Loss: 0.00202 | Epsilon: 0.079
+Beta: 1.000
+
+
+
+EPISODE 255 COMPLETED
+======================================================================
+Total Steps: 506154 | Episode Steps: 2719
+Episode Reward: 11.00 | Mean Reward: -6.50
+Loss: 0.00200 | Epsilon: 0.078
+Beta: 1.000
+
+
+
+EPISODE 256 COMPLETED
+======================================================================
+Total Steps: 508446 | Episode Steps: 2292
+Episode Reward: 16.00 | Mean Reward: -6.15
+Loss: 0.00172 | Epsilon: 0.077
+Beta: 1.000
+
+
+
+EPISODE 257 COMPLETED
+======================================================================
+Total Steps: 511139 | Episode Steps: 2693
+Episode Reward: 13.00 | Mean Reward: -5.85
+Loss: 0.00163 | Epsilon: 0.076
+Beta: 1.000
+
+
+
+EPISODE 258 COMPLETED
+======================================================================
+Total Steps: 513688 | Episode Steps: 2549
+Episode Reward: 15.00 | Mean Reward: -5.53
+Loss: 0.00171 | Epsilon: 0.076
+Beta: 1.000
+
+
+
+EPISODE 259 COMPLETED
+======================================================================
+Total Steps: 516088 | Episode Steps: 2400
+Episode Reward: 13.00 | Mean Reward: -5.25
+Loss: 0.00162 | Epsilon: 0.075
+Beta: 1.000
+
+
+
+EPISODE 260 COMPLETED
+======================================================================
+Total Steps: 518379 | Episode Steps: 2291
+Episode Reward: 11.00 | Mean Reward: -5.05
+Loss: 0.00171 | Epsilon: 0.074
+Beta: 1.000
+
+
+
+EPISODE 261 COMPLETED
+======================================================================
+Total Steps: 520721 | Episode Steps: 2342
+Episode Reward: 16.00 | Mean Reward: -4.71
+Loss: 0.00162 | Epsilon: 0.073
+Beta: 1.000
+
+
+
+EPISODE 262 COMPLETED
+======================================================================
+Total Steps: 523139 | Episode Steps: 2418
+Episode Reward: 14.00 | Mean Reward: -4.41
+Loss: 0.00155 | Epsilon: 0.073
+Beta: 1.000
+
+
+
+EPISODE 263 COMPLETED
+======================================================================
+Total Steps: 526964 | Episode Steps: 3825
+Episode Reward: -1.00 | Mean Reward: -4.27
+Loss: 0.00163 | Epsilon: 0.072
+Beta: 1.000
+
+
+
+EPISODE 264 COMPLETED
+======================================================================
+Total Steps: 529603 | Episode Steps: 2639
+Episode Reward: 11.00 | Mean Reward: -4.01
+Loss: 0.00166 | Epsilon: 0.071
+Beta: 1.000
+
+
+
+EPISODE 265 COMPLETED
+======================================================================
+Total Steps: 531998 | Episode Steps: 2395
+Episode Reward: 12.00 | Mean Reward: -3.73
+Loss: 0.00162 | Epsilon: 0.070
+Beta: 1.000
+
+
+
+EPISODE 266 COMPLETED
+======================================================================
+Total Steps: 534110 | Episode Steps: 2112
+Episode Reward: 18.00 | Mean Reward: -3.42
+Loss: 0.00152 | Epsilon: 0.070
+Beta: 1.000
+
+
+
+EPISODE 267 COMPLETED
+======================================================================
+Total Steps: 536226 | Episode Steps: 2116
+Episode Reward: 16.00 | Mean Reward: -3.14
+Loss: 0.00148 | Epsilon: 0.069
+Beta: 1.000
+
+
+
+EPISODE 268 COMPLETED
+======================================================================
+Total Steps: 538429 | Episode Steps: 2203
+Episode Reward: 17.00 | Mean Reward: -2.79
+Loss: 0.00154 | Epsilon: 0.068
+Beta: 1.000
+
+
+
+EPISODE 269 COMPLETED
+======================================================================
+Total Steps: 541240 | Episode Steps: 2811
+Episode Reward: 6.00 | Mean Reward: -2.59
+Loss: 0.00150 | Epsilon: 0.068
+Beta: 1.000
+
+
+
+EPISODE 270 COMPLETED
+======================================================================
+Total Steps: 543149 | Episode Steps: 1909
+Episode Reward: 20.00 | Mean Reward: -2.22
+Loss: 0.00144 | Epsilon: 0.067
+Beta: 1.000
+
+
+
+EPISODE 271 COMPLETED
+======================================================================
+Total Steps: 546319 | Episode Steps: 3170
+Episode Reward: 7.00 | Mean Reward: -1.98
+Loss: 0.00144 | Epsilon: 0.066
+Beta: 1.000
+
+
+
+EPISODE 272 COMPLETED
+======================================================================
+Total Steps: 548625 | Episode Steps: 2306
+Episode Reward: 17.00 | Mean Reward: -1.65
+Loss: 0.00135 | Epsilon: 0.066
+Beta: 1.000
+
+
+
+EPISODE 273 COMPLETED
+======================================================================
+Total Steps: 550532 | Episode Steps: 1907
+Episode Reward: 20.00 | Mean Reward: -1.30
+Loss: 0.00137 | Epsilon: 0.065
+Beta: 1.000
+
+
+
+EPISODE 274 COMPLETED
+======================================================================
+Total Steps: 553225 | Episode Steps: 2693
+Episode Reward: 14.00 | Mean Reward: -0.97
+Loss: 0.00141 | Epsilon: 0.064
+Beta: 1.000
+
+
+
+EPISODE 275 COMPLETED
+======================================================================
+Total Steps: 555782 | Episode Steps: 2557
+Episode Reward: 12.00 | Mean Reward: -0.70
+Loss: 0.00132 | Epsilon: 0.064
+Beta: 1.000
+
+
+
+EPISODE 276 COMPLETED
+======================================================================
+Total Steps: 557822 | Episode Steps: 2040
+Episode Reward: 19.00 | Mean Reward: -0.35
+Loss: 0.00115 | Epsilon: 0.063
+Beta: 1.000
+
+
+
+EPISODE 277 COMPLETED
+======================================================================
+Total Steps: 560149 | Episode Steps: 2327
+Episode Reward: 16.00 | Mean Reward: -0.01
+Loss: 0.00113 | Epsilon: 0.062
+Beta: 1.000
+
+
+
+EPISODE 278 COMPLETED
+======================================================================
+Total Steps: 562289 | Episode Steps: 2140
+Episode Reward: 17.00 | Mean Reward: 0.34
+Loss: 0.00120 | Epsilon: 0.062
+Beta: 1.000
+
+
+
+EPISODE 279 COMPLETED
+======================================================================
+Total Steps: 565235 | Episode Steps: 2946
+Episode Reward: 7.00 | Mean Reward: 0.56
+Loss: 0.00125 | Epsilon: 0.061
+Beta: 1.000
+
+
+
+EPISODE 280 COMPLETED
+======================================================================
+Total Steps: 567217 | Episode Steps: 1982
+Episode Reward: 19.00 | Mean Reward: 0.92
+Loss: 0.00106 | Epsilon: 0.061
+Beta: 1.000
+
+
+
+EPISODE 281 COMPLETED
+======================================================================
+Total Steps: 569435 | Episode Steps: 2218
+Episode Reward: 14.00 | Mean Reward: 1.15
+Loss: 0.00115 | Epsilon: 0.060
+Beta: 1.000
+
+
+
+EPISODE 282 COMPLETED
+======================================================================
+Total Steps: 571671 | Episode Steps: 2236
+Episode Reward: 17.00 | Mean Reward: 1.46
+Loss: 0.00114 | Epsilon: 0.059
+Beta: 1.000
+
+
+
+EPISODE 283 COMPLETED
+======================================================================
+Total Steps: 573589 | Episode Steps: 1918
+Episode Reward: 18.00 | Mean Reward: 1.82
+Loss: 0.00118 | Epsilon: 0.059
+Beta: 1.000
+
+
+
+EPISODE 284 COMPLETED
+======================================================================
+Total Steps: 576058 | Episode Steps: 2469
+Episode Reward: 12.00 | Mean Reward: 2.09
+Loss: 0.00116 | Epsilon: 0.058
+Beta: 1.000
+
+
+
+EPISODE 285 COMPLETED
+======================================================================
+Total Steps: 578248 | Episode Steps: 2190
+Episode Reward: 16.00 | Mean Reward: 2.39
+Loss: 0.00110 | Epsilon: 0.058
+Beta: 1.000
+
+
+
+EPISODE 286 COMPLETED
+======================================================================
+Total Steps: 580014 | Episode Steps: 1766
+Episode Reward: 20.00 | Mean Reward: 2.77
+Loss: 0.00106 | Epsilon: 0.057
+Beta: 1.000
+
+
+
+EPISODE 287 COMPLETED
+======================================================================
+Total Steps: 582370 | Episode Steps: 2356
+Episode Reward: 17.00 | Mean Reward: 3.05
+Loss: 0.00130 | Epsilon: 0.056
+Beta: 1.000
+
+
+
+EPISODE 288 COMPLETED
+======================================================================
+Total Steps: 584459 | Episode Steps: 2089
+Episode Reward: 18.00 | Mean Reward: 3.34
+Loss: 0.00110 | Epsilon: 0.056
+Beta: 1.000
+
+
+
+EPISODE 289 COMPLETED
+======================================================================
+Total Steps: 586852 | Episode Steps: 2393
+Episode Reward: 17.00 | Mean Reward: 3.71
+Loss: 0.00104 | Epsilon: 0.055
+Beta: 1.000
+
+
+
+EPISODE 290 COMPLETED
+======================================================================
+Total Steps: 589171 | Episode Steps: 2319
+Episode Reward: 17.00 | Mean Reward: 4.02
+Loss: 0.00113 | Epsilon: 0.055
+Beta: 1.000
+
+
+
+EPISODE 291 COMPLETED
+======================================================================
+Total Steps: 591158 | Episode Steps: 1987
+Episode Reward: 17.00 | Mean Reward: 4.34
+Loss: 0.00109 | Epsilon: 0.054
+Beta: 1.000
+
+
+
+EPISODE 292 COMPLETED
+======================================================================
+Total Steps: 593209 | Episode Steps: 2051
+Episode Reward: 18.00 | Mean Reward: 4.68
+Loss: 0.00111 | Epsilon: 0.054
+Beta: 1.000
+
+
+
+EPISODE 293 COMPLETED
+======================================================================
+Total Steps: 595227 | Episode Steps: 2018
+Episode Reward: 18.00 | Mean Reward: 4.98
+Loss: 0.00101 | Epsilon: 0.053
+Beta: 1.000
+
+
+
+EPISODE 294 COMPLETED
+======================================================================
+Total Steps: 597831 | Episode Steps: 2604
+Episode Reward: 10.00 | Mean Reward: 5.20
+Loss: 0.00112 | Epsilon: 0.053
+Beta: 1.000
+
+
+
+EPISODE 295 COMPLETED
+======================================================================
+Total Steps: 599957 | Episode Steps: 2126
+Episode Reward: 17.00 | Mean Reward: 5.47
+Loss: 0.00103 | Epsilon: 0.052
+Beta: 1.000
+
+
+
+EPISODE 296 COMPLETED
+======================================================================
+Total Steps: 602246 | Episode Steps: 2289
+Episode Reward: 17.00 | Mean Reward: 5.77
+Loss: 0.00111 | Epsilon: 0.052
+Beta: 1.000
+
+
+
+EPISODE 297 COMPLETED
+======================================================================
+Total Steps: 604315 | Episode Steps: 2069
+Episode Reward: 18.00 | Mean Reward: 6.04
+Loss: 0.00117 | Epsilon: 0.051
+Beta: 1.000
+
+
+
+EPISODE 298 COMPLETED
+======================================================================
+Total Steps: 606617 | Episode Steps: 2302
+Episode Reward: 15.00 | Mean Reward: 6.28
+Loss: 0.00113 | Epsilon: 0.051
+Beta: 1.000
+
+
+
+EPISODE 299 COMPLETED
+======================================================================
+Total Steps: 608593 | Episode Steps: 1976
+Episode Reward: 16.00 | Mean Reward: 6.53
+Loss: 0.00103 | Epsilon: 0.050
+Beta: 1.000
+
+
+
+EPISODE 300 COMPLETED
+======================================================================
+Total Steps: 610990 | Episode Steps: 2397
+Episode Reward: 15.00 | Mean Reward: 6.80
+Loss: 0.00114 | Epsilon: 0.050
+Beta: 1.000
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_300.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_300.pt
+EPISODE 301 COMPLETED
+======================================================================
+Total Steps: 612909 | Episode Steps: 1919
+Episode Reward: 19.00 | Mean Reward: 7.02
+Loss: 0.00106 | Epsilon: 0.049
+Beta: 1.000
+
+
+
+EPISODE 302 COMPLETED
+======================================================================
+Total Steps: 614925 | Episode Steps: 2016
+Episode Reward: 18.00 | Mean Reward: 7.30
+Loss: 0.00104 | Epsilon: 0.049
+Beta: 1.000
+
+
+
+EPISODE 303 COMPLETED
+======================================================================
+Total Steps: 617113 | Episode Steps: 2188
+Episode Reward: 17.00 | Mean Reward: 7.62
+Loss: 0.00099 | Epsilon: 0.048
+Beta: 1.000
+
+
+
+EPISODE 304 COMPLETED
+======================================================================
+Total Steps: 619590 | Episode Steps: 2477
+Episode Reward: 13.00 | Mean Reward: 7.92
+Loss: 0.00095 | Epsilon: 0.048
+Beta: 1.000
+
+
+
+EPISODE 305 COMPLETED
+======================================================================
+Total Steps: 621823 | Episode Steps: 2233
+Episode Reward: 15.00 | Mean Reward: 8.12
+Loss: 0.00090 | Epsilon: 0.047
+Beta: 1.000
+
+
+
+EPISODE 306 COMPLETED
+======================================================================
+Total Steps: 623837 | Episode Steps: 2014
+Episode Reward: 16.00 | Mean Reward: 8.40
+Loss: 0.00092 | Epsilon: 0.047
+Beta: 1.000
+
+
+
+EPISODE 307 COMPLETED
+======================================================================
+Total Steps: 625842 | Episode Steps: 2005
+Episode Reward: 19.00 | Mean Reward: 8.72
+Loss: 0.00099 | Epsilon: 0.046
+Beta: 1.000
+
+
+
+EPISODE 308 COMPLETED
+======================================================================
+Total Steps: 627563 | Episode Steps: 1721
+Episode Reward: 20.00 | Mean Reward: 9.06
+Loss: 0.00094 | Epsilon: 0.046
+Beta: 1.000
+
+
+
+EPISODE 309 COMPLETED
+======================================================================
+Total Steps: 629759 | Episode Steps: 2196
+Episode Reward: 15.00 | Mean Reward: 9.29
+Loss: 0.00087 | Epsilon: 0.045
+Beta: 1.000
+
+
+
+EPISODE 310 COMPLETED
+======================================================================
+Total Steps: 631396 | Episode Steps: 1637
+Episode Reward: 21.00 | Mean Reward: 9.58
+Loss: 0.00088 | Epsilon: 0.045
+Beta: 1.000
+
+
+
+EPISODE 311 COMPLETED
+======================================================================
+Total Steps: 633538 | Episode Steps: 2142
+Episode Reward: 18.00 | Mean Reward: 9.92
+Loss: 0.00102 | Epsilon: 0.044
+Beta: 1.000
+
+
+
+EPISODE 312 COMPLETED
+======================================================================
+Total Steps: 635235 | Episode Steps: 1697
+Episode Reward: 20.00 | Mean Reward: 10.28
+Loss: 0.00090 | Epsilon: 0.044
+Beta: 1.000
+
+
+
+EPISODE 313 COMPLETED
+======================================================================
+Total Steps: 637010 | Episode Steps: 1775
+Episode Reward: 18.00 | Mean Reward: 10.55
+Loss: 0.00089 | Epsilon: 0.043
+Beta: 1.000
+
+
+
+EPISODE 314 COMPLETED
+======================================================================
+Total Steps: 639128 | Episode Steps: 2118
+Episode Reward: 15.00 | Mean Reward: 10.74
+Loss: 0.00104 | Epsilon: 0.043
+Beta: 1.000
+
+
+
+EPISODE 315 COMPLETED
+======================================================================
+Total Steps: 640888 | Episode Steps: 1760
+Episode Reward: 20.00 | Mean Reward: 11.05
+Loss: 0.00087 | Epsilon: 0.043
+Beta: 1.000
+
+
+
+EPISODE 316 COMPLETED
+======================================================================
+Total Steps: 642736 | Episode Steps: 1848
+Episode Reward: 18.00 | Mean Reward: 11.40
+Loss: 0.00085 | Epsilon: 0.042
+Beta: 1.000
+
+
+
+EPISODE 317 COMPLETED
+======================================================================
+Total Steps: 645285 | Episode Steps: 2549
+Episode Reward: 16.00 | Mean Reward: 11.66
+Loss: 0.00089 | Epsilon: 0.042
+Beta: 1.000
+
+
+
+EPISODE 318 COMPLETED
+======================================================================
+Total Steps: 647252 | Episode Steps: 1967
+Episode Reward: 17.00 | Mean Reward: 11.74
+Loss: 0.00090 | Epsilon: 0.041
+Beta: 1.000
+
+
+
+EPISODE 319 COMPLETED
+======================================================================
+Total Steps: 649195 | Episode Steps: 1943
+Episode Reward: 18.00 | Mean Reward: 11.99
+Loss: 0.00076 | Epsilon: 0.041
+Beta: 1.000
+
+
+
+EPISODE 320 COMPLETED
+======================================================================
+Total Steps: 651639 | Episode Steps: 2444
+Episode Reward: 13.00 | Mean Reward: 12.22
+Loss: 0.00076 | Epsilon: 0.041
+Beta: 1.000
+
+
+
+EPISODE 321 COMPLETED
+======================================================================
+Total Steps: 653884 | Episode Steps: 2245
+Episode Reward: 16.00 | Mean Reward: 12.43
+Loss: 0.00077 | Epsilon: 0.040
+Beta: 1.000
+
+
+
+EPISODE 322 COMPLETED
+======================================================================
+Total Steps: 656234 | Episode Steps: 2350
+Episode Reward: 10.00 | Mean Reward: 12.58
+Loss: 0.00080 | Epsilon: 0.040
+Beta: 1.000
+
+
+
+EPISODE 323 COMPLETED
+======================================================================
+Total Steps: 658740 | Episode Steps: 2506
+Episode Reward: 9.00 | Mean Reward: 12.68
+Loss: 0.00085 | Epsilon: 0.039
+Beta: 1.000
+
+
+
+EPISODE 324 COMPLETED
+======================================================================
+Total Steps: 661027 | Episode Steps: 2287
+Episode Reward: 17.00 | Mean Reward: 12.91
+Loss: 0.00089 | Epsilon: 0.039
+Beta: 1.000
+
+
+
+EPISODE 325 COMPLETED
+======================================================================
+Total Steps: 662957 | Episode Steps: 1930
+Episode Reward: 18.00 | Mean Reward: 13.06
+Loss: 0.00081 | Epsilon: 0.039
+Beta: 1.000
+
+
+
+EPISODE 326 COMPLETED
+======================================================================
+Total Steps: 664697 | Episode Steps: 1740
+Episode Reward: 21.00 | Mean Reward: 13.17
+Loss: 0.00088 | Epsilon: 0.038
+Beta: 1.000
+
+
+
+EPISODE 327 COMPLETED
+======================================================================
+Total Steps: 667122 | Episode Steps: 2425
+Episode Reward: 15.00 | Mean Reward: 13.31
+Loss: 0.00081 | Epsilon: 0.038
+Beta: 1.000
+
+
+
+EPISODE 328 COMPLETED
+======================================================================
+Total Steps: 669655 | Episode Steps: 2533
+Episode Reward: 10.00 | Mean Reward: 13.36
+Loss: 0.00087 | Epsilon: 0.037
+Beta: 1.000
+
+
+
+EPISODE 329 COMPLETED
+======================================================================
+Total Steps: 671733 | Episode Steps: 2078
+Episode Reward: 17.00 | Mean Reward: 13.45
+Loss: 0.00083 | Epsilon: 0.037
+Beta: 1.000
+
+
+
+EPISODE 330 COMPLETED
+======================================================================
+Total Steps: 673555 | Episode Steps: 1822
+Episode Reward: 20.00 | Mean Reward: 13.51
+Loss: 0.00094 | Epsilon: 0.037
+Beta: 1.000
+
+
+
+EPISODE 331 COMPLETED
+======================================================================
+Total Steps: 675193 | Episode Steps: 1638
+Episode Reward: 21.00 | Mean Reward: 13.81
+Loss: 0.00087 | Epsilon: 0.036
+Beta: 1.000
+
+
+
+EPISODE 332 COMPLETED
+======================================================================
+Total Steps: 677509 | Episode Steps: 2316
+Episode Reward: 15.00 | Mean Reward: 13.97
+Loss: 0.00080 | Epsilon: 0.036
+Beta: 1.000
+
+
+
+EPISODE 333 COMPLETED
+======================================================================
+Total Steps: 679424 | Episode Steps: 1915
+Episode Reward: 19.00 | Mean Reward: 14.11
+Loss: 0.00078 | Epsilon: 0.036
+Beta: 1.000
+
+
+
+EPISODE 334 COMPLETED
+======================================================================
+Total Steps: 681097 | Episode Steps: 1673
+Episode Reward: 20.00 | Mean Reward: 14.30
+Loss: 0.00078 | Epsilon: 0.035
+Beta: 1.000
+
+
+
+EPISODE 335 COMPLETED
+======================================================================
+Total Steps: 683442 | Episode Steps: 2345
+Episode Reward: 13.00 | Mean Reward: 14.42
+Loss: 0.00086 | Epsilon: 0.035
+Beta: 1.000
+
+
+
+EPISODE 336 COMPLETED
+======================================================================
+Total Steps: 685390 | Episode Steps: 1948
+Episode Reward: 17.00 | Mean Reward: 14.68
+Loss: 0.00089 | Epsilon: 0.034
+Beta: 1.000
+
+
+
+EPISODE 337 COMPLETED
+======================================================================
+Total Steps: 687367 | Episode Steps: 1977
+Episode Reward: 18.00 | Mean Reward: 14.81
+Loss: 0.00088 | Epsilon: 0.034
+Beta: 1.000
+
+
+
+EPISODE 338 COMPLETED
+======================================================================
+Total Steps: 689353 | Episode Steps: 1986
+Episode Reward: 15.00 | Mean Reward: 15.03
+Loss: 0.00090 | Epsilon: 0.034
+Beta: 1.000
+
+
+
+EPISODE 339 COMPLETED
+======================================================================
+Total Steps: 691323 | Episode Steps: 1970
+Episode Reward: 19.00 | Mean Reward: 15.16
+Loss: 0.00092 | Epsilon: 0.033
+Beta: 1.000
+
+
+
+EPISODE 340 COMPLETED
+======================================================================
+Total Steps: 693012 | Episode Steps: 1689
+Episode Reward: 20.00 | Mean Reward: 15.27
+Loss: 0.00079 | Epsilon: 0.033
+Beta: 1.000
+
+
+
+EPISODE 341 COMPLETED
+======================================================================
+Total Steps: 695017 | Episode Steps: 2005
+Episode Reward: 19.00 | Mean Reward: 15.30
+Loss: 0.00088 | Epsilon: 0.033
+Beta: 1.000
+
+
+
+EPISODE 342 COMPLETED
+======================================================================
+Total Steps: 697036 | Episode Steps: 2019
+Episode Reward: 16.00 | Mean Reward: 15.35
+Loss: 0.00082 | Epsilon: 0.032
+Beta: 1.000
+
+
+
+EPISODE 343 COMPLETED
+======================================================================
+Total Steps: 698868 | Episode Steps: 1832
+Episode Reward: 19.00 | Mean Reward: 15.37
+Loss: 0.00093 | Epsilon: 0.032
+Beta: 1.000
+
+
+
+EPISODE 344 COMPLETED
+======================================================================
+Total Steps: 700692 | Episode Steps: 1824
+Episode Reward: 19.00 | Mean Reward: 15.51
+Loss: 0.00096 | Epsilon: 0.032
+Beta: 1.000
+
+
+
+EPISODE 345 COMPLETED
+======================================================================
+Total Steps: 702496 | Episode Steps: 1804
+Episode Reward: 19.00 | Mean Reward: 15.52
+Loss: 0.00081 | Epsilon: 0.032
+Beta: 1.000
+
+
+
+EPISODE 346 COMPLETED
+======================================================================
+Total Steps: 704362 | Episode Steps: 1866
+Episode Reward: 19.00 | Mean Reward: 15.64
+Loss: 0.00088 | Epsilon: 0.031
+Beta: 1.000
+
+
+
+EPISODE 347 COMPLETED
+======================================================================
+Total Steps: 706125 | Episode Steps: 1763
+Episode Reward: 20.00 | Mean Reward: 15.71
+Loss: 0.00077 | Epsilon: 0.031
+Beta: 1.000
+
+
+
+EPISODE 348 COMPLETED
+======================================================================
+Total Steps: 707870 | Episode Steps: 1745
+Episode Reward: 19.00 | Mean Reward: 15.81
+Loss: 0.00067 | Epsilon: 0.031
+Beta: 1.000
+
+
+
+EPISODE 349 COMPLETED
+======================================================================
+Total Steps: 709587 | Episode Steps: 1717
+Episode Reward: 20.00 | Mean Reward: 15.88
+Loss: 0.00068 | Epsilon: 0.030
+Beta: 1.000
+
+
+
+EPISODE 350 COMPLETED
+======================================================================
+Total Steps: 711385 | Episode Steps: 1798
+Episode Reward: 18.00 | Mean Reward: 16.10
+Loss: 0.00067 | Epsilon: 0.030
+Beta: 1.000
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_350.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_350.pt
+EPISODE 351 COMPLETED
+======================================================================
+Total Steps: 713240 | Episode Steps: 1855
+Episode Reward: 20.00 | Mean Reward: 16.16
+Loss: 0.00065 | Epsilon: 0.030
+Beta: 1.000
+
+
+
+EPISODE 352 COMPLETED
+======================================================================
+Total Steps: 714875 | Episode Steps: 1635
+Episode Reward: 21.00 | Mean Reward: 16.17
+Loss: 0.00062 | Epsilon: 0.029
+Beta: 1.000
+
+
+
+EPISODE 353 COMPLETED
+======================================================================
+Total Steps: 717049 | Episode Steps: 2174
+Episode Reward: 15.00 | Mean Reward: 16.15
+Loss: 0.00083 | Epsilon: 0.029
+Beta: 1.000
+
+
+
+EPISODE 354 COMPLETED
+======================================================================
+Total Steps: 719135 | Episode Steps: 2086
+Episode Reward: 19.00 | Mean Reward: 16.22
+Loss: 0.00073 | Epsilon: 0.029
+Beta: 1.000
+
+
+
+EPISODE 355 COMPLETED
+======================================================================
+Total Steps: 721138 | Episode Steps: 2003
+Episode Reward: 18.00 | Mean Reward: 16.29
+Loss: 0.00071 | Epsilon: 0.029
+Beta: 1.000
+
+
+
+EPISODE 356 COMPLETED
+======================================================================
+Total Steps: 722905 | Episode Steps: 1767
+Episode Reward: 20.00 | Mean Reward: 16.33
+Loss: 0.00063 | Epsilon: 0.028
+Beta: 1.000
+
+
+
+EPISODE 357 COMPLETED
+======================================================================
+Total Steps: 725236 | Episode Steps: 2331
+Episode Reward: 16.00 | Mean Reward: 16.36
+Loss: 0.00079 | Epsilon: 0.028
+Beta: 1.000
+
+
+
+EPISODE 358 COMPLETED
+======================================================================
+Total Steps: 727271 | Episode Steps: 2035
+Episode Reward: 15.00 | Mean Reward: 16.36
+Loss: 0.00071 | Epsilon: 0.028
+Beta: 1.000
+
+
+
+EPISODE 359 COMPLETED
+======================================================================
+Total Steps: 729015 | Episode Steps: 1744
+Episode Reward: 19.00 | Mean Reward: 16.42
+Loss: 0.00069 | Epsilon: 0.027
+Beta: 1.000
+
+
+
+EPISODE 360 COMPLETED
+======================================================================
+Total Steps: 730887 | Episode Steps: 1872
+Episode Reward: 20.00 | Mean Reward: 16.51
+Loss: 0.00076 | Epsilon: 0.027
+Beta: 1.000
+
+
+
+EPISODE 361 COMPLETED
+======================================================================
+Total Steps: 732635 | Episode Steps: 1748
+Episode Reward: 20.00 | Mean Reward: 16.55
+Loss: 0.00084 | Epsilon: 0.027
+Beta: 1.000
+
+
+
+EPISODE 362 COMPLETED
+======================================================================
+Total Steps: 734483 | Episode Steps: 1848
+Episode Reward: 20.00 | Mean Reward: 16.61
+Loss: 0.00076 | Epsilon: 0.027
+Beta: 1.000
+
+
+
+EPISODE 363 COMPLETED
+======================================================================
+Total Steps: 736214 | Episode Steps: 1731
+Episode Reward: 20.00 | Mean Reward: 16.82
+Loss: 0.00069 | Epsilon: 0.026
+Beta: 1.000
+
+
+
+EPISODE 364 COMPLETED
+======================================================================
+Total Steps: 737879 | Episode Steps: 1665
+Episode Reward: 20.00 | Mean Reward: 16.91
+Loss: 0.00070 | Epsilon: 0.026
+Beta: 1.000
+
+
+
+EPISODE 365 COMPLETED
+======================================================================
+Total Steps: 739808 | Episode Steps: 1929
+Episode Reward: 20.00 | Mean Reward: 16.99
+Loss: 0.00080 | Epsilon: 0.026
+Beta: 1.000
+
+
+
+EPISODE 366 COMPLETED
+======================================================================
+Total Steps: 741444 | Episode Steps: 1636
+Episode Reward: 21.00 | Mean Reward: 17.02
+Loss: 0.00072 | Epsilon: 0.026
+Beta: 1.000
+
+
+
+EPISODE 367 COMPLETED
+======================================================================
+Total Steps: 744335 | Episode Steps: 2891
+Episode Reward: 11.00 | Mean Reward: 16.97
+Loss: 0.00077 | Epsilon: 0.025
+Beta: 1.000
+
+
+
+EPISODE 368 COMPLETED
+======================================================================
+Total Steps: 746474 | Episode Steps: 2139
+Episode Reward: 13.00 | Mean Reward: 16.93
+Loss: 0.00086 | Epsilon: 0.025
+Beta: 1.000
+
+
+
+EPISODE 369 COMPLETED
+======================================================================
+Total Steps: 748703 | Episode Steps: 2229
+Episode Reward: 16.00 | Mean Reward: 17.03
+Loss: 0.00074 | Epsilon: 0.025
+Beta: 1.000
+
+
+
+EPISODE 370 COMPLETED
+======================================================================
+Total Steps: 750455 | Episode Steps: 1752
+Episode Reward: 20.00 | Mean Reward: 17.03
+Loss: 0.00066 | Epsilon: 0.025
+Beta: 1.000
+
+
+
+EPISODE 371 COMPLETED
+======================================================================
+Total Steps: 752089 | Episode Steps: 1634
+Episode Reward: 21.00 | Mean Reward: 17.17
+Loss: 0.00062 | Epsilon: 0.024
+Beta: 1.000
+
+
+
+EPISODE 372 COMPLETED
+======================================================================
+Total Steps: 754875 | Episode Steps: 2786
+Episode Reward: 16.00 | Mean Reward: 17.16
+Loss: 0.00073 | Epsilon: 0.024
+Beta: 1.000
+
+
+
+EPISODE 373 COMPLETED
+======================================================================
+Total Steps: 756739 | Episode Steps: 1864
+Episode Reward: 19.00 | Mean Reward: 17.15
+Loss: 0.00079 | Epsilon: 0.024
+Beta: 1.000
+
+
+
+EPISODE 374 COMPLETED
+======================================================================
+Total Steps: 758377 | Episode Steps: 1638
+Episode Reward: 21.00 | Mean Reward: 17.22
+Loss: 0.00076 | Epsilon: 0.024
+Beta: 1.000
+
+
+
+EPISODE 375 COMPLETED
+======================================================================
+Total Steps: 760012 | Episode Steps: 1635
+Episode Reward: 21.00 | Mean Reward: 17.31
+Loss: 0.00067 | Epsilon: 0.023
+Beta: 1.000
+
+
+
+EPISODE 376 COMPLETED
+======================================================================
+Total Steps: 761850 | Episode Steps: 1838
+Episode Reward: 19.00 | Mean Reward: 17.31
+Loss: 0.00070 | Epsilon: 0.023
+Beta: 1.000
+
+
+
+EPISODE 377 COMPLETED
+======================================================================
+Total Steps: 763821 | Episode Steps: 1971
+Episode Reward: 16.00 | Mean Reward: 17.31
+Loss: 0.00069 | Epsilon: 0.023
+Beta: 1.000
+
+
+
+EPISODE 378 COMPLETED
+======================================================================
+Total Steps: 765642 | Episode Steps: 1821
+Episode Reward: 19.00 | Mean Reward: 17.33
+Loss: 0.00061 | Epsilon: 0.023
+Beta: 1.000
+
+
+
+EPISODE 379 COMPLETED
+======================================================================
+Total Steps: 767414 | Episode Steps: 1772
+Episode Reward: 20.00 | Mean Reward: 17.46
+Loss: 0.00062 | Epsilon: 0.022
+Beta: 1.000
+
+
+
+EPISODE 380 COMPLETED
+======================================================================
+Total Steps: 769499 | Episode Steps: 2085
+Episode Reward: 17.00 | Mean Reward: 17.44
+Loss: 0.00063 | Epsilon: 0.022
+Beta: 1.000
+
+
+
+EPISODE 381 COMPLETED
+======================================================================
+Total Steps: 771361 | Episode Steps: 1862
+Episode Reward: 18.00 | Mean Reward: 17.48
+Loss: 0.00058 | Epsilon: 0.022
+Beta: 1.000
+
+
+
+EPISODE 382 COMPLETED
+======================================================================
+Total Steps: 773698 | Episode Steps: 2337
+Episode Reward: 13.00 | Mean Reward: 17.44
+Loss: 0.00061 | Epsilon: 0.022
+Beta: 1.000
+
+
+
+EPISODE 383 COMPLETED
+======================================================================
+Total Steps: 775544 | Episode Steps: 1846
+Episode Reward: 19.00 | Mean Reward: 17.45
+Loss: 0.00060 | Epsilon: 0.022
+Beta: 1.000
+
+
+
+EPISODE 384 COMPLETED
+======================================================================
+Total Steps: 777182 | Episode Steps: 1638
+Episode Reward: 21.00 | Mean Reward: 17.54
+Loss: 0.00056 | Epsilon: 0.021
+Beta: 1.000
+
+
+
+EPISODE 385 COMPLETED
+======================================================================
+Total Steps: 779247 | Episode Steps: 2065
+Episode Reward: 18.00 | Mean Reward: 17.56
+Loss: 0.00058 | Epsilon: 0.021
+Beta: 1.000
+
+
+
+EPISODE 386 COMPLETED
+======================================================================
+Total Steps: 781267 | Episode Steps: 2020
+Episode Reward: 19.00 | Mean Reward: 17.55
+Loss: 0.00064 | Epsilon: 0.021
+Beta: 1.000
+
+
+
+EPISODE 387 COMPLETED
+======================================================================
+Total Steps: 783143 | Episode Steps: 1876
+Episode Reward: 19.00 | Mean Reward: 17.57
+Loss: 0.00060 | Epsilon: 0.021
+Beta: 1.000
+
+
+
+EPISODE 388 COMPLETED
+======================================================================
+Total Steps: 784950 | Episode Steps: 1807
+Episode Reward: 19.00 | Mean Reward: 17.58
+Loss: 0.00057 | Epsilon: 0.020
+Beta: 1.000
+
+
+
+EPISODE 389 COMPLETED
+======================================================================
+Total Steps: 787572 | Episode Steps: 2622
+Episode Reward: 13.00 | Mean Reward: 17.54
+Loss: 0.00059 | Epsilon: 0.020
+Beta: 1.000
+
+
+
+EPISODE 390 COMPLETED
+======================================================================
+Total Steps: 789209 | Episode Steps: 1637
+Episode Reward: 21.00 | Mean Reward: 17.58
+Loss: 0.00051 | Epsilon: 0.020
+Beta: 1.000
+
+
+
+EPISODE 391 COMPLETED
+======================================================================
+Total Steps: 791181 | Episode Steps: 1972
+Episode Reward: 15.00 | Mean Reward: 17.56
+Loss: 0.00052 | Epsilon: 0.020
+Beta: 1.000
+
+
+
+EPISODE 392 COMPLETED
+======================================================================
+Total Steps: 792816 | Episode Steps: 1635
+Episode Reward: 21.00 | Mean Reward: 17.59
+Loss: 0.00053 | Epsilon: 0.020
+Beta: 1.000
+
+
+
+EPISODE 393 COMPLETED
+======================================================================
+Total Steps: 794686 | Episode Steps: 1870
+Episode Reward: 17.00 | Mean Reward: 17.58
+Loss: 0.00053 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 394 COMPLETED
+======================================================================
+Total Steps: 796499 | Episode Steps: 1813
+Episode Reward: 19.00 | Mean Reward: 17.67
+Loss: 0.00050 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 395 COMPLETED
+======================================================================
+Total Steps: 798734 | Episode Steps: 2235
+Episode Reward: 17.00 | Mean Reward: 17.67
+Loss: 0.00055 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 396 COMPLETED
+======================================================================
+Total Steps: 800443 | Episode Steps: 1709
+Episode Reward: 20.00 | Mean Reward: 17.70
+Loss: 0.00047 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 397 COMPLETED
+======================================================================
+Total Steps: 802238 | Episode Steps: 1795
+Episode Reward: 20.00 | Mean Reward: 17.72
+Loss: 0.00054 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 398 COMPLETED
+======================================================================
+Total Steps: 803877 | Episode Steps: 1639
+Episode Reward: 21.00 | Mean Reward: 17.78
+Loss: 0.00053 | Epsilon: 0.019
+Beta: 1.000
+
+
+
+EPISODE 399 COMPLETED
+======================================================================
+Total Steps: 805593 | Episode Steps: 1716
+Episode Reward: 20.00 | Mean Reward: 17.82
+Loss: 0.00049 | Epsilon: 0.018
+Beta: 1.000
+
+
+
+EPISODE 400 COMPLETED
+======================================================================
+Total Steps: 807228 | Episode Steps: 1635
+Episode Reward: 21.00 | Mean Reward: 17.88
+Loss: 0.00046 | Epsilon: 0.018
+Beta: 1.000
+
+
+
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_400.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_400.pt
+EPISODE 401 COMPLETED
+======================================================================
+Total Steps: 809527 | Episode Steps: 2299
+Episode Reward: 17.00 | Mean Reward: 17.86
+Loss: 0.00051 | Epsilon: 0.018
+Beta: 1.000
+
+
+
+EPISODE 402 COMPLETED
+======================================================================
+Total Steps: 811164 | Episode Steps: 1637
+Episode Reward: 21.00 | Mean Reward: 17.89
+Loss: 0.00051 | Epsilon: 0.018
+Beta: 1.000
+
+
+
+EPISODE 403 COMPLETED
+======================================================================
+Total Steps: 812895 | Episode Steps: 1731
+Episode Reward: 20.00 | Mean Reward: 17.92
+Loss: 0.00050 | Epsilon: 0.018
+Beta: 1.000
+
+
+
+EPISODE 404 COMPLETED
+======================================================================
+Total Steps: 814532 | Episode Steps: 1637
+Episode Reward: 21.00 | Mean Reward: 18.00
+Loss: 0.00048 | Epsilon: 0.017
+Beta: 1.000
+
+
+
+
+>>> Environment solved in 404 episodes!
+Checkpoint saved: checkpoints/DoubleDQN_PER_ep_404.pt
+Removed old checkpoint: checkpoints/DoubleDQN_PER_ep_404.pt
+>>> Mean reward: 18.00
+[34m[1mwandb[0m: [33mWARNING[0m Saving files without folders. If you want to preserve subdirectories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+[34m[1mwandb[0m: [33mWARNING[0m Symlinked 0 file into the W&B run directory, call wandb.save again to sync new files.
+
+Plot saved to training_plot.png
