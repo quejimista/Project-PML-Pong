@@ -1,0 +1,18 @@
+
+>>> Creating and training model 'ppo'...
+Using cuda device
+Standard Env.        : (210, 160, 3)
+MaxAndSkipObservation: (210, 160, 3)
+Reward Scaled        : (Reward * scale factor)
+CropObs              : (150, 144, 3)
+ResizeObservation    : (84, 84, 3)
+GrayscaleObservation : (84, 84, 1)
+ReshapeObservation   : (84, 84)
+FrameStackObservation: (4, 84, 84)
+Environment reward threshold: -10000
+Traceback (most recent call last):
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 117, in <module>
+    train_model(env, model_name, thresh)
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 45, in train_model
+    eval_callback = EvalCallback(eval_env, callback_on_new_best=callback_on_best, verbose=1) # at every evaluation point it will call the evaluation and then (using the mean reward) will call the stop training on reward threshold function
+NameError: name 'callback_on_best' is not defined

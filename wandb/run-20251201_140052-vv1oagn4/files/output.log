@@ -1,0 +1,39 @@
+
+>>> Creating and training model 'ppo'...
+Using cuda device
+Environment reward threshold: -5000
+------------------------------
+| time/              |       |
+|    fps             | 379   |
+|    iterations      | 1     |
+|    time_elapsed    | 86    |
+|    total_timesteps | 32768 |
+------------------------------
+Eval num_timesteps=40000, episode_reward=-300.00 +/- 0.00
+Episode length: 1127.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 1.13e+03    |
+|    mean_reward          | -300        |
+| time/                   |             |
+|    total_timesteps      | 40000       |
+| train/                  |             |
+|    approx_kl            | 0.007835811 |
+|    clip_fraction        | 0.0708      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -0.00118    |
+|    learning_rate        | 0.0003      |
+|    loss                 | 22.2        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | 0.000699    |
+|    value_loss           | 127         |
+-----------------------------------------
+New best mean reward!
+------------------------------
+| time/              |       |
+|    fps             | 305   |
+|    iterations      | 2     |
+|    time_elapsed    | 214   |
+|    total_timesteps | 65536 |
+------------------------------

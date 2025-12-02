@@ -1,0 +1,52 @@
+
+>>> Creating and training model 'ppo'...
+Using cuda device
+Environment reward threshold: -5000
+------------------------------
+| time/              |       |
+|    fps             | 383   |
+|    iterations      | 1     |
+|    time_elapsed    | 42    |
+|    total_timesteps | 16384 |
+------------------------------
+------------------------------------------
+| time/                   |              |
+|    fps                  | 351          |
+|    iterations           | 2            |
+|    time_elapsed         | 93           |
+|    total_timesteps      | 32768        |
+| train/                  |              |
+|    approx_kl            | 0.0035681117 |
+|    clip_fraction        | 0.0661       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.09        |
+|    explained_variance   | -0.000207    |
+|    learning_rate        | 0.0003       |
+|    loss                 | 68.2         |
+|    n_updates            | 10           |
+|    policy_gradient_loss | -0.000226    |
+|    value_loss           | 145          |
+------------------------------------------
+C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\evaluation.py:70: UserWarning: Evaluation environment is not wrapped with a ``Monitor`` wrapper. This may result in reporting modified episode lengths and rewards, if other wrappers happen to modify these. Consider wrapping environment first with ``Monitor`` wrapper.
+  warnings.warn(
+Eval num_timesteps=40000, episode_reward=-90.13 +/- 0.00
+Episode length: 132.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 132         |
+|    mean_reward          | -90.1       |
+| time/                   |             |
+|    total_timesteps      | 40000       |
+| train/                  |             |
+|    approx_kl            | 0.013160881 |
+|    clip_fraction        | 0.283       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | 0.00435     |
+|    learning_rate        | 0.0003      |
+|    loss                 | 54.7        |
+|    n_updates            | 20          |
+|    policy_gradient_loss | 0.00518     |
+|    value_loss           | 129         |
+-----------------------------------------
+New best mean reward!

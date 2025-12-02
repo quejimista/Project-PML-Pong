@@ -1,0 +1,37 @@
+
+>>> Training model 'ppo'...
+Using cuda device
+Traceback (most recent call last):
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main2.py", line 126, in <module>
+    train_model(env, model_name, reward_threshold)
+  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main2.py", line 96, in train_model
+    model.learn(total_timesteps=config["total_timesteps"], callback=callback_list)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\ppo\ppo.py", line 311, in learn
+    return super().learn(
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 311, in learn
+    total_timesteps, callback = self._setup_learn(
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\base_class.py", line 431, in _setup_learn
+    self._logger = utils.configure_logger(self.verbose, self.tensorboard_log, tb_log_name, reset_num_timesteps)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\utils.py", line 301, in configure_logger
+    return configure(save_path, format_strings=format_strings)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\logger.py", line 661, in configure
+    output_formats = [make_output_format(f, folder, log_suffix) for f in format_strings]
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\logger.py", line 661, in <listcomp>
+    output_formats = [make_output_format(f, folder, log_suffix) for f in format_strings]
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\logger.py", line 467, in make_output_format
+    return TensorBoardOutputFormat(log_dir)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\stable_baselines3\common\logger.py", line 400, in __init__
+    self.writer = SummaryWriter(log_dir=folder)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\utils\tensorboard\writer.py", line 250, in __init__
+    self._get_file_writer()
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\utils\tensorboard\writer.py", line 265, in _get_file_writer
+    self.file_writer = FileWriter(
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\utils\tensorboard\writer.py", line 76, in __init__
+    self.event_writer = EventFileWriter(
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\wandb\integration\tensorboard\monkeypatch.py", line 175, in __init__
+    super().__init__(logdir, *args, **kwargs)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 72, in __init__
+    tf.io.gfile.makedirs(logdir)
+  File "C:\Users\Iván\AppData\Local\Programs\Python\Python310\lib\site-packages\tensorflow\python\lib\io\file_io.py", line 513, in recursive_create_dir_v2
+    _pywrap_file_io.RecursivelyCreateDir(compat.path_to_bytes(path))
+tensorflow.python.framework.errors_impl.FailedPreconditionError: runs\q2hxanzu\PPO_1 is not a directory

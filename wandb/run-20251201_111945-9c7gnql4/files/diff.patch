@@ -1,0 +1,29 @@
+diff --git a/Part_3/functions/preprocessing.py b/Part_3/functions/preprocessing.py
+index 3c827f5..0ad09c0 100644
+--- a/Part_3/functions/preprocessing.py
++++ b/Part_3/functions/preprocessing.py
+@@ -119,7 +119,7 @@ class FrameSkip(Wrapper):
+                 break
+         return obs, total_reward, done, truncated, info
+ 
+-def make_env(env_name, render=None):
++def make_env(env_name = "ALE/Skiing-v5", render=None):
+     gym.register_envs(ale_py)
+     env = gym.make(env_name, render_mode=render)
+     print("Standard Env.        :", env.observation_space.shape)
+@@ -275,7 +275,7 @@ total_reward = 0
+ 
+ print("Starting rewards calculation...")
+ 
+-for i in range(1000):
++for i in range(2000):
+     
+     action = env.action_space.sample() 
+     obs, reward, done, truncated, info = env.step(action)
+diff --git a/Part_3/functions/wrapper_steps.png b/Part_3/functions/wrapper_steps.png
+deleted file mode 100644
+index 5d38cea..0000000
+Binary files a/Part_3/functions/wrapper_steps.png and /dev/null differ
+diff --git a/wrapper_steps_final.png b/wrapper_steps_final.png
+index 991c288..4d23f4c 100644
+Binary files a/wrapper_steps_final.png and b/wrapper_steps_final.png differ

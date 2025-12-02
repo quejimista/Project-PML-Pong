@@ -1,0 +1,80 @@
+diff --git a/Part_3/functions/preprocessing.py b/Part_3/functions/preprocessing.py
+index 3c827f5..139ea28 100644
+--- a/Part_3/functions/preprocessing.py
++++ b/Part_3/functions/preprocessing.py
+@@ -119,13 +119,13 @@ class FrameSkip(Wrapper):
+                 break
+         return obs, total_reward, done, truncated, info
+ 
+-def make_env(env_name, render=None):
++def make_env(env_name = "ALE/Skiing-v5", render=None):
+     gym.register_envs(ale_py)
+     env = gym.make(env_name, render_mode=render)
+     print("Standard Env.        :", env.observation_space.shape)
+ 
+-    # env = MaxAndSkipObservation(env, skip=4)
+-    # print("MaxAndSkipObservation:", env.observation_space.shape)
++    env = MaxAndSkipObservation(env, skip=4)
++    print("MaxAndSkipObservation:", env.observation_space.shape)
+ 
+     env = SkiingRewardScaler(env) 
+     print("Reward Scaled        : (Reward * scale factor)")
+@@ -266,27 +266,29 @@ def save_plot(snapshots):
+     print(f"Successfully saved visualization to {filename}")
+     plt.close()
+ 
+-capture_and_save_pipeline()
+ 
+-#simulate a game to see how it moves
+-env = make_env("ALE/Skiing-v5", render='human')
+-obs, _ = env.reset()
+-total_reward = 0
++if __name__ == "__main__":
++    capture_and_save_pipeline()
+ 
+-print("Starting rewards calculation...")
++    #simulate a game to see how it moves
++    env = make_env("ALE/Skiing-v5", render='human')
++    obs, _ = env.reset()
++    total_reward = 0
+ 
+-for i in range(1000):
+-    
+-    action = env.action_space.sample() 
+-    obs, reward, done, truncated, info = env.step(action)
+-    
+-    total_reward += reward
+-    
+-    if reward != 0.0:
+-        print(f"Step {i}: Reward = {reward}")
+-    
+-    if done or truncated:
+-        break
++    print("Starting rewards calculation...")
++
++    for i in range(2000):
++        
++        action = env.action_space.sample() 
++        obs, reward, done, truncated, info = env.step(action)
++        
++        total_reward += reward
++        
++        if reward != 0.0:
++            print(f"Step {i}: Reward = {reward}")
++        
++        if done or truncated:
++            break
+ 
+-print(f"Reward Total Acumulado: {total_reward}")
+-env.close()
+\ No newline at end of file
++    print(f"Reward Total Acumulado: {total_reward}")
++    env.close()
+\ No newline at end of file
+diff --git a/Part_3/functions/wrapper_steps.png b/Part_3/functions/wrapper_steps.png
+deleted file mode 100644
+index 5d38cea..0000000
+Binary files a/Part_3/functions/wrapper_steps.png and /dev/null differ
+diff --git a/wrapper_steps_final.png b/wrapper_steps_final.png
+index 991c288..efcdef9 100644
+Binary files a/wrapper_steps_final.png and b/wrapper_steps_final.png differ
