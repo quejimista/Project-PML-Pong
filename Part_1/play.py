@@ -10,11 +10,12 @@ from functions.models import DQN
 MODEL_PATH = r"C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_1\download_models_wandb\DoubleDQN_PER_lor0.0001_dnnupd4_epsdec0.99_batch64_20251139_124235.pt"         # ← Just change this
 # MODEL_PATH = r'C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_1\download_models_wandb\DQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch32_20251130_094810.pt'
 # MODEL_PATH = r'C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_1\download_models_wandb\DoubleDQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch32_20251129_195152.pt'
+MODEL_PATH = r'C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_1\download_models_wandb\DoubleDQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch64_20251201_144143.pt'
 
 MODEL_NAME = f"DoubleDQN_PER_lor0.0001_dnnupd4_epsdec0.99_batch64_20251139_124235"
 # MODEL_NAME = f'DQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch32_20251130_094810'
 # MODEL_NAME = "DoubleDQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch32_20251129_195152"
-
+MODEL_NAME = f'DoubleDQN_PER_lr0.0001_dnnupd4_epsdec0.99_batch64_20251201_144143.pt'
 
 ENV_NAME = "PongNoFrameskip-v4"
 VIDEO_FOLDER = f"test_video/{MODEL_NAME}"             # Where to save video
