@@ -1,0 +1,11 @@
+{"time":"2025-12-08T21:11:28.9010133+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
+{"time":"2025-12-08T21:11:29.1763421+01:00","level":"INFO","msg":"stream: created new stream","id":"ptjl816o"}
+{"time":"2025-12-08T21:11:29.1763421+01:00","level":"INFO","msg":"handler: started","stream_id":"ptjl816o"}
+{"time":"2025-12-08T21:11:29.1776687+01:00","level":"INFO","msg":"stream: started","id":"ptjl816o"}
+{"time":"2025-12-08T21:11:29.1777404+01:00","level":"INFO","msg":"writer: started","stream_id":"ptjl816o"}
+{"time":"2025-12-08T21:11:29.1777782+01:00","level":"INFO","msg":"sender: started","stream_id":"ptjl816o"}
+{"time":"2025-12-08T21:11:39.9608914+01:00","level":"INFO","msg":"stream: closing","id":"ptjl816o"}
+{"time":"2025-12-08T21:11:40.4943154+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-08T21:11:40.9013224+01:00","level":"INFO","msg":"handler: closed","stream_id":"ptjl816o"}
+{"time":"2025-12-08T21:11:40.9013224+01:00","level":"INFO","msg":"sender: closed","stream_id":"ptjl816o"}
+{"time":"2025-12-08T21:11:40.9013224+01:00","level":"INFO","msg":"stream: closed","id":"ptjl816o"}

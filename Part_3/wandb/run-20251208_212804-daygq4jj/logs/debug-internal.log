@@ -1,0 +1,14 @@
+{"time":"2025-12-08T21:28:07.240203+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
+{"time":"2025-12-08T21:28:07.5165445+01:00","level":"INFO","msg":"stream: created new stream","id":"daygq4jj"}
+{"time":"2025-12-08T21:28:07.5165445+01:00","level":"INFO","msg":"handler: started","stream_id":"daygq4jj"}
+{"time":"2025-12-08T21:28:07.5179974+01:00","level":"INFO","msg":"stream: started","id":"daygq4jj"}
+{"time":"2025-12-08T21:28:07.5179974+01:00","level":"INFO","msg":"writer: started","stream_id":"daygq4jj"}
+{"time":"2025-12-08T21:28:07.5179974+01:00","level":"INFO","msg":"sender: started","stream_id":"daygq4jj"}
+{"time":"2025-12-08T21:28:07.8724481+01:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-12-08T21:28:18.2618735+01:00","level":"INFO","msg":"stream: closing","id":"daygq4jj"}
+{"time":"2025-12-08T21:28:28.2484109+01:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-12-08T21:28:28.2484109+01:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"C:\\\\Users\\\\Iván\\\\Desktop\\\\Project-PML-Pong\\\\Project-PML-Pong\\\\Part_3\\\\runs\\\\daygq4jj\\\\PPO_1\")","namespace":""}
+{"time":"2025-12-08T21:28:29.0650957+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-08T21:28:29.2733438+01:00","level":"INFO","msg":"handler: closed","stream_id":"daygq4jj"}
+{"time":"2025-12-08T21:28:29.2733438+01:00","level":"INFO","msg":"sender: closed","stream_id":"daygq4jj"}
+{"time":"2025-12-08T21:28:29.2733438+01:00","level":"INFO","msg":"stream: closed","id":"daygq4jj"}
