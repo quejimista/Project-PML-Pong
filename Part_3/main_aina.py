@@ -1,5 +1,6 @@
 import wandb
 import torch
+import os
 from datetime import datetime
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import SubprocVecEnv
@@ -7,6 +8,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CallbackList, EvalCallback, BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
 from preprocessing_aina import make_env
+
 
 
 # ------------------ DEVICE ------------------
@@ -94,14 +96,16 @@ def train_model():
     # Create evaluation environment
     eval_env = make_env(config["env_name"])
     eval_env = Monitor(eval_env)
-    
+    log_path = "C:/Pong_part_3/logs"
+    os.makedirs(log_path, exist_ok=True)
+    print(f"Saving TensorBoard logs to: {log_path}")
     # Create PPO model with optimized hyperparameters
     model = PPO(
         config["policy_type"],
         env,
         verbose=1,
         device=DEVICE,
-        tensorboard_log=f"runs/{run.id}",
+        tensorboard_log=log_path,
         
         # Training hyperparameters
         n_steps=config["n_steps"],

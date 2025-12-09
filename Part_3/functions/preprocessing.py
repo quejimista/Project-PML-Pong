@@ -7,7 +7,7 @@ from gymnasium.wrappers import ResizeObservation, GrayscaleObservation, FrameSta
 import ale_py
 import matplotlib.pyplot as plt
 from gymnasium.wrappers import TimeLimit
-
+from stable_baselines3.common.monitor import Monitor
 class GrayScaleObs(ObservationWrapper):
     def __init__(self, env):
         super().__init__(env)
@@ -160,6 +160,7 @@ def make_env(env_name = "ALE/Skiing-v5", render=None, verbose = False):
     # env = ScaledFloatFrame(env)
     # print("ScaledFloatFrame     :", env.observation_space.shape)
     env = TimeLimit(env, max_episode_steps=25000)
+    env = Monitor(env)
 
     return env
 
@@ -278,7 +279,7 @@ def save_plot(snapshots):
 
 
 if __name__ == "__main__":
-    capture_and_save_pipeline()
+    # capture_and_save_pipeline()
 
     #simulate a game to see how it moves
     env = make_env("ALE/Skiing-v5", render='human')
