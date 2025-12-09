@@ -46,16 +46,16 @@ config = {
     "n_envs": 8,  # Number of parallel environments
     
     # Optimized PPO hyperparameters for Atari
-    "n_steps": 128,  # Steps per env per update
+    "n_steps": 2048,  # Steps per env per update
     "batch_size": 256,  # Minibatch size
     "n_epochs": 4,  # Number of epochs per update
     "gamma": 0.999,  # Discount factor
     "gae_lambda": 0.95,  # GAE lambda
-    "clip_range": 0.2,  # PPO clip range
-    "ent_coef": 0.1,  # Entropy coefficient for exploration
+    "clip_range": 0.1,  # PPO clip range
+    "ent_coef": 0.03,  # Entropy coefficient for exploration
     "vf_coef": 1.0,  # Value function coefficient
     "max_grad_norm": 0.5,  # Gradient clipping
-    "learning_rate": 3e-4,  # Learning rate
+    "learning_rate": 5e-5,  # Learning rate
     "normalize_advantage": True,  # Normalize advantages
 }
 
@@ -237,7 +237,7 @@ def visualize_agent(model_path, n_episodes=5):
             action_str = action_names[action]
 
             obs, reward, terminated, truncated, info = env.step(action)
-            print(f"Action taken: {action} -> {action_str}")
+            print(f"Action taken: {action} -> {action_str} | Reward: {reward:.2f}")
             episode_reward += reward
             steps += 1
             done = terminated or truncated

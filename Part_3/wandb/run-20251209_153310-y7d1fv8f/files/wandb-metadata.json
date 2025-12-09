@@ -1,0 +1,43 @@
+{
+  "os": "Windows-11-10.0.26100-SP0",
+  "python": "CPython 3.13.9",
+  "startedAt": "2025-12-09T14:33:10.574283Z",
+  "args": [
+    "--train"
+  ],
+  "program": "C:\\Users\\User\\Desktop\\Project-PML-Pong\\Part_3\\main_aina.py",
+  "codePath": "Part_3\\main_aina.py",
+  "codePathLocal": "main_aina.py",
+  "git": {
+    "remote": "https://github.com/quejimista/Project-PML-Pong.git",
+    "commit": "39890492a7780e3a9287abdcb6172cb45c288fde"
+  },
+  "email": "ivanmartincampoy@gmail.com",
+  "root": "C:\\Users\\User\\Desktop\\Project-PML-Pong\\Part_3",
+  "host": "Portatil-Ivan",
+  "executable": "C:\\Users\\User\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+  "cpu_count": 8,
+  "cpu_count_logical": 16,
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "511208058880",
+      "used": "134232608768"
+    }
+  },
+  "memory": {
+    "total": "25439199232"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "memoryTotal": "8585740288",
+      "cudaCores": 3072,
+      "architecture": "Ada",
+      "uuid": "GPU-4984273b-9091-2c63-3433-f397a7312b71"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "3rfrh25pxgjdfhwcch6njox3ot6ns3po"
+}

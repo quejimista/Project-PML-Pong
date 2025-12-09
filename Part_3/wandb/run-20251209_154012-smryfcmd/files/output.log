@@ -1,0 +1,372 @@
+
+============================================================
+Training PPO on ALE/Skiing-v5
+============================================================
+
+Saving TensorBoard logs to: C:/Pong_part_3/logs
+Using cuda device
+
+Model architecture:
+ActorCriticCnnPolicy(
+  (features_extractor): NatureCNN(
+    (cnn): Sequential(
+      (0): Conv2d(4, 32, kernel_size=(8, 8), stride=(4, 4))
+      (1): ReLU()
+      (2): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2))
+      (3): ReLU()
+      (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+      (5): ReLU()
+      (6): Flatten(start_dim=1, end_dim=-1)
+    )
+    (linear): Sequential(
+      (0): Linear(in_features=3136, out_features=512, bias=True)
+      (1): ReLU()
+    )
+  )
+  (pi_features_extractor): NatureCNN(
+    (cnn): Sequential(
+      (0): Conv2d(4, 32, kernel_size=(8, 8), stride=(4, 4))
+      (1): ReLU()
+      (2): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2))
+      (3): ReLU()
+      (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+      (5): ReLU()
+      (6): Flatten(start_dim=1, end_dim=-1)
+    )
+    (linear): Sequential(
+      (0): Linear(in_features=3136, out_features=512, bias=True)
+      (1): ReLU()
+    )
+  )
+  (vf_features_extractor): NatureCNN(
+    (cnn): Sequential(
+      (0): Conv2d(4, 32, kernel_size=(8, 8), stride=(4, 4))
+      (1): ReLU()
+      (2): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2))
+      (3): ReLU()
+      (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))
+      (5): ReLU()
+      (6): Flatten(start_dim=1, end_dim=-1)
+    )
+    (linear): Sequential(
+      (0): Linear(in_features=3136, out_features=512, bias=True)
+      (1): ReLU()
+    )
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential()
+    (value_net): Sequential()
+  )
+  (action_net): Linear(in_features=512, out_features=3, bias=True)
+  (value_net): Linear(in_features=512, out_features=1, bias=True)
+)
+
+Starting training for 10,000,000 timesteps...
+This equals 1,220 updates
+Evaluation every 1250 updates
+[34m[1mwandb[0m: [33mWARNING[0m Found log directory outside of given root_logdir, dropping given root_logdir for event file in C:/Pong_part_3/logs\PPO_2
+
+Logging to C:/Pong_part_3/logs\PPO_2
+C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\stable_baselines3\common\callbacks.py:418: UserWarning: Training and eval env are not of the same type<stable_baselines3.common.vec_env.subproc_vec_env.SubprocVecEnv object at 0x000002CE96965E80> != <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x000002CF0EE001A0>
+  warnings.warn("Training and eval env are not of the same type" f"{self.training_env} != {self.eval_env}")
+[2Kwandb: WARNING Step cannot be set when using tensorboard syncing. Please use `run.define_metric(...)` to m [ [33m0:00:03[0m < [36m3:09:59[0m , [31m877 it/s[0m ]
+define a custom metric to log your step values.
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m8,152/10,000,000 [0m [ [33m0:00:10[0m < [36m3:19:50[0m , [31m833 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 371      |
+|    ep_rew_mean     | -592     |
+| time/              |          |
+|    fps             | 796      |
+|    iterations      | 1        |
+|    time_elapsed    | 10       |
+|    total_timesteps | 8192     |
+---------------------------------
+[2K-----------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m16,296/10,000,000 [0m [ [33m0:00:25[0m < [36m4:20:02[0m , [31m640 it/s[0m ]
+| rollout/                |             |
+|    ep_len_mean          | 389         |
+|    ep_rew_mean          | -617        |
+| time/                   |             |
+|    fps                  | 629         |
+|    iterations           | 2           |
+|    time_elapsed         | 26          |
+|    total_timesteps      | 16384       |
+| train/                  |             |
+|    approx_kl            | 0.018974505 |
+|    clip_fraction        | 0.167       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -0.000563   |
+|    learning_rate        | 0.00025     |
+|    loss                 | 131         |
+|    n_updates            | 10          |
+|    policy_gradient_loss | 0.00204     |
+|    value_loss           | 218         |
+-----------------------------------------
+[2K----------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m24,528/10,000,000 [0m [ [33m0:00:44[0m < [36m4:55:14[0m , [31m563 it/s[0m ]
+| rollout/                |            |
+|    ep_len_mean          | 437        |
+|    ep_rew_mean          | -681       |
+| time/                   |            |
+|    fps                  | 550        |
+|    iterations           | 3          |
+|    time_elapsed         | 44         |
+|    total_timesteps      | 24576      |
+| train/                  |            |
+|    approx_kl            | 0.26311225 |
+|    clip_fraction        | 0.76       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.808     |
+|    explained_variance   | 0.00012    |
+|    learning_rate        | 0.00025    |
+|    loss                 | 52.1       |
+|    n_updates            | 20         |
+|    policy_gradient_loss | 0.0808     |
+|    value_loss           | 153        |
+----------------------------------------
+[2K---------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m32,744/10,000,000 [0m [ [33m0:01:04[0m < [36m6:09:49[0m , [31m449 it/s[0m ]
+| rollout/                |           |
+|    ep_len_mean          | 522       |
+|    ep_rew_mean          | -781      |
+| time/                   |           |
+|    fps                  | 505       |
+|    iterations           | 4         |
+|    time_elapsed         | 64        |
+|    total_timesteps      | 32768     |
+| train/                  |           |
+|    approx_kl            | 1.1189897 |
+|    clip_fraction        | 0.747     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.722    |
+|    explained_variance   | 0.0107    |
+|    learning_rate        | 0.00025   |
+|    loss                 | 9.04      |
+|    n_updates            | 30        |
+|    policy_gradient_loss | 0.0653    |
+|    value_loss           | 80.8      |
+---------------------------------------
+[2K---------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m40,904/10,000,000 [0m [ [33m0:01:22[0m < [36m5:31:19[0m , [31m501 it/s[0m ]
+| rollout/                |           |
+|    ep_len_mean          | 530       |
+|    ep_rew_mean          | -786      |
+| time/                   |           |
+|    fps                  | 495       |
+|    iterations           | 5         |
+|    time_elapsed         | 82        |
+|    total_timesteps      | 40960     |
+| train/                  |           |
+|    approx_kl            | 3.2144344 |
+|    clip_fraction        | 0.894     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.298    |
+|    explained_variance   | 0.00208   |
+|    learning_rate        | 0.00025   |
+|    loss                 | 125       |
+|    n_updates            | 40        |
+|    policy_gradient_loss | 0.12      |
+|    value_loss           | 180       |
+---------------------------------------
+[2K-----------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m49,032/10,000,000 [0m [ [33m0:01:37[0m < [36m4:34:03[0m , [31m605 it/s[0m ]
+| rollout/                |             |
+|    ep_len_mean          | 352         |
+|    ep_rew_mean          | -554        |
+| time/                   |             |
+|    fps                  | 504         |
+|    iterations           | 6           |
+|    time_elapsed         | 97          |
+|    total_timesteps      | 49152       |
+| train/                  |             |
+|    approx_kl            | 0.002130814 |
+|    clip_fraction        | 0.00338     |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.00856    |
+|    explained_variance   | 0.00373     |
+|    learning_rate        | 0.00025     |
+|    loss                 | 126         |
+|    n_updates            | 50          |
+|    policy_gradient_loss | 0.00064     |
+|    value_loss           | 207         |
+-----------------------------------------
+[2K-------------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m57,296/10,000,000 [0m [ [33m0:01:53[0m < [36m4:20:42[0m , [31m636 it/s[0m ]
+| rollout/                |               |
+|    ep_len_mean          | 135           |
+|    ep_rew_mean          | -278          |
+| time/                   |               |
+|    fps                  | 506           |
+|    iterations           | 7             |
+|    time_elapsed         | 113           |
+|    total_timesteps      | 57344         |
+| train/                  |               |
+|    approx_kl            | 0.00021771964 |
+|    clip_fraction        | 0.000757      |
+|    clip_range           | 0.2           |
+|    entropy_loss         | -0.00357      |
+|    explained_variance   | -0.00142      |
+|    learning_rate        | 0.00025       |
+|    loss                 | 152           |
+|    n_updates            | 60            |
+|    policy_gradient_loss | -6.93e-06     |
+|    value_loss           | 184           |
+-------------------------------------------
+[2K------------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m65,496/10,000,000 [0m [ [33m0:02:14[0m < [36m5:21:56[0m , [31m514 it/s[0m ]
+| rollout/                |              |
+|    ep_len_mean          | 133          |
+|    ep_rew_mean          | -276         |
+| time/                   |              |
+|    fps                  | 488          |
+|    iterations           | 8            |
+|    time_elapsed         | 134          |
+|    total_timesteps      | 65536        |
+| train/                  |              |
+|    approx_kl            | 6.906033e-05 |
+|    clip_fraction        | 0.000427     |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.00272     |
+|    explained_variance   | 0.00317      |
+|    learning_rate        | 0.00025      |
+|    loss                 | 170          |
+|    n_updates            | 70           |
+|    policy_gradient_loss | 0.000188     |
+|    value_loss           | 219          |
+------------------------------------------
+[2K-------------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m73,680/10,000,000 [0m [ [33m0:02:31[0m < [36m5:34:53[0m , [31m494 it/s[0m ]
+| rollout/                |               |
+|    ep_len_mean          | 132           |
+|    ep_rew_mean          | -274          |
+| time/                   |               |
+|    fps                  | 485           |
+|    iterations           | 9             |
+|    time_elapsed         | 151           |
+|    total_timesteps      | 73728         |
+| train/                  |               |
+|    approx_kl            | 2.7752467e-06 |
+|    clip_fraction        | 9.77e-05      |
+|    clip_range           | 0.2           |
+|    entropy_loss         | -0.00213      |
+|    explained_variance   | 0.00566       |
+|    learning_rate        | 0.00025       |
+|    loss                 | 259           |
+|    n_updates            | 80            |
+|    policy_gradient_loss | -1.28e-05     |
+|    value_loss           | 276           |
+-------------------------------------------
+[2KEval num_timesteps=80000, episode_reward=-274.40 +/- 0.00━━━━━━━━━━━━━━━━[0m [32m79,992/10,000,000 [0m [ [33m0:03:01[0m < [36m11:32:48[0m , [31m239 it/s[0m ]
+[2KEpisode length: 132.00 +/- 0.00━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m79,992/10,000,000 [0m [ [33m0:03:01[0m < [36m11:32:48[0m , [31m239 it/s[0m ]
+[2K---------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m79,992/10,000,000 [0m [ [33m0:03:01[0m < [36m11:32:48[0m , [31m239 it/s[0m ]
+| eval/                   |           |
+|    mean_ep_length       | 132       |
+|    mean_reward          | -274      |
+| time/                   |           |
+|    total_timesteps      | 80000     |
+| train/                  |           |
+|    approx_kl            | 0.0       |
+|    clip_fraction        | 0         |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.00186  |
+|    explained_variance   | 0.0202    |
+|    learning_rate        | 0.00025   |
+|    loss                 | 376       |
+|    n_updates            | 90        |
+|    policy_gradient_loss | -3.62e-07 |
+|    value_loss           | 394       |
+---------------------------------------
+[2KNew best mean reward!m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m79,992/10,000,000 [0m [ [33m0:03:01[0m < [36m11:32:48[0m , [31m239 it/s[0m ]
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m81,856/10,000,000 [0m [ [33m0:03:04[0m < [36m9:12:35[0m , [31m299 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 132      |
+|    ep_rew_mean     | -275     |
+| time/              |          |
+|    fps             | 442      |
+|    iterations      | 10       |
+|    time_elapsed    | 184      |
+|    total_timesteps | 81920    |
+---------------------------------
+[2K------------------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m90,064/10,000,000 [0m [ [33m0:03:25[0m < [36m6:53:25[0m , [31m400 it/s[0m ]
+| rollout/                |              |
+|    ep_len_mean          | 134          |
+|    ep_rew_mean          | -276         |
+| time/                   |              |
+|    fps                  | 438          |
+|    iterations           | 11           |
+|    time_elapsed         | 205          |
+|    total_timesteps      | 90112        |
+| train/                  |              |
+|    approx_kl            | 4.858157e-07 |
+|    clip_fraction        | 0.000159     |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.00209     |
+|    explained_variance   | 0.0281       |
+|    learning_rate        | 0.00025      |
+|    loss                 | 388          |
+|    n_updates            | 100          |
+|    policy_gradient_loss | 1.49e-05     |
+|    value_loss           | 411          |
+------------------------------------------
+[2KTraceback (most recent call last):━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:34[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+[2K  File "C:\Users\User\Desktop\Project-PML-Pong\Part_3\main_aina.py", line 268, in <module>000,000 [0m [ [33m0:03:34[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+    model_path = train_model()
+[2K  File "C:\Users\User\Desktop\Project-PML-Pong\Part_3\main_aina.py", line 149, in train_model,000 [0m [ [33m0:03:34[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+    model.learn(
+    ~~~~~~~~~~~^
+        total_timesteps=config["total_timesteps"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        callback=callback_list,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        progress_bar=True
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+[2K  File  1%[0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\ppo\ppo.py", line 311, in learn
+    return super().learn(
+           ~~~~~~~~~~~~~^
+        total_timesteps=total_timesteps,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        progress_bar=progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 324, in learn
+    continue_training = self.collect_rollouts(self.env, callback, self.rollout_buffer,
+n_rollout_steps=self.n_steps)
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 202, in
+collect_rollouts
+    actions, values, log_probs = self.policy(obs_tensor)
+                                 ~~~~~~~~~~~^^^^^^^^^^^^
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\common\policies.py", line 654, in forward
+    distribution = self._get_action_dist_from_latent(latent_pi)
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\common\policies.py", line 697, in
+_get_action_dist_from_latent
+    return self.action_dist.proba_distribution(action_logits=mean_actions)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\stable_baselines3\common\distributions.py", line 288, in
+proba_distribution
+    self.distribution = Categorical(logits=action_logits)
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+[2K  File [0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+"C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-
+packages\Python313\site-packages\torch\distributions\categorical.py", line 75, in __init__
+    self.logits = logits - logits.logsumexp(dim=-1, keepdim=True)
+                           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+[2KKeyboardInterrupt;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]
+[35m   1%[0m [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93,936/10,000,000 [0m [ [33m0:03:35[0m < [36m6:51:29[0m , [31m401 it/s[0m ]

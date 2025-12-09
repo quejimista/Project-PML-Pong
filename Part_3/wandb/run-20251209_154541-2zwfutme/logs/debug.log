@@ -1,0 +1,11 @@
+2025-12-09 15:45:41,775 INFO    MainThread:22812 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-12-09 15:45:41,775 INFO    MainThread:22812 [wandb_setup.py:_flush():81] Configure stats pid to 22812
+2025-12-09 15:45:41,775 INFO    MainThread:22812 [wandb_setup.py:_flush():81] Loading settings from C:\Users\User\.config\wandb\settings
+2025-12-09 15:45:41,775 INFO    MainThread:22812 [wandb_setup.py:_flush():81] Loading settings from C:\Users\User\Desktop\Project-PML-Pong\Part_3\wandb\settings
+2025-12-09 15:45:41,775 INFO    MainThread:22812 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-12-09 15:45:41,776 INFO    MainThread:22812 [wandb_init.py:setup_run_log_directory():705] Logging user logs to C:\Users\User\Desktop\Project-PML-Pong\Part_3\wandb\run-20251209_154541-2zwfutme\logs\debug.log
+2025-12-09 15:45:41,782 INFO    MainThread:22812 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to C:\Users\User\Desktop\Project-PML-Pong\Part_3\wandb\run-20251209_154541-2zwfutme\logs\debug-internal.log
+2025-12-09 15:45:41,793 INFO    MainThread:22812 [wandb_init.py:init():832] calling init triggers
+2025-12-09 15:45:41,794 INFO    MainThread:22812 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'policy_type': 'CnnPolicy', 'total_timesteps': 10000000, 'env_name': 'ALE/Skiing-v5', 'export_path': '../exports/', 'n_envs': 8, 'n_steps': 2048, 'batch_size': 256, 'n_epochs': 4, 'gamma': 0.999, 'gae_lambda': 0.95, 'clip_range': 0.1, 'ent_coef': 0.03, 'vf_coef': 1.0, 'max_grad_norm': 0.5, 'learning_rate': 0.0001, 'normalize_advantage': True, '_wandb': {'code_path': 'code/Part_3/main_aina.py'}}
+2025-12-09 15:45:41,794 INFO    MainThread:22812 [wandb_init.py:init():880] starting backend

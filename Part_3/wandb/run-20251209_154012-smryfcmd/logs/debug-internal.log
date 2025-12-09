@@ -1,0 +1,15 @@
+{"time":"2025-12-09T15:40:14.8000218+01:00","level":"INFO","msg":"stream: starting","core version":"0.22.2"}
+{"time":"2025-12-09T15:40:15.1128149+01:00","level":"INFO","msg":"stream: created new stream","id":"smryfcmd"}
+{"time":"2025-12-09T15:40:15.1128149+01:00","level":"INFO","msg":"handler: started","stream_id":"smryfcmd"}
+{"time":"2025-12-09T15:40:15.1150364+01:00","level":"INFO","msg":"stream: started","id":"smryfcmd"}
+{"time":"2025-12-09T15:40:15.1150364+01:00","level":"INFO","msg":"writer: started","stream_id":"smryfcmd"}
+{"time":"2025-12-09T15:40:15.1150364+01:00","level":"INFO","msg":"sender: started","stream_id":"smryfcmd"}
+{"time":"2025-12-09T15:40:15.453184+01:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-12-09T15:40:36.9889393+01:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-12-09T15:40:36.9889393+01:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"C:\\\\Pong_part_3\\\\logs\\\\PPO_2\")","namespace":""}
+{"time":"2025-12-09T15:40:36.9896254+01:00","level":"ERROR","msg":"tensorboard: failed to infer path where to save file","file":"C:\\Pong_part_3\\logs\\PPO_2\\events.out.tfevents.1765291226.Portatil-Ivan.9304.0","error":"\"C:/Pong_part_3/logs/PPO_2/events.out.tfevents.1765291226.Portatil-Ivan.9304.0\" does not start with \"C:/Users/User/Desktop/Project-PML-Pong/Part_3\""}
+{"time":"2025-12-09T15:44:02.0512283+01:00","level":"INFO","msg":"stream: closing","id":"smryfcmd"}
+{"time":"2025-12-09T15:44:03.0397708+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-09T15:44:03.5462178+01:00","level":"INFO","msg":"handler: closed","stream_id":"smryfcmd"}
+{"time":"2025-12-09T15:44:03.5467671+01:00","level":"INFO","msg":"sender: closed","stream_id":"smryfcmd"}
+{"time":"2025-12-09T15:44:03.5467671+01:00","level":"INFO","msg":"stream: closed","id":"smryfcmd"}
