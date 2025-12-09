@@ -7,7 +7,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CallbackList, EvalCallback, BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
-from preprocessing_aina import make_env
+from functions.preprocessing_aina import make_env
 
 
 
@@ -42,14 +42,14 @@ config = {
     "policy_type": "CnnPolicy",
     "total_timesteps": 10_000_000,  # Skiing needs significant training
     "env_name": "ALE/Skiing-v5",
-    "export_path": "./exports/",
+    "export_path": "../exports/",
     "n_envs": 8,  # Number of parallel environments
     
     # Optimized PPO hyperparameters for Atari
     "n_steps": 128,  # Steps per env per update
     "batch_size": 256,  # Minibatch size
     "n_epochs": 4,  # Number of epochs per update
-    "gamma": 0.99,  # Discount factor
+    "gamma": 0.999,  # Discount factor
     "gae_lambda": 0.95,  # GAE lambda
     "clip_range": 0.2,  # PPO clip range
     "ent_coef": 0.1,  # Entropy coefficient for exploration
@@ -215,12 +215,15 @@ def visualize_agent(model_path, n_episodes=5):
     print(f"\n{'='*60}")
     print(f"Visualizing agent: {model_path}")
     print(f"{'='*60}\n")
-    
+    if model_path.endswith(".zip"):
+        model_path = model_path[:-4]
+    print(f"Loading model from: {model_path}")
     model = PPO.load(model_path, device=DEVICE)
     
     # Create environment with rendering
     env = make_env(config["env_name"], render="human")
-    
+    action_names = env.unwrapped.get_action_meanings()
+
     for episode in range(n_episodes):
         obs, info = env.reset()
         episode_reward = 0
@@ -231,7 +234,10 @@ def visualize_agent(model_path, n_episodes=5):
         
         while not done:
             action, _states = model.predict(obs, deterministic=True)
+            action_str = action_names[action]
+
             obs, reward, terminated, truncated, info = env.step(action)
+            print(f"Action taken: {action} -> {action_str}")
             episode_reward += reward
             steps += 1
             done = terminated or truncated
