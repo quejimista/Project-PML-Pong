@@ -91,7 +91,7 @@ class EpisodeInfoWrapper(gym.Wrapper):
         return obs, reward, terminated, truncated, info
 
 
-def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     """
     Create and wrap Skiing environment with preprocessing pipeline.
     
@@ -161,6 +161,93 @@ def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     if verbose:
         print(f"{'EpisodeInfoWrapper':<25} {'':<20} Track episode stats")
         print(f"{'-'*70}")
+    
+    return env
+
+
+def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+    """
+    Create and wrap Skiing environment with preprocessing pipeline.
+    
+    Pipeline:
+    1. Create base environment
+    2. MaxAndSkipObservation: Skip 4 frames, take max over last 2
+    3. Reward shaping: Scale and clip rewards
+    4. Crop: Remove scoreboard
+    5. Resize: 84x84
+    6. Grayscale: Convert to grayscale
+    7. Reshape: Remove channel dimension
+    8. FrameStack: Stack 4 frames for temporal information
+    9. TimeLimit: Limit episode length
+    10. EpisodeInfo: Track episode statistics
+    
+    Args:
+        env_name: Name of the Gymnasium environment
+        render: Render mode (None, 'human', 'rgb_array')
+        verbose: Print detailed information about the pipeline
+        
+    Returns:
+        Wrapped Gymnasium environment
+    """
+    gym.register_envs(ale_py)
+    
+    # Base environment
+    env = gym.make(env_name, render_mode=render)
+    if verbose:
+        print(f"\n{'='*70}")
+        print(f"ENVIRONMENT PREPROCESSING PIPELINE")
+        print(f"{'='*70}")
+        print(f"{'Step':<25} {'Shape':<20} {'Description'}")
+        print(f"{'-'*70}")
+        print(f"{'Original Env':<25} {str(env.observation_space.shape):<20} Base Atari environment")
+    
+    # Frame skipping - take max over last 2 frames, skip 4 total
+    env = MaxAndSkipObservation(env, skip=4)
+    if verbose:
+        print(f"{'MaxAndSkipObservation':<25} {str(env.observation_space.shape):<20} Skip 4 frames, max pooling")
+    
+    # Reward shaping - LESS aggressive scaling
+    # env = SkiingRewardShaping(env, scale=0.1, clip_min=-10.0, clip_max=10.0)
+    env = SkiingRewardShaping(env, scale=0.05, clip_min=-100.0, clip_max=100.0)
+    if verbose:
+        print(f"{'SkiingRewardShaping':<25} {'':<20} Scale rewards by 0.1, clip to [-10, 10]")
+    
+    # Crop to remove scoreboard and unnecessary parts
+    env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
+    if verbose:
+        print(f"{'CropObs':<25} {str(env.observation_space.shape):<20} Remove scoreboard")
+    
+    # Resize to 84x84
+    env = ResizeObservation(env, (84, 84))
+    if verbose:
+        print(f"{'ResizeObservation':<25} {str(env.observation_space.shape):<20} Resize to 84x84")
+    
+    # Convert to grayscale
+    env = GrayscaleObservation(env, keep_dim=True)
+    if verbose:
+        print(f"{'GrayscaleObservation':<25} {str(env.observation_space.shape):<20} Convert to grayscale")
+    
+    # Reshape to remove channel dimension for frame stacking
+    env = ReshapeObservation(env, (84, 84))
+    if verbose:
+        print(f"{'ReshapeObservation':<25} {str(env.observation_space.shape):<20} Remove channel dim")
+    
+    # Stack 4 frames for temporal information
+    env = FrameStackObservation(env, stack_size=4)
+    if verbose:
+        print(f"{'FrameStackObservation':<25} {str(env.observation_space.shape):<20} Stack 4 frames")
+    
+    # Limit episode length to prevent infinite episodes
+    env = TimeLimit(env, max_episode_steps=25000)
+    if verbose:
+        print(f"{'TimeLimit':<25} {'':<20} Max 25000 steps/episode")
+    
+    # Add episode info tracking
+    env = EpisodeInfoWrapper(env)
+    if verbose:
+        print(f"{'EpisodeInfoWrapper':<25} {'':<20} Track episode stats")
+        print(f"{'-'*70}")
+        print(f"{'='*70}\n")
     
     return env
 

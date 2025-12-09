@@ -6,7 +6,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CallbackList, EvalCallback, BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
-from functions.preprocessing_aina import make_env
+from preprocessing_aina import make_env
 
 
 # ------------------ DEVICE ------------------
@@ -19,17 +19,19 @@ class WandbRewardCallback(BaseCallback):
     """Log reward and episode length to Wandb each episode."""
     def __init__(self, verbose=0):
         super().__init__(verbose)
+        self.episode_count = 0
 
     def _on_step(self) -> bool:
         infos = self.locals.get("infos", [])
         for info in infos:
             ep_info = info.get("episode")
             if ep_info:
+                self.episode_count += 1
                 wandb.log({
                     "train/reward": ep_info['r'],
                     "train/episode_length": ep_info['l'],
-                    "train/timesteps": self.num_timesteps
-                })
+                    "train/timesteps": self.episode_count
+                }, step=self.num_timesteps)
         return True
 
 
@@ -47,11 +49,12 @@ config = {
     "n_epochs": 4,  # Number of epochs per update
     "gamma": 0.99,  # Discount factor
     "gae_lambda": 0.95,  # GAE lambda
-    "clip_range": 0.1,  # PPO clip range
-    "ent_coef": 0.01,  # Entropy coefficient for exploration
-    "vf_coef": 0.5,  # Value function coefficient
+    "clip_range": 0.2,  # PPO clip range
+    "ent_coef": 0.1,  # Entropy coefficient for exploration
+    "vf_coef": 1.0,  # Value function coefficient
     "max_grad_norm": 0.5,  # Gradient clipping
-    "learning_rate": 2.5e-4,  # Learning rate
+    "learning_rate": 3e-4,  # Learning rate
+    "normalize_advantage": True,  # Normalize advantages
 }
 
 
@@ -74,9 +77,9 @@ def make_vec_env(env_name, n_envs, seed=0):
 # ------------------ TRAINING ------------------
 def train_model():
     run = wandb.init(
-        project="Paradigms_Part3_Skiing",
+        project="Paradigms_Part3",
         config=config,
-        name=f"PPO_Skiing_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+        name=f"PPO_trying_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
         sync_tensorboard=True,
         save_code=True
     )
@@ -123,7 +126,7 @@ def train_model():
         log_path=f"./logs/ppo_skiing",
         eval_freq=10000,  # Evaluate every 10k steps
         n_eval_episodes=10,
-        deterministic=True,
+        deterministic=False, 
         render=False,
         verbose=1
     )
