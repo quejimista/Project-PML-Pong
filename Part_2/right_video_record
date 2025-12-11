@@ -1,0 +1,33 @@
+import os
+import gymnasium as gym
+from stable_baselines3 import PPO
+
+# Load trained agent
+model_path = "./exports/right_agent/right_agent_final.zip"
+right_agent = PPO.load(model_path)
+
+# Folder to save video
+video_folder = "pong_right_agent_video"
+os.makedirs(video_folder, exist_ok=True)
+
+# Create environment wrapped for video recording
+env = gym.make("ALE/Pong-v5", render_mode="rgb_array")  # rgb_array mode required for recording
+env = gym.wrappers.RecordVideo(env, video_folder, episode_trigger=lambda x: True)  # record first episode
+
+# Run single episode
+obs, _ = env.reset()
+done = False
+total_reward = 0
+length = 0
+
+while not done:
+    action, _ = right_agent.predict(obs, deterministic=True)
+    obs, reward, terminated, truncated, info = env.step(action)
+    done = terminated or truncated
+    total_reward += reward
+    length += 1
+
+env.close()
+
+print(f"Single episode finished! Total reward: {total_reward}, Length: {length}")
+print(f"Video saved in folder: {video_folder}")
