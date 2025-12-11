@@ -164,6 +164,51 @@ def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     
     return env
 
+class SkiingSurvivalWrapper(gym.Wrapper):
+    def __init__(self, env):
+        super().__init__(env)
+        self.straight_counter = 0
+
+    def step(self, action):
+        obs, reward, terminated, truncated, info = self.env.step(action)
+
+        #Access Atari RAM
+        ram = self.env.unwrapped.ale.getRAM()
+        pose = ram[15]
+
+        #--- DISCOVERED VALUES---
+        #values when crashing (facing Left=71, Right=72)
+        CRASH_VALUES = [71, 72]
+        #values when going straight (Center of 0-15 range)
+        STRAIGHT_VALUES = [7, 8]
+
+        #reset native reward (negative time penalty)
+        my_reward = 0.0
+
+        #1.SURVIVAL LOGIC (AVOID CRASHES)
+        if pose in CRASH_VALUES:
+            #huge penalty for crashing
+            #we want agent to learn that 71/72 states are bad
+            my_reward = -50.0
+            
+            
+        #2.ZIG-ZAG LOGIC (AVOID GOING STRAIGHT FOREVER)
+        elif pose in STRAIGHT_VALUES:
+            self.straight_counter += 1
+            #small velocity bonus, but strictly monitored
+            my_reward += 0.01
+        else:
+            #turning/Slalom resets the counter
+            self.straight_counter = 0
+            #small reward for skiing (turning)
+            my_reward += 0.05
+
+        #punish if going straight for too long (>20 frames)
+        #this forces the agent to turn eventually
+        if self.straight_counter > 20:
+            my_reward -= 1.0
+
+        return obs, my_reward, terminated, truncated, info
 
 def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     """
@@ -201,6 +246,8 @@ def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
         print(f"{'-'*70}")
         print(f"{'Original Env':<25} {str(env.observation_space.shape):<20} Base Atari environment")
     
+    env = SkiingSurvivalWrapper(env)
+
     # Frame skipping - take max over last 2 frames, skip 4 total
     env = MaxAndSkipObservation(env, skip=4)
     if verbose:
