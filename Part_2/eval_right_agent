@@ -1,0 +1,50 @@
+import numpy as np
+import gymnasium as gym
+from stable_baselines3 import PPO
+
+# Load trained agent
+model_path = "./exports/right_agent/right_agent_final.zip"
+right_agent = PPO.load(model_path)
+
+env = gym.make("ALE/Pong-v5", render_mode="rgb_array")
+
+num_episodes = 10
+episode_rewards = []
+episode_lengths = []
+wins = 0
+
+for ep in range(num_episodes):
+    obs, _ = env.reset()
+    done = False
+    total_reward = 0
+    length = 0
+
+    while not done:
+        # Predict action using the trained agent
+        action, _ = right_agent.predict(obs, deterministic=True)
+        obs, reward, terminated, truncated, info = env.step(action)
+        done = terminated or truncated
+
+        total_reward += reward
+        length += 1
+
+    episode_rewards.append(total_reward)
+    episode_lengths.append(length)
+    
+    if total_reward > 0:  # reward > 0 counts as a win
+        wins += 1
+
+    print(f"Episode {ep+1}: Reward = {total_reward}, Length = {length}")
+
+env.close()
+
+# Summary
+average_reward = np.mean(episode_rewards)
+average_length = np.mean(episode_lengths)
+win_rate = wins / num_episodes * 100
+
+print("\n=== Evaluation Summary ===")
+print(f"Average reward: {average_reward:.2f}")
+print(f"Average episode length: {average_length:.2f}")
+print(f"Win rate: {win_rate:.2f}%")
+print(f"Max reward: {np.max(episode_rewards)}, Min reward: {np.min(episode_rewards)}")
