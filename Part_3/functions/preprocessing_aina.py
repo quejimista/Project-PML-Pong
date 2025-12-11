@@ -122,9 +122,9 @@ def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
         print(f"{'MaxAndSkipObservation':<25} {str(env.observation_space.shape):<20} Skip 4 frames, max pooling")
     
     # Reward shaping
-    env = SkiingRewardShaping(env, scale=0.01, clip_min=-1.0, clip_max=1.0)
-    if verbose:
-        print(f"{'SkiingRewardShaping':<25} {'':<20} Scale and clip rewards")
+    # env = SkiingRewardShaping(env, scale=0.01, clip_min=-1.0, clip_max=1.0)
+    # if verbose:
+    #     print(f"{'SkiingRewardShaping':<25} {'':<20} Scale and clip rewards")
     
     # Crop to remove scoreboard and unnecessary parts
     env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
@@ -189,7 +189,7 @@ class SkiingSurvivalWrapper(gym.Wrapper):
         if pose in CRASH_VALUES:
             #huge penalty for crashing
             #we want agent to learn that 71/72 states are bad
-            my_reward = -50.0
+            my_reward = -10.0
             
             
         #2.ZIG-ZAG LOGIC (AVOID GOING STRAIGHT FOREVER)
@@ -255,9 +255,9 @@ def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     
     # Reward shaping - LESS aggressive scaling
     # env = SkiingRewardShaping(env, scale=0.1, clip_min=-10.0, clip_max=10.0)
-    env = SkiingRewardShaping(env, scale=0.05, clip_min=-100.0, clip_max=100.0)
-    if verbose:
-        print(f"{'SkiingRewardShaping':<25} {'':<20} Scale rewards by 0.1, clip to [-10, 10]")
+    # env = SkiingRewardShaping(env, scale=0.05, clip_min=-100.0, clip_max=100.0)
+    # if verbose:
+    #     print(f"{'SkiingRewardShaping':<25} {'':<20} Scale rewards by 0.1, clip to [-10, 10]")
     
     # Crop to remove scoreboard and unnecessary parts
     env = CropObs(env, x_min=8, x_max=152, y_min=30, y_max=180)
@@ -305,7 +305,7 @@ def test_environment():
     print("TESTING ENVIRONMENT SETUP")
     print("="*70 + "\n")
     
-    env = make_env("ALE/Skiing-v5", verbose=True)
+    env = make_env("ALE/Skiing-v5", verbose=True, render="human")
     
     print("\n" + "="*70)
     print("RUNNING TEST EPISODE")
@@ -325,6 +325,7 @@ def test_environment():
     for i in range(100):
         action = env.action_space.sample()
         obs, reward, terminated, truncated, info = env.step(action)
+        print(f"Action: {action} | Reward: {reward:.2f}")
         total_reward += reward
         steps += 1
         
