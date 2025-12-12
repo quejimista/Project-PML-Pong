@@ -1,7 +1,16 @@
-# -*- coding: utf-8 -*-
+import os
 import numpy as np
 import gymnasium as gym
+
+import wandb
+
 from stable_baselines3 import PPO
+from stable_baselines3.common.vec_env import VecFrameStack, VecMonitor, SubprocVecEnv
+from stable_baselines3.common.callbacks import BaseCallback, CheckpointCallback
+from stable_baselines3.common.logger import configure
+
+import ale_py
+
 from stable_baselines3.common.atari_wrappers import (
     ClipRewardEnv,
     MaxAndSkipEnv,
@@ -9,138 +18,149 @@ from stable_baselines3.common.atari_wrappers import (
     NoopResetEnv,
     EpisodicLifeEnv,
 )
-import ale_py
-from collections import deque
+
+import torch
 
 
-# Function to create a single test env
-# with the same preprocessing as training
-def make_test_env(env_name="ALE/Pong-v5", render_mode="rgb_array"):
-    env = gym.make(env_name, render_mode=render_mode)
-    env = NoopResetEnv(env, noop_max=30)
-    env = MaxAndSkipEnv(env, skip=4)
-    env = EpisodicLifeEnv(env)
-    env = WarpFrame(env)       # resize to 84x84 and grayscale (SB3 wrapper behavior)
-    env = ClipRewardEnv(env)
+# Custom callback for W&B logging
+class CustomLoggingCallback(BaseCallback):
+    def __init__(self, agent_name="agent", avg_window=20, verbose=0):
+        super().__init__(verbose)
+        self.avg_window = avg_window
+        self.agent_name = agent_name
+        self.episode_rewards = []
+        self.episode_lengths = []
+
+    def _on_step(self) -> bool:
+        infos = self.locals.get("infos", [])
+        for info in infos:
+            ep_info = info.get("episode")
+            if ep_info is not None:
+                ep_rew = ep_info["r"]
+                ep_len = ep_info["l"]
+                self.episode_rewards.append(ep_rew)
+                self.episode_lengths.append(ep_len)
+                wandb.log({
+                    f"{self.agent_name}/episode_reward": ep_rew,
+                    f"{self.agent_name}/episode_length": ep_len,
+                })
+        return True
+
+    def _on_rollout_end(self):
+        if len(self.episode_rewards) > 0:
+            avg_rew = np.mean(self.episode_rewards[-self.avg_window:])
+            avg_len = np.mean(self.episode_lengths[-self.avg_window:])
+            wandb.log({
+                f"{self.agent_name}/avg_episode_reward": avg_rew,
+                f"{self.agent_name}/avg_episode_length": avg_len,
+            })
+
+
+# Environment creation functions
+def make_env(env_name="ALE/Pong-v5", n_envs=8, seed=0):
+    def _init():
+        env = gym.make(env_name)
+        env = NoopResetEnv(env, noop_max=30)
+        env = MaxAndSkipEnv(env, skip=4)
+        env = EpisodicLifeEnv(env)
+        env = WarpFrame(env)
+        env = ClipRewardEnv(env)
+        return env
+    return _init
+
+def make_vec_env(n_envs=8):
+    env = SubprocVecEnv([make_env() for _ in range(n_envs)])
+    env = VecFrameStack(env, n_stack=4)
+    env = VecMonitor(env)
     return env
 
 
-# Small wrapper to produce CHW stacked frames (4,84,84)
-# This mirrors the VecFrameStack used during training, but for a single env.
-class FrameStackCHW(gym.Wrapper):
-    """
-    Frame stack wrapper that returns observations in CHW order: (k, H, W).
-    Preserves dtype coming from the underlying env (WarpFrame usually returns uint8).
-    """
-    def __init__(self, env, k=4):
-        super().__init__(env)
-        self.k = k
-        # initialize by resetting env once to infer shape
-        obs, _ = self.env.reset()
-        arr = np.asarray(obs)
-        # Convert obs to single-channel 2D array if needed (remove trailing dim if 1)
-        if arr.ndim == 3 and arr.shape[2] == 1:
-            arr2 = arr[:, :, 0]
-        elif arr.ndim == 3 and arr.shape[2] != 1:
-            # Unexpected multi-channel; convert to grayscale by averaging channels
-            arr2 = arr.mean(axis=2).astype(arr.dtype)
-        elif arr.ndim == 2:
-            arr2 = arr
-        else:
-            raise RuntimeError(f"Unexpected observation shape from env.reset(): {arr.shape}")
+# Training function (resumable)
+def train_right_agent(
+    total_timesteps,
+    avg_window,
+    save_every_episodes,
+    learning_rate,
+    gamma,
+    batch_size,
+    n_steps,
+    resume_from_path=None
+):
+    export_path = "./exports/right_agent/"
+    os.makedirs(export_path, exist_ok=True)
 
-        self.h, self.w = arr2.shape
-        self.frames = deque(maxlen=self.k)
-        # fill deque with initial frame
-        for _ in range(self.k):
-            self.frames.append(arr2)
-        # observation space: (k, H, W), preserve dtype if available
-        base_dtype = getattr(self.env.observation_space, "dtype", np.uint8)
-        self.observation_space = gym.spaces.Box(low=0, high=255, shape=(self.k, self.h, self.w), dtype=base_dtype)
+    # Initialize W&B
+    run = wandb.init(
+        project="pong_right_agent",
+        config={
+            "total_timesteps": total_timesteps,
+            "avg_window": avg_window,
+            "learning_rate": learning_rate,
+            "gamma": gamma,
+            "batch_size": batch_size
+        },
+        sync_tensorboard=True,
+        save_code=True,
+    )
 
-    def reset(self, **kwargs):
-        obs, info = self.env.reset(**kwargs)
-        arr = np.asarray(obs)
-        arr2 = self._to_gray2d(arr)
-        self.frames = deque([arr2 for _ in range(self.k)], maxlen=self.k)
-        stacked = self._get_obs()
-        return stacked, info
+    # Create environment
+    env = make_vec_env()
 
-    def step(self, action):
-        obs, reward, terminated, truncated, info = self.env.step(action)
-        arr = np.asarray(obs)
-        arr2 = self._to_gray2d(arr)
-        self.frames.append(arr2)
-        return self._get_obs(), reward, terminated, truncated, info
-
-    def _to_gray2d(self, a):
-        # convert to 2D grayscale array (H, W), preserving dtype
-        if a.ndim == 3 and a.shape[2] == 1:
-            return a[:, :, 0]
-        if a.ndim == 3 and a.shape[2] != 1:
-            # fallback: average channels (shouldn't happen for WarpFrame)
-            return a.mean(axis=2).astype(a.dtype)
-        if a.ndim == 2:
-            return a
-        raise RuntimeError(f"Unexpected observation ndim: {a.ndim}, shape: {a.shape}")
-
-    def _get_obs(self):
-        # stack frames into array shape (k, H, W)
-        arr = np.stack(list(self.frames), axis=0)
-        return arr
+    # Logger
+    log_dir = "./logs/"
+    os.makedirs(log_dir, exist_ok=True)
+    sb3_logger = configure(log_dir, ["stdout", "tensorboard"])
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-# Load trained PPO agent
-model_path = "./exports/right_agent/right_agent_final.zip"
-right_agent = PPO.load(model_path)
+    # Load or create PPO agent
+    if resume_from_path is not None and os.path.exists(resume_from_path):
+        print(f"Resuming training from {resume_from_path}...")
+        agent = PPO.load(resume_from_path, env=env, device=device)
+    else:
+        agent = PPO(
+            "CnnPolicy",
+            env,
+            verbose=1,
+            device=device,
+            learning_rate=learning_rate,
+            gamma=gamma,
+            batch_size=batch_size,
+            n_steps=n_steps,
+            tensorboard_log=log_dir
+        )
+    agent.set_logger(sb3_logger)
+
+    # Callbacks
+    logging_callback = CustomLoggingCallback(agent_name="right_agent_V2", avg_window=avg_window)
+    checkpoint_callback = CheckpointCallback(
+        save_freq=200_000,
+        save_path=export_path,
+        name_prefix="right_agent_V2_checkpoint"
+    )
+
+    # Train
+    agent.learn(
+        total_timesteps=total_timesteps,
+        callback=[logging_callback, checkpoint_callback]
+    )
+
+    # Save final model
+    agent.save(os.path.join(export_path, "right_agent_final_V2"))
+    print("Right agent training completed and model saved.")
+
+    run.finish()
 
 
-# Create test environment and wrap with FrameStackCHW
-env = make_test_env()
-env = FrameStackCHW(env, k=4)
-
-
-# Evaluation loop
-num_episodes = 100
-episode_rewards = []
-episode_lengths = []
-wins = 0
-
-for ep in range(num_episodes):
-    obs, _ = env.reset()      # obs shape: (4, 84, 84)
-    done = False
-    total_reward = 0
-    length = 0
-
-    while not done:
-        # Predict action
-        # Provide observation in shape (4,84,84) — SB3 accepts this for a single env
-        action, _ = right_agent.predict(obs, deterministic=True)
-
-        # Step environment
-        obs, reward, terminated, truncated, info = env.step(action)
-        done = bool(terminated or truncated)
-
-        total_reward += float(reward)
-        length += 1
-
-    episode_rewards.append(total_reward)
-    episode_lengths.append(length)
-    if total_reward > 0:
-        wins += 1
-
-    print(f"Episode {ep+1}: Reward = {total_reward}, Length = {length}")
-
-env.close()
-
-
-# Evaluation summary
-average_reward = np.mean(episode_rewards)
-average_length = np.mean(episode_lengths)
-win_rate = wins / num_episodes * 100
-
-print("\n=== Evaluation Summary ===")
-print(f"Average reward: {average_reward:.2f}")
-print(f"Average episode length: {average_length:.2f}")
-print(f"Win rate: {win_rate:.2f}%")
-print(f"Max reward: {np.max(episode_rewards)}, Min reward: {np.min(episode_rewards)}")
+# Run / resume training
+if __name__ == "__main__":
+    train_right_agent(
+        total_timesteps=3_000_000,
+        avg_window=50,
+        save_every_episodes=100,
+        learning_rate=2.5e-4,
+        gamma=0.99,
+        batch_size=256,
+        n_steps=256,
+        resume_from_path="./exports/right_agent/right_agent_final.zip"  # path to resume
+    )
