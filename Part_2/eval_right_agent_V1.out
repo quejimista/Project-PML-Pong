@@ -1,0 +1,110 @@
+Job started at: vie 12 dic 2025 04:33:13 CET
+Job ID: 96878
+No devices were found
+Episode 1: Reward = -1.0, Length = 1244
+Episode 2: Reward = -13.0, Length = 1007
+Episode 3: Reward = -2.0, Length = 1404
+Episode 4: Reward = -4.0, Length = 1320
+Episode 5: Reward = -16.0, Length = 706
+Episode 6: Reward = -8.0, Length = 1069
+Episode 7: Reward = -13.0, Length = 859
+Episode 8: Reward = -13.0, Length = 888
+Episode 9: Reward = -13.0, Length = 746
+Episode 10: Reward = 8.0, Length = 1261
+Episode 11: Reward = -14.0, Length = 971
+Episode 12: Reward = -17.0, Length = 585
+Episode 13: Reward = 4.0, Length = 1430
+Episode 14: Reward = -10.0, Length = 944
+Episode 15: Reward = -5.0, Length = 1291
+Episode 16: Reward = 1.0, Length = 1210
+Episode 17: Reward = -2.0, Length = 1340
+Episode 18: Reward = -16.0, Length = 631
+Episode 19: Reward = -12.0, Length = 1095
+Episode 20: Reward = -13.0, Length = 808
+Episode 21: Reward = -8.0, Length = 1025
+Episode 22: Reward = -8.0, Length = 995
+Episode 23: Reward = 4.0, Length = 1234
+Episode 24: Reward = -10.0, Length = 1132
+Episode 25: Reward = -4.0, Length = 1175
+Episode 26: Reward = 7.0, Length = 1214
+Episode 27: Reward = -14.0, Length = 801
+Episode 28: Reward = 3.0, Length = 1321
+Episode 29: Reward = -14.0, Length = 819
+Episode 30: Reward = 2.0, Length = 1466
+Episode 31: Reward = -9.0, Length = 944
+Episode 32: Reward = -11.0, Length = 1055
+Episode 33: Reward = -13.0, Length = 924
+Episode 34: Reward = -13.0, Length = 793
+Episode 35: Reward = -17.0, Length = 656
+Episode 36: Reward = -15.0, Length = 857
+Episode 37: Reward = -18.0, Length = 608
+Episode 38: Reward = 3.0, Length = 1131
+Episode 39: Reward = -5.0, Length = 1328
+Episode 40: Reward = -11.0, Length = 1047
+Episode 41: Reward = -18.0, Length = 599
+Episode 42: Reward = -15.0, Length = 825
+Episode 43: Reward = -4.0, Length = 1245
+Episode 44: Reward = -9.0, Length = 956
+Episode 45: Reward = -11.0, Length = 889
+Episode 46: Reward = -13.0, Length = 828
+Episode 47: Reward = -2.0, Length = 1342
+Episode 48: Reward = -9.0, Length = 995
+Episode 49: Reward = -15.0, Length = 781
+Episode 50: Reward = -14.0, Length = 738
+Episode 51: Reward = -16.0, Length = 854
+Episode 52: Reward = -3.0, Length = 1364
+Episode 53: Reward = -4.0, Length = 1322
+Episode 54: Reward = -7.0, Length = 1068
+Episode 55: Reward = -10.0, Length = 1152
+Episode 56: Reward = -11.0, Length = 856
+Episode 57: Reward = -13.0, Length = 893
+Episode 58: Reward = -14.0, Length = 977
+Episode 59: Reward = -2.0, Length = 1245
+Episode 60: Reward = -15.0, Length = 694
+Episode 61: Reward = 3.0, Length = 1330
+Episode 62: Reward = -5.0, Length = 1129
+Episode 63: Reward = 2.0, Length = 1355
+Episode 64: Reward = -2.0, Length = 1237
+Episode 65: Reward = -14.0, Length = 817
+Episode 66: Reward = 4.0, Length = 1362
+Episode 67: Reward = -8.0, Length = 1018
+Episode 68: Reward = -11.0, Length = 1101
+Episode 69: Reward = -6.0, Length = 1294
+Episode 70: Reward = -5.0, Length = 1187
+Episode 71: Reward = -8.0, Length = 1022
+Episode 72: Reward = -10.0, Length = 1001
+Episode 73: Reward = -13.0, Length = 772
+Episode 74: Reward = -8.0, Length = 1166
+Episode 75: Reward = 3.0, Length = 1256
+Episode 76: Reward = -11.0, Length = 916
+Episode 77: Reward = -5.0, Length = 1124
+Episode 78: Reward = -9.0, Length = 1122
+Episode 79: Reward = -16.0, Length = 757
+Episode 80: Reward = -7.0, Length = 1115
+Episode 81: Reward = -8.0, Length = 895
+Episode 82: Reward = -10.0, Length = 1052
+Episode 83: Reward = -15.0, Length = 663
+Episode 84: Reward = -12.0, Length = 885
+Episode 85: Reward = -1.0, Length = 1306
+Episode 86: Reward = 6.0, Length = 1084
+Episode 87: Reward = -7.0, Length = 1083
+Episode 88: Reward = -5.0, Length = 1343
+Episode 89: Reward = -12.0, Length = 1130
+Episode 90: Reward = -12.0, Length = 839
+Episode 91: Reward = -7.0, Length = 1175
+Episode 92: Reward = -14.0, Length = 776
+Episode 93: Reward = -10.0, Length = 1005
+Episode 94: Reward = -2.0, Length = 1331
+Episode 95: Reward = -2.0, Length = 1347
+Episode 96: Reward = -8.0, Length = 1096
+Episode 97: Reward = -4.0, Length = 1366
+Episode 98: Reward = -12.0, Length = 904
+Episode 99: Reward = -16.0, Length = 883
+Episode 100: Reward = -14.0, Length = 858
+
+=== Evaluation Summary ===
+Average reward: -8.06
+Average episode length: 1040.59
+Win rate: 13.00%
+Max reward: 8.0, Min reward: -18.0
+Job finished at: vie 12 dic 2025 04:48:42 CET
