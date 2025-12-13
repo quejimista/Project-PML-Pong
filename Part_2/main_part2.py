@@ -93,7 +93,7 @@ config = {
     "policy_type": "CnnPolicy",
     "total_timesteps": 5_000_000,  # 5M timesteps for Pong
     "env_name": "ALE/Pong-v5",
-    "export_path": "/datafast/105-1/Datasets/INTERNS/anavarror/paradigms/exports/pong/",
+    "export_path": "/exports/pong/",
     "n_envs": 8,  # Number of parallel environments
     
     # PPO hyperparameters optimized for Atari Pong
