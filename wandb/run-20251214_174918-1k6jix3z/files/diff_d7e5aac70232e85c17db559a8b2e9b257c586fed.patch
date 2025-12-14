@@ -1,0 +1,205 @@
+diff --git a/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc b/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc
+index 1c52199..5bdf7ec 100644
+Binary files a/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc and b/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc differ
+diff --git a/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc b/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc
+index 5ffe3ca..05246af 100644
+Binary files a/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc and b/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc differ
+diff --git a/Part_3/functions/preprocessing_aina.py b/Part_3/functions/preprocessing_aina.py
+index 6d609ed..1ee2045 100644
+--- a/Part_3/functions/preprocessing_aina.py
++++ b/Part_3/functions/preprocessing_aina.py
+@@ -167,49 +167,95 @@ def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+ class SkiingSurvivalWrapper(gym.Wrapper):
+     def __init__(self, env):
+         super().__init__(env)
+-        self.straight_counter = 0
+-
+-    def step(self, action):
+-        obs, reward, terminated, truncated, info = self.env.step(action)
++        self.prev_flags = 999
++        self.last_x_pos = None
++        self.frames_since_flag = 0  # Contador de paciencia
++        self.MAX_PATIENCE = 300     # Si en 300 steps no pilla bandera, muere
++        
++        # DEFINICION DE POSES
++        # Solo estas poses generan velocidad vertical real
++        self.DOWNHILL_POSES = [5, 6, 7, 8, 9, 10]
++        
++        # Poses de freno o muy lentas (incluimos diagonales lentas)
++        self.SLOW_POSES = [0, 1, 2, 3, 4, 11, 12, 13, 14, 15]
+ 
+-        #Access Atari RAM
++    def reset(self, **kwargs):
++        obs, info = self.env.reset(**kwargs)
++        self.last_x_pos = None
++        self.frames_since_flag = 0
++        
+         ram = self.env.unwrapped.ale.getRAM()
+-        pose = ram[15]
++        if 107 < len(ram):
++            self.prev_flags = int(ram[107])
++            self.last_x_pos = int(ram[25])
++        else:
++            self.prev_flags = 999
++            
++        print(f"--- RESET | Flags Iniciales: {self.prev_flags} ---")
++        return obs, info
+ 
+-        #--- DISCOVERED VALUES---
+-        #values when crashing (facing Left=71, Right=72)
+-        CRASH_VALUES = [71, 72]
+-        #values when going straight (Center of 0-15 range)
+-        STRAIGHT_VALUES = [7, 8]
++    def step(self, action):
++        obs, native_reward, terminated, truncated, info = self.env.step(action)
++        ram = self.env.unwrapped.ale.getRAM()
++        
++        current_flags = int(ram[107]) 
++        player_x = int(ram[25])
++        pose = int(ram[15])
+ 
+-        #reset native reward (negative time penalty)
++        if self.last_x_pos is None: self.last_x_pos = player_x
++        
+         my_reward = 0.0
++        
++        # Aumentamos contador de aburrimiento
++        self.frames_since_flag += 1
+ 
+-        #1.SURVIVAL LOGIC (AVOID CRASHES)
+-        if pose in CRASH_VALUES:
+-            #huge penalty for crashing
+-            #we want agent to learn that 71/72 states are bad
+-            my_reward = -10.0
+-            
++        # --- 1. LOGICA DE BANDERAS (LO UNICO QUE IMPORTA) ---
++        diff = self.prev_flags - current_flags
++        
++        if diff > 0 and diff < 20:
++            # print(f"Flag achieved! {self.prev_flags} -> {current_flags}")
++            my_reward += 50.0 
++            # Reseteamos la paciencia porque ha hecho algo util
++            self.frames_since_flag = 0
+             
+-        #2.ZIG-ZAG LOGIC (AVOID GOING STRAIGHT FOREVER)
+-        elif pose in STRAIGHT_VALUES:
+-            self.straight_counter += 1
+-            #small velocity bonus, but strictly monitored
+-            my_reward += 0.01
+-        else:
+-            #turning/Slalom resets the counter
+-            self.straight_counter = 0
+-            #small reward for skiing (turning)
+-            my_reward += 0.05
++        self.prev_flags = current_flags
++
++        # --- 2. TIMEOUT (MUERTE POR VAGO) ---
++        # Si lleva mucho tiempo sin coger bandera, cortamos el episodio.
++        # Esto evita que se quede 1000 steps de lado.
++        if self.frames_since_flag > self.MAX_PATIENCE:
++            print("TIMEOUT! Muriendo por aburrimiento...")
++            my_reward -= 20.0  # Castigo fuerte por perder el tiempo
++            truncated = True   # Forzamos fin del episodio
++        
++        # --- 3. LIVING COST (COSTE DE VIDA) ---
++        # Restamos un poco cada frame para meterle prisa.
++        my_reward -= 0.1
+ 
+-        #punish if going straight for too long (>20 frames)
+-        #this forces the agent to turn eventually
+-        if self.straight_counter > 20:
+-            my_reward -= 1.0
++        # --- 4. GESTION DE POSES ---
++        if pose in self.SLOW_POSES:
++            # Si no esta bajando a tope, castigo extra.
++            # No queremos que frene NUNCA.
++            my_reward -= 2.0 
++        
++        elif pose in self.DOWNHILL_POSES:
++            # Si baja rapido, compensamos un poco el coste de vida
++            my_reward += 0.2
+ 
+-        return obs, my_reward, terminated, truncated, info
++        # --- 5. CASTIGOS EXTRA ---
++        # Chocarse
++        if pose in [71, 72]:
++            my_reward -= 10.0
++            # Reset paciencia parcial para que no muera doble
++            self.frames_since_flag = 0 
+ 
++        # Salirse de la pista
++        if player_x < 30 or player_x > 130:
++            my_reward -= 5.0 
++
++        self.last_x_pos = player_x
++
++        return obs, my_reward, terminated, truncated, info
+ def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+     """
+     Create and wrap Skiing environment with preprocessing pipeline.
+@@ -322,7 +368,7 @@ def test_environment():
+     print(f"Number of actions: {env.action_space.n}\n")
+     
+     # Run for a few steps
+-    for i in range(100):
++    for i in range(500):
+         action = env.action_space.sample()
+         obs, reward, terminated, truncated, info = env.step(action)
+         print(f"Action: {action} | Reward: {reward:.2f}")
+diff --git a/Part_3/logs/ppo_skiing/evaluations.npz b/Part_3/logs/ppo_skiing/evaluations.npz
+index 2868d56..78cb892 100644
+Binary files a/Part_3/logs/ppo_skiing/evaluations.npz and b/Part_3/logs/ppo_skiing/evaluations.npz differ
+diff --git a/Part_3/main_aina.py b/Part_3/main_aina.py
+index 0c93710..f11bcee 100644
+--- a/Part_3/main_aina.py
++++ b/Part_3/main_aina.py
+@@ -8,7 +8,7 @@ from stable_baselines3.common.monitor import Monitor
+ from stable_baselines3.common.callbacks import CallbackList, EvalCallback, BaseCallback
+ from stable_baselines3.common.evaluation import evaluate_policy
+ from functions.preprocessing_aina import make_env
+-
++from stable_baselines3.common.callbacks import CheckpointCallback
+ 
+ 
+ # ------------------ DEVICE ------------------
+@@ -49,13 +49,13 @@ config = {
+     "n_steps": 2048,  # Steps per env per update
+     "batch_size": 256,  # Minibatch size
+     "n_epochs": 4,  # Number of epochs per update
+-    "gamma": 0.999,  # Discount factor
++    "gamma": 0.9,  # Discount factor
+     "gae_lambda": 0.95,  # GAE lambda
+     "clip_range": 0.1,  # PPO clip range
+-    "ent_coef": 0.03,  # Entropy coefficient for exploration
++    "ent_coef": 0.05,  # Entropy coefficient for exploration
+     "vf_coef": 1.0,  # Value function coefficient
+     "max_grad_norm": 0.5,  # Gradient clipping
+-    "learning_rate": 5e-5,  # Learning rate
++    "learning_rate": 3e-4,  # Learning rate
+     "normalize_advantage": True,  # Normalize advantages
+ }
+ 
+@@ -135,9 +135,16 @@ def train_model():
+         verbose=1
+     )
+     
++    checkpoint_callback = CheckpointCallback(
++        save_freq=200,  # save every 200 steps
++        save_path=f"{config['export_path']}checkpoints/",
++        name_prefix="ppo_skiing_run"
++    )
++
+     callback_list = CallbackList([
+         WandbRewardCallback(verbose=0),
+-        eval_callback
++        eval_callback,
++        checkpoint_callback
+     ])
+     
+     # Train
+diff --git a/exports/best_ppo_skiing/best_model.zip b/exports/best_ppo_skiing/best_model.zip
+index 8f5cbf3..f458753 100644
+Binary files a/exports/best_ppo_skiing/best_model.zip and b/exports/best_ppo_skiing/best_model.zip differ
+diff --git a/logs/ppo_skiing/evaluations.npz b/logs/ppo_skiing/evaluations.npz
+index 8f9e8bb..efd5953 100644
+Binary files a/logs/ppo_skiing/evaluations.npz and b/logs/ppo_skiing/evaluations.npz differ

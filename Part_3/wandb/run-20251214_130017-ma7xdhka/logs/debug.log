@@ -1,0 +1,22 @@
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_setup.py:_flush():80] Current SDK version is 0.23.0
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_setup.py:_flush():80] Configure stats pid to 1280
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_setup.py:_flush():80] Loading settings from C:\Users\Iván\.config\wandb\settings
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_setup.py:_flush():80] Loading settings from c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\wandb\settings
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-14 13:00:17,233 INFO    MainThread:1280 [wandb_init.py:setup_run_log_directory():713] Logging user logs to c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\wandb\run-20251214_130017-ma7xdhka\logs\debug.log
+2025-12-14 13:00:17,234 INFO    MainThread:1280 [wandb_init.py:setup_run_log_directory():714] Logging internal logs to c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\wandb\run-20251214_130017-ma7xdhka\logs\debug-internal.log
+2025-12-14 13:00:17,237 INFO    MainThread:1280 [wandb_init.py:init():840] calling init triggers
+2025-12-14 13:00:17,237 INFO    MainThread:1280 [wandb_init.py:init():845] wandb.init called with sweep_config: {}
+config: {'policy_type': 'CnnPolicy', 'total_timesteps': 10000000, 'env_name': 'ALE/Skiing-v5', 'export_path': '../exports/', 'n_envs': 8, 'n_steps': 2048, 'batch_size': 256, 'n_epochs': 4, 'gamma': 0.999, 'gae_lambda': 0.95, 'clip_range': 0.1, 'ent_coef': 0.03, 'vf_coef': 1.0, 'max_grad_norm': 0.5, 'learning_rate': 5e-05, 'normalize_advantage': True, '_wandb': {'code_path': 'code/Part_3/main_aina.py'}}
+2025-12-14 13:00:17,237 INFO    MainThread:1280 [wandb_init.py:init():888] starting backend
+2025-12-14 13:00:19,526 INFO    MainThread:1280 [wandb_init.py:init():891] sending inform_init request
+2025-12-14 13:00:19,540 INFO    MainThread:1280 [wandb_init.py:init():899] backend started and connected
+2025-12-14 13:00:19,561 INFO    MainThread:1280 [wandb_init.py:init():969] updated telemetry
+2025-12-14 13:00:19,601 INFO    MainThread:1280 [wandb_init.py:init():993] communicating run to backend with 90.0 second timeout
+2025-12-14 13:00:20,103 INFO    MainThread:1280 [wandb_init.py:init():1040] starting run threads in backend
+2025-12-14 13:00:20,376 INFO    MainThread:1280 [wandb_run.py:_console_start():2504] atexit reg
+2025-12-14 13:00:20,376 INFO    MainThread:1280 [wandb_run.py:_redirect():2352] redirect: wrap_raw
+2025-12-14 13:00:20,376 INFO    MainThread:1280 [wandb_run.py:_redirect():2421] Wrapping output streams.
+2025-12-14 13:00:20,376 INFO    MainThread:1280 [wandb_run.py:_redirect():2444] Redirects installed.
+2025-12-14 13:00:20,378 INFO    MainThread:1280 [wandb_init.py:init():1080] run started, returning control to user process
+2025-12-14 13:00:32,723 INFO    MainThread:1280 [wandb_run.py:_tensorboard_callback():1596] tensorboard callback: C:/Pong_part_3/logs\PPO_19, True

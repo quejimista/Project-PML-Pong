@@ -167,49 +167,91 @@ def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
 class SkiingSurvivalWrapper(gym.Wrapper):
     def __init__(self, env):
         super().__init__(env)
-        self.straight_counter = 0
+        self.prev_flags = 999
+        self.last_x_pos = None
+        self.frames_since_flag = 0  
+        self.MAX_PATIENCE = 300     
+        
+        # --- pose definitions ---
+        
+        #slow poses - punish them
+        self.FORBIDDEN_POSES = [0, 1, 2, 3, 4, 11, 12, 13, 14, 15]
+        
+        #going straight
+        self.STRAIGHT_POSES = [7, 8]
+        
+        #balance between turning and going straight
+        self.CARVING_POSES = [5, 6, 9, 10]
+
+    def reset(self, **kwargs):
+        obs, info = self.env.reset(**kwargs)
+        self.last_x_pos = None
+        self.frames_since_flag = 0
+        
+        ram = self.env.unwrapped.ale.getRAM()
+        if 107 < len(ram):
+            self.prev_flags = int(ram[107])
+            self.last_x_pos = int(ram[25])
+        else:
+            self.prev_flags = 999
+            
+        return obs, info
 
     def step(self, action):
-        obs, reward, terminated, truncated, info = self.env.step(action)
+        obs, native_reward, terminated, truncated, info = self.env.step(action)
+        ram = self.env.unwrapped.ale.getRAM() #get ram
+        
+        current_flags = int(ram[107]) 
+        player_x = int(ram[25])
+        pose = int(ram[15])
 
-        #Access Atari RAM
-        ram = self.env.unwrapped.ale.getRAM()
-        pose = ram[15]
-
-        #--- DISCOVERED VALUES---
-        #values when crashing (facing Left=71, Right=72)
-        CRASH_VALUES = [71, 72]
-        #values when going straight (Center of 0-15 range)
-        STRAIGHT_VALUES = [7, 8]
-
-        #reset native reward (negative time penalty)
+        if self.last_x_pos is None: self.last_x_pos = player_x
+        
         my_reward = 0.0
+        self.frames_since_flag += 1
 
-        #1.SURVIVAL LOGIC (AVOID CRASHES)
-        if pose in CRASH_VALUES:
-            #huge penalty for crashing
-            #we want agent to learn that 71/72 states are bad
-            my_reward = -10.0
-            
-            
-        #2.ZIG-ZAG LOGIC (AVOID GOING STRAIGHT FOREVER)
-        elif pose in STRAIGHT_VALUES:
-            self.straight_counter += 1
-            #small velocity bonus, but strictly monitored
-            my_reward += 0.01
-        else:
-            #turning/Slalom resets the counter
-            self.straight_counter = 0
-            #small reward for skiing (turning)
-            my_reward += 0.05
+        #flags
+        diff = self.prev_flags - current_flags
+        if diff > 0 and diff < 20: #if takes a flag (with some margin)
+            my_reward += 50.0  #flag reward
+            self.frames_since_flag = 0 #reset patience
+        self.prev_flags = current_flags
 
-        #punish if going straight for too long (>20 frames)
-        #this forces the agent to turn eventually
-        if self.straight_counter > 20:
-            my_reward -= 1.0
+        #timeout penalty (for when it is horizontal)
+        if self.frames_since_flag > self.MAX_PATIENCE:
+            #punish it
+            my_reward -= 20.0 
+            truncated = True   
+        
+        #punish taking time
+        my_reward -= 0.1
+
+        #pose rewards/punishment
+        
+        if pose in self.FORBIDDEN_POSES:
+            #we penalize going horizontal 
+            my_reward -= 5.0 
+        
+        #reward going straight
+        elif pose in self.STRAIGHT_POSES:
+            my_reward += 0.1
+        
+        #reward carving a lot
+        elif pose in self.CARVING_POSES:
+            my_reward += 1.5
+
+        #extra punishment
+        if pose in [71, 72]: #when falling (collision)
+            my_reward -= 10.0
+            self.frames_since_flag = 0 
+
+        #being close to the edge
+        if player_x < 30 or player_x > 130:
+            my_reward -= 5.0 
+
+        self.last_x_pos = player_x
 
         return obs, my_reward, terminated, truncated, info
-
 def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
     """
     Create and wrap Skiing environment with preprocessing pipeline.
@@ -322,7 +364,7 @@ def test_environment():
     print(f"Number of actions: {env.action_space.n}\n")
     
     # Run for a few steps
-    for i in range(100):
+    for i in range(500):
         action = env.action_space.sample()
         obs, reward, terminated, truncated, info = env.step(action)
         print(f"Action: {action} | Reward: {reward:.2f}")

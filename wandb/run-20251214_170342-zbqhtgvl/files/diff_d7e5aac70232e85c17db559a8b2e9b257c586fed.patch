@@ -1,0 +1,142 @@
+diff --git a/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc b/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc
+index 1c52199..5bdf7ec 100644
+Binary files a/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc and b/Part_2/__pycache__/preprocessing_pong.cpython-310.pyc differ
+diff --git a/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc b/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc
+index 5ffe3ca..dc3d81a 100644
+Binary files a/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc and b/Part_3/functions/__pycache__/preprocessing_aina.cpython-310.pyc differ
+diff --git a/Part_3/functions/preprocessing_aina.py b/Part_3/functions/preprocessing_aina.py
+index 6d609ed..9ec2f4b 100644
+--- a/Part_3/functions/preprocessing_aina.py
++++ b/Part_3/functions/preprocessing_aina.py
+@@ -167,49 +167,83 @@ def old_make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+ class SkiingSurvivalWrapper(gym.Wrapper):
+     def __init__(self, env):
+         super().__init__(env)
+-        self.straight_counter = 0
+-
+-    def step(self, action):
+-        obs, reward, terminated, truncated, info = self.env.step(action)
++        self.prev_flags = 0
++        self.last_x_pos = None
++        self.SCREEN_CENTER = 80 
++        
++        # DEBUG: Contador para no saturar la consola
++        self.print_timer = 0
+ 
+-        #Access Atari RAM
++    def reset(self, **kwargs):
++        obs, info = self.env.reset(**kwargs)
++        self.prev_flags = 0
++        self.last_x_pos = None
++        
+         ram = self.env.unwrapped.ale.getRAM()
+-        pose = ram[15]
++        if 107 < len(ram):
++            self.prev_flags = int(ram[107])
++            self.last_x_pos = int(ram[25])
++            
++        print(f"--- RESET WRAPPER | Flags Iniciales: {self.prev_flags} ---")
++        return obs, info
+ 
+-        #--- DISCOVERED VALUES---
+-        #values when crashing (facing Left=71, Right=72)
+-        CRASH_VALUES = [71, 72]
+-        #values when going straight (Center of 0-15 range)
+-        STRAIGHT_VALUES = [7, 8]
++    def step(self, action):
++        obs, native_reward, terminated, truncated, info = self.env.step(action)
++        ram = self.env.unwrapped.ale.getRAM()
++        
++        current_flags = int(ram[107]) 
++        player_x = int(ram[25])
++        pose = int(ram[15])
+ 
+-        #reset native reward (negative time penalty)
++        if self.last_x_pos is None: self.last_x_pos = player_x
++        
+         my_reward = 0.0
+ 
+-        #1.SURVIVAL LOGIC (AVOID CRASHES)
+-        if pose in CRASH_VALUES:
+-            #huge penalty for crashing
+-            #we want agent to learn that 71/72 states are bad
+-            my_reward = -10.0
+-            
++        # --- 1. DETECCION DE BANDERAS (DEBUG) ---
++        diff = self.prev_flags - current_flags  
++        
++        # SI HAY CUALQUIER CAMBIO EN 107, LO IMPRIMIMOS
++
++        # Logica de Reward (Relajada)
++        # Quitamos el "< 10" por si acaso suma de golpe 20 puntos
++        # Solo pedimos que sea positivo y logico (menos de 100 para evitar glitches de reset)
++        if diff > 0 and diff < 100:
++            # print("Flag passed!  Reward +50.0 points")
++            my_reward += 50.0 
+             
+-        #2.ZIG-ZAG LOGIC (AVOID GOING STRAIGHT FOREVER)
+-        elif pose in STRAIGHT_VALUES:
+-            self.straight_counter += 1
+-            #small velocity bonus, but strictly monitored
+-            my_reward += 0.01
+-        else:
+-            #turning/Slalom resets the counter
+-            self.straight_counter = 0
+-            #small reward for skiing (turning)
+-            my_reward += 0.05
++        self.prev_flags = current_flags
+ 
+-        #punish if going straight for too long (>20 frames)
+-        #this forces the agent to turn eventually
+-        if self.straight_counter > 20:
+-            my_reward -= 1.0
++        # --- 2. AYUDAS A LA NAVEGACION ---
++        crossed_left_to_right = (self.last_x_pos < self.SCREEN_CENTER and player_x >= self.SCREEN_CENTER)
++        crossed_right_to_left = (self.last_x_pos > self.SCREEN_CENTER and player_x <= self.SCREEN_CENTER)
+ 
+-        return obs, my_reward, terminated, truncated, info
++        if crossed_left_to_right or crossed_right_to_left:
++            my_reward += 3.0 
++
++        # Castigos de posicion
++        if player_x < 30 or player_x > 130:
++            my_reward -= 2.0 
++        if pose in [71, 72]:
++            my_reward -= 10.0
+ 
++        # --- 3. ANTI-VAGOS ---
++        if abs(player_x - self.last_x_pos) < 1:
++             my_reward -= 1.0
++        
++        self.last_x_pos = player_x
++
++        # --- DEBUG VISUAL ---
++        # Imprime cada 100 frames donde está el agente para saber si está vivo
++        self.print_timer += 1
++        if self.print_timer % 100 == 0:
++            # print(f"Step {self.print_timer} | X: {player_x} | Flags: {current_flags}")
++            pass
++
++        if terminated or truncated:
++            # print(f"--- FIN EPISODIO | Flags Totales: {current_flags} ---")
++            pass
++
++        return obs, my_reward, terminated, truncated, info
+ def make_env(env_name="ALE/Skiing-v5", render=None, verbose=False):
+     """
+     Create and wrap Skiing environment with preprocessing pipeline.
+@@ -322,7 +356,7 @@ def test_environment():
+     print(f"Number of actions: {env.action_space.n}\n")
+     
+     # Run for a few steps
+-    for i in range(100):
++    for i in range(500):
+         action = env.action_space.sample()
+         obs, reward, terminated, truncated, info = env.step(action)
+         print(f"Action: {action} | Reward: {reward:.2f}")
+diff --git a/Part_3/logs/ppo_skiing/evaluations.npz b/Part_3/logs/ppo_skiing/evaluations.npz
+index 2868d56..78cb892 100644
+Binary files a/Part_3/logs/ppo_skiing/evaluations.npz and b/Part_3/logs/ppo_skiing/evaluations.npz differ
+diff --git a/exports/best_ppo_skiing/best_model.zip b/exports/best_ppo_skiing/best_model.zip
+index 8f5cbf3..f458753 100644
+Binary files a/exports/best_ppo_skiing/best_model.zip and b/exports/best_ppo_skiing/best_model.zip differ

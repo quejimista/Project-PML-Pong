@@ -1,0 +1,11 @@
+{"time":"2025-12-14T17:59:13.0772239+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
+{"time":"2025-12-14T17:59:13.351749+01:00","level":"INFO","msg":"stream: created new stream","id":"yfvhs4kr"}
+{"time":"2025-12-14T17:59:13.351749+01:00","level":"INFO","msg":"handler: started","stream_id":"yfvhs4kr"}
+{"time":"2025-12-14T17:59:13.3527967+01:00","level":"INFO","msg":"stream: started","id":"yfvhs4kr"}
+{"time":"2025-12-14T17:59:13.3527967+01:00","level":"INFO","msg":"writer: started","stream_id":"yfvhs4kr"}
+{"time":"2025-12-14T17:59:13.3527967+01:00","level":"INFO","msg":"sender: started","stream_id":"yfvhs4kr"}
+{"time":"2025-12-14T17:59:35.5077995+01:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-12-14T17:59:35.5077995+01:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"C:\\\\Pong_part_3\\\\logs\\\\PPO_30\")","namespace":""}
+{"time":"2025-12-14T17:59:35.5077995+01:00","level":"ERROR","msg":"tensorboard: failed to infer path where to save file","file":"C:\\Pong_part_3\\logs\\PPO_30\\events.out.tfevents.1765731565.Pc-Ivan.11468.0","error":"\"C:/Pong_part_3/logs/PPO_30/events.out.tfevents.1765731565.Pc-Ivan.11468.0\" does not start with \"c:/Users/Iván/Desktop/Project-PML-Pong/Project-PML-Pong\""}
+{"time":"2025-12-14T18:48:37.0849869+01:00","level":"INFO","msg":"flowcontrol: backed up, offloading to disk","recordNumber":91242}
+{"time":"2025-12-14T18:48:37.0861558+01:00","level":"INFO","msg":"flowcontrol: unblocked","totalOffloaded":8}

@@ -1,0 +1,40 @@
+{
+  "os": "Windows-10-10.0.19045-SP0",
+  "python": "CPython 3.10.10",
+  "startedAt": "2025-12-14T14:14:09.590765Z",
+  "program": "c:\\Users\\Iván\\Desktop\\Project-PML-Pong\\Project-PML-Pong\\Part_3\\main_aina.py",
+  "codePath": "Part_3\\main_aina.py",
+  "codePathLocal": "main_aina.py",
+  "git": {
+    "remote": "https://github.com/quejimista/Project-PML-Pong.git",
+    "commit": "d7e5aac70232e85c17db559a8b2e9b257c586fed"
+  },
+  "email": "ivanmartincampoy@gmail.com",
+  "root": "c:\\Users\\Iván\\Desktop\\Project-PML-Pong\\Project-PML-Pong\\Part_3",
+  "host": "Pc-Ivan",
+  "executable": "C:\\Users\\Iván\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "cpu_count": 8,
+  "cpu_count_logical": 16,
+  "gpu": "NVIDIA GeForce RTX 3070",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "999542947840",
+      "used": "810462330880"
+    }
+  },
+  "memory": {
+    "total": "34290769920"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3070",
+      "memoryTotal": "8589934592",
+      "cudaCores": 5888,
+      "architecture": "Ampere",
+      "uuid": "GPU-0874ff1a-4d55-a603-929f-30b09fe083f9"
+    }
+  ],
+  "cudaVersion": "12.9",
+  "writerId": "vyuxnlzw70gn6t6zyffo9lptsxa267bs"
+}

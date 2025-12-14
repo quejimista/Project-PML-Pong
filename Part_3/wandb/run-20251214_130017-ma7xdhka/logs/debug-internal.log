@@ -1,0 +1,12 @@
+{"time":"2025-12-14T13:00:19.5413541+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
+{"time":"2025-12-14T13:00:19.81738+01:00","level":"INFO","msg":"stream: created new stream","id":"ma7xdhka"}
+{"time":"2025-12-14T13:00:19.81738+01:00","level":"INFO","msg":"handler: started","stream_id":"ma7xdhka"}
+{"time":"2025-12-14T13:00:19.8184709+01:00","level":"INFO","msg":"stream: started","id":"ma7xdhka"}
+{"time":"2025-12-14T13:00:19.8184709+01:00","level":"INFO","msg":"writer: started","stream_id":"ma7xdhka"}
+{"time":"2025-12-14T13:00:19.8184709+01:00","level":"INFO","msg":"sender: started","stream_id":"ma7xdhka"}
+{"time":"2025-12-14T13:00:20.1053811+01:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-12-14T13:00:42.7243465+01:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-12-14T13:00:42.7243465+01:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"C:\\\\Pong_part_3\\\\logs\\\\PPO_19\")","namespace":""}
+{"time":"2025-12-14T13:00:42.7248635+01:00","level":"ERROR","msg":"tensorboard: failed to infer path where to save file","file":"C:\\Pong_part_3\\logs\\PPO_19\\events.out.tfevents.1765713632.Pc-Ivan.1280.0","error":"\"C:/Pong_part_3/logs/PPO_19/events.out.tfevents.1765713632.Pc-Ivan.1280.0\" does not start with \"c:/Users/Iván/Desktop/Project-PML-Pong/Project-PML-Pong/Part_3\""}
+{"time":"2025-12-14T13:31:58.690546+01:00","level":"INFO","msg":"flowcontrol: backed up, offloading to disk","recordNumber":19374}
+{"time":"2025-12-14T13:31:58.690546+01:00","level":"INFO","msg":"flowcontrol: unblocked","totalOffloaded":2}
