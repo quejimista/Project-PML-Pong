@@ -116,6 +116,6 @@ pip install gymnasium[atari] "gymnasium[accept-rom-license]" pettingzoo stable-b
 
 | Name | Role | GitHub |
 | :--- | :--- | :--- |
-| **Ivan Martin** | Team Member | [@ivan](https://github.com/quejimista) |
-| **Aina Navarro** | Team Member | [@aina](https://github.com/Aiinins06) |
-| **David Galindo** | Team Member | [@david](https://github.com/DavidGaMu) |
+| **Ivan Martin** | Team Member | [@quejimista](https://github.com/quejimista) |
+| **Aina Navarro** | Team Member | [@Aiinins06](https://github.com/Aiinins06) |
+| **David Galindo** | Team Member | [@DavidGaMu](https://github.com/DavidGaMu) |
