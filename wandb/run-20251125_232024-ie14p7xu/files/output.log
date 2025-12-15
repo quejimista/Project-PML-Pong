@@ -1,6 +1,0 @@
->>> Training starts at 2025-11-25 23:20:28.135528
->>> Hyperparameters:
-    LR: 0.00025, Batch: 32, Gamma: 0.99
-    Epsilon: 1.0 -> 0.01 (decay: 0.9995)
-    Update freq: 4, Sync freq: 1000
-Filling replay buffer...

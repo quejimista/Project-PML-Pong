@@ -1,8 +1,0 @@
-
->>> Creating and training model 'ppo'...
-Traceback (most recent call last):
-  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 118, in <module>
-    train_model(env, model_name, thresh)
-  File "c:\Users\Iván\Desktop\Project-PML-Pong\Project-PML-Pong\Part_3\main.py", line 33, in train_model
-    model = PPO("CnnPolicy", env, verbose=1, tensorboard_log=f"runs/{run.id}", device=DEVICE, n_steps=4096,
-TypeError: PPO.__init__() got an unexpected keyword argument 'normalize_images'

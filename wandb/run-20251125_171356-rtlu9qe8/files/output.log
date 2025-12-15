@@ -1,8 +1,0 @@
-
->>> Creating and traininig model 'a2c'...
-Traceback (most recent call last):
-  File "C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_2\main.py", line 114, in <module>
-    train_model(env, model_name, thresh)
-  File "C:\Users\ainav\OneDrive\Documents\Uni\4th_year\1st_semester\paradigms_ml\project\Project-PML-Pong\Part_2\main.py", line 31, in train_model
-    model = A2C(config["policy_type"], env, verbose=0, tensorboard_log=f"runs/{run.id}", device=DEVICE, normalize_images=False)
-TypeError: A2C.__init__() got an unexpected keyword argument 'normalize_images'

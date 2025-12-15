@@ -6,12 +6,12 @@ from datetime import datetime
 import numpy as np
 import optuna
 import torch
-
+import wandb
+from wandb.integration.sb3 import WandbCallback
 import gymnasium as gym
 from gymnasium import ObservationWrapper
 from gymnasium.wrappers import FrameStackObservation, ResizeObservation
 import ale_py
-
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import SubprocVecEnv, VecMonitor
 from stable_baselines3.common.monitor import Monitor
@@ -147,7 +147,7 @@ config = {
     "policy_type": "CnnPolicy",
     "total_timesteps": 5_000_000,
     "env_name": "ALE/Pong-v5",
-    "export_path": "./exports/pong/",
+    "export_path": "/datafast/105-1/Datasets/INTERNS/anavarror/paradigms/exports/bayes_opt/",
     "n_envs": 8,
     "n_steps": 128,
     "batch_size": 256,
@@ -237,6 +237,8 @@ class CustomLoggingCallback(BaseCallback):
             ep = info.get("episode")
             if ep is not None:
                 self.episode_count += 1
+                if self.episode_count % 10 == 0:
+                    print(f"Trial Episode {self.episode_count}: Reward {ep.get('r'):.1f}, Length {ep.get('l')}")
                 self.episode_logs.append({
                     "episode": self.episode_count,
                     "reward": float(ep.get("r", 0.0)),
@@ -339,64 +341,128 @@ def objective(trial):
     """
     cfg = config.copy()
 
-    # Define Optuna search space
+    # -------------------------------------------------------------
+    # OPTUNA HYPERPARAMETER SEARCH SPACE
+    # (Updated to match recommended ranges)
+    # -------------------------------------------------------------
+    cfg["n_steps"] = trial.suggest_categorical("n_steps", [128, 256, 512])
+    cfg["gamma"] = trial.suggest_categorical("gamma", [0.99, 0.995, 0.999])
     cfg["learning_rate"] = trial.suggest_float("learning_rate", 1e-5, 5e-4, log=True)
-    cfg["gamma"] = trial.suggest_float("gamma", 0.95, 0.999)
-    cfg["gae_lambda"] = trial.suggest_float("gae_lambda", 0.9, 0.99)
-    cfg["clip_range"] = trial.suggest_float("clip_range", 0.05, 0.2)
-    cfg["ent_coef"] = trial.suggest_float("ent_coef", 1e-4, 1e-2, log=True)
+    cfg["ent_coef"] = trial.suggest_float("ent_coef", 0.00001, 0.01, log=True)
+    cfg["clip_range"] = trial.suggest_categorical("clip_range", [0.1, 0.2])
+    cfg["n_epochs"] = trial.suggest_categorical("n_epochs", [4, 10])
+    cfg["gae_lambda"] = trial.suggest_categorical("gae_lambda", [0.95, 0.98])
+    cfg["max_grad_norm"] = trial.suggest_categorical("max_grad_norm", [0.5, 1.0])
+    cfg["vf_coef"] = trial.suggest_float("vf_coef", 0.5, 1.0)
+    cfg["batch_size"] = trial.suggest_categorical("batch_size", [64, 128, 256])
 
-    cfg["n_steps"] = trial.suggest_categorical("n_steps", [64, 128, 256])
-    cfg["batch_size"] = trial.suggest_categorical("batch_size", [64, 128, 256, 512])
-    cfg["n_epochs"] = trial.suggest_int("n_epochs", 2, 6)
-
-    # Ensure batch_size is valid
-    if cfg["batch_size"] > cfg["n_steps"] * cfg["n_envs"]:
+    # VALIDATION: Ensure batch_size divides evenly into buffer_size
+    # PPO requires (n_steps * n_envs) % batch_size == 0
+    buffer_size = cfg["n_steps"] * cfg["n_envs"]
+    if buffer_size % cfg["batch_size"] != 0:
         raise optuna.exceptions.TrialPruned()
+    
+    trial_start_time = datetime.now()
+    print(f"\n{'#'*80}")
+    print(f"TRIAL {trial.number} STARTING at {trial_start_time.strftime('%H:%M:%S')}")
+    print(f"{'#'*80}")
+    print("HYPERPARAMETERS:")
+    for key, value in cfg.items():
+        if key not in config: continue # Only print optimization params if preferred, or all
+        print(f"  {key:<20}: {value}")
+    print("-" * 80 + "\n")
 
-    # Create training environment
-    train_env = make_vec_env(cfg["env_name"], cfg["n_envs"], seed=trial.number)
-    model = build_model(train_env, cfg, verbose=0)
-
-    logging_cb = CustomLoggingCallback()  # Logging callback for per-episode metrics
-
-    # Evaluation environment for pruning
-    prune_eval_env = make_env(cfg["env_name"])
-    prune_eval_env = Monitor(prune_eval_env)
-
-    pruning_cb = OptunaPruningCallback(
-        trial=trial,
-        eval_env=prune_eval_env,
-        eval_freq=50_000,
-        n_eval_episodes=50,
+    # 1. INIT WANDB RUN
+    # We use reinit=True to allow multiple runs in the same script
+    # grouping by "optuna_search" lets you filter them easily in the dashboard
+    run = wandb.init(
+        project="Pong_Part2_Tournament", 
+        name=f"trial_{trial.number}", 
+        group="optuna_search",
+        config=cfg,
+        reinit=True, 
+        sync_tensorboard=True,  # Auto-upload SB3 metrics
+        save_code=True,
     )
-
-    # Train the model
-    model.learn(
-        total_timesteps=3_000_000,
-        callback=CallbackList([logging_cb, pruning_cb]),
-    )
-
-    # Final evaluation
-    eval_env = make_env(cfg["env_name"])
-    eval_env = Monitor(eval_env)
-
-    mean_reward, _ = evaluate_policy(model, eval_env, n_eval_episodes=100)
-
-    # Save JSON with episode logs
-    save_trial_json(trial.number, cfg, logging_cb.episode_logs)
-
-    # Clean up
-    eval_env.close()
-    train_env.close()
-    prune_eval_env.close()
 
     try:
-        del model
-        torch.cuda.empty_cache()
-    except Exception:
-        pass
-    
+        # Create training environment
+        train_env = make_vec_env(cfg["env_name"], cfg["n_envs"], seed=trial.number)
+        model = build_model(train_env, cfg, verbose=0)
+
+        logging_cb = CustomLoggingCallback()  # Logging callback for per-episode metrics
+        wandb_cb = WandbCallback(
+            gradient_save_freq=0,
+            model_save_path=None,
+            verbose=0
+        )
+
+        # Evaluation environment for pruning
+        prune_eval_env = make_env(cfg["env_name"])
+        prune_eval_env = Monitor(prune_eval_env)
+
+        pruning_cb = OptunaPruningCallback(
+            trial=trial,
+            eval_env=prune_eval_env,
+            eval_freq=50_000,
+            n_eval_episodes=20, # Reduced episodes for speed during pruning checks
+        )
+
+        # Train the model
+        model.learn(
+            total_timesteps=5_000_000, # Note: Trials will be pruned early if bad
+            callback=CallbackList([logging_cb, pruning_cb, wandb_cb]),
+            progress_bar=True
+        )
+
+        # Final evaluation
+        eval_env = make_env(cfg["env_name"])
+        eval_env = Monitor(eval_env)
+
+        mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=100)
+
+        # Log final result explicitly
+        wandb.log({"final_eval_reward": mean_reward})
+
+        # Save JSON with episode logs
+        save_trial_json(trial.number, cfg, logging_cb.episode_logs)
+
+        print(f"\n--> Trial {trial.number} Finished. Mean Reward: {mean_reward:.2f} +/- {std_reward:.2f}")
+
+    except Exception as e:
+        # If trial crashes or is pruned, mark as failed in wandb
+        print(f"Trial failed: {e}")
+        wandb.finish(exit_code=1)
+        raise e
+
+    finally:
+        trial_end_time = datetime.now()
+        duration = trial_end_time - trial_start_time
+        print(f"Trial {trial.number} ENDED at {trial_end_time.strftime('%H:%M:%S')} (Duration: {duration})")
+        print(f"{'#'*80}\n")
+        
+        # Log duration to wandb summary before finishing
+        wandb.run.summary["trial_duration_seconds"] = duration.total_seconds()
+
+        run.finish()
+
+        # Clean up
+        try:
+            eval_env.close()
+        except: pass
+        try:
+            train_env.close()
+        except: pass
+        try:
+            prune_eval_env.close()
+        except: pass
+
+        try:
+            del model
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
+        
     # Return mean reward as objective
     return float(mean_reward)
 
@@ -410,6 +476,26 @@ if __name__ == "__main__":
 
 
     if args.optimize > 0:
-        study = optuna.create_study(direction="maximize")
+        overall_start = datetime.now()
+        print(f"\n{'='*80}")
+        print(f"OPTIMIZATION STUDY STARTED AT: {overall_start.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"{'='*80}\n")
+
+        storage_url = "/datafast/105-1/Datasets/INTERNS/anavarror/paradigms/bayes_opt_aina/sqlite:///pong_optuna.db"
+        study_name = "/datafast/105-1/Datasets/INTERNS/anavarror/paradigms/bayes_opt_aina/pong_ppo_optimization"
+
+        # MedianPruner is efficient for stopping bad trials early
+        study = optuna.create_study(
+            direction="maximize", 
+            pruner=optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=100_000)
+        )
         study.optimize(objective, n_trials=args.optimize)
         save_all_trials_txt(study)
+
+        overall_end = datetime.now()
+        total_duration = overall_end - overall_start
+        print(f"\n{'='*80}")
+        print(f"OPTIMIZATION STUDY FINISHED AT: {overall_end.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"TOTAL DURATION: {total_duration}")
+        print(f"BEST PARAMS: {study.best_params}")
+        print(f"{'='*80}\n")

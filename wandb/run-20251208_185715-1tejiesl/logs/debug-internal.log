@@ -1,6 +1,0 @@
-{"time":"2025-12-08T18:57:17.4530003+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
-{"time":"2025-12-08T18:57:17.9210518+01:00","level":"INFO","msg":"stream: created new stream","id":"1tejiesl"}
-{"time":"2025-12-08T18:57:17.9210518+01:00","level":"INFO","msg":"handler: started","stream_id":"1tejiesl"}
-{"time":"2025-12-08T18:57:17.9283231+01:00","level":"INFO","msg":"stream: started","id":"1tejiesl"}
-{"time":"2025-12-08T18:57:17.9283231+01:00","level":"INFO","msg":"writer: started","stream_id":"1tejiesl"}
-{"time":"2025-12-08T18:57:17.9283231+01:00","level":"INFO","msg":"sender: started","stream_id":"1tejiesl"}

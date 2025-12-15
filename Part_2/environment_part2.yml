@@ -1,0 +1,23 @@
+name: project_paradigms_updated
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - swig
+  - cmake
+  - ffmpeg
+  - wandb
+  - jupyter
+  - ipykernel
+  - pytorch
+  - pip:
+      - gymnasium[atari,accept-rom-license]==1.0.0
+      - stable-baselines3[extra]
+      - pettingzoo 
+      - shimmy>=2.0.0      
+      - supersuit
+      - ale-py           
+      - moviepy
+      - autorom[accept-rom-license]

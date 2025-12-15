@@ -1,1 +1,0 @@
-{"_wandb":{"runtime":387},"_runtime":387,"time/fps":84,"global_step":31500,"eval/mean_reward":-21,"train/entropy_loss":-1.3546205,"train/explained_variance":0,"train/policy_loss":-0.93590325,"_timestamp":1.7640869170435393e+09,"train/learning_rate":0.0007,"train/value_loss":0.94319993,"_step":383,"eval/mean_ep_length":763}

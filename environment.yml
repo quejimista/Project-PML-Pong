@@ -1,9 +1,0 @@
-name: project_paradigms
-channels:
-  - defaults
-dependencies:
-  - python=3.10
-  - ipykernel
-  - pytorch::pytorch
-  - conda-forge::wandb
-prefix: C:\Users\ainav\anaconda3\envs\project_paradigms

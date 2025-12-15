@@ -1,8 +1,0 @@
-{"time":"2025-11-30T12:43:40.646290608+01:00","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpq6b_8oq3/port-395889.txt","pid":395889,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
-{"time":"2025-11-30T12:43:40.660278631+01:00","level":"INFO","msg":"server: will exit if parent process dies","ppid":395889}
-{"time":"2025-11-30T12:43:40.660249657+01:00","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-395889-396014-1906336251/socket","Net":"unix"}}
-{"time":"2025-11-30T12:43:40.771568578+01:00","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
-{"time":"2025-11-30T12:43:40.787917153+01:00","level":"INFO","msg":"handleInformInit: received","streamId":"91qxx1qa","id":"1(@)"}
-{"time":"2025-11-30T12:43:41.230950532+01:00","level":"INFO","msg":"handleInformInit: stream started","streamId":"91qxx1qa","id":"1(@)"}
-{"time":"2025-11-30T12:58:18.806624981+01:00","level":"ERROR","msg":"connection: fatal error reading connection","error":"read unix /tmp/wandb-395889-396014-1906336251/socket->@: read: connection reset by peer","id":"1(@)"}
-{"time":"2025-11-30T12:58:18.916154977+01:00","level":"INFO","msg":"server: parent process exited, terminating service process"}
