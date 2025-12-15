@@ -95,9 +95,9 @@ Videos of the trained agents can be found in the respective folders:
   
 * [Part 2 Videos](./Part_2/test_video)
 
-* Part 3 Videos:
-https://github.com/user-attachments/assets/fb40b2f9-ca0f-404c-a485-cfc0359764b6
-
+**Part 3:**
+<video src="https://github.com/user-attachments/assets/fb40b2f9-ca0f-404c-a485-cfc0359764b6" controls="controls" style="max-width: 100%;">
+</video>
 
 
 
