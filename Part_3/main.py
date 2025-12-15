@@ -7,7 +7,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CallbackList, EvalCallback, BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
-from functions.preprocessing_aina import make_env
+from functions.preprocessing import make_env
 from stable_baselines3.common.callbacks import CheckpointCallback
 
 
