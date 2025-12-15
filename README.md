@@ -103,3 +103,10 @@ To reproduce the environments and training loops, install the required dependenc
 git clone https://github.com/quejimista/Project-PML-Pong.git
 cd Project-PML-Pong
 pip install gymnasium[atari] "gymnasium[accept-rom-license]" pettingzoo stable-baselines3 torch opencv-python
+
+👥 Authors
+[Ivan Martin]
+
+[Aina Navarro]
+
+[David Galindo]
