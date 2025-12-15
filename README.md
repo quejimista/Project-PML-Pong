@@ -1,6 +1,6 @@
 # Project Paradigms of Machine Learning
 
-**Group 04** | Reinforcement Learning & Computer Vision
+**Group 04** | Paradigms of Machine Learning
 
 This repository contains the implementation and analysis of three distinct Reinforcement Learning (RL) paradigms. The project progresses from optimizing single-agent value-based methods to exploring multi-agent policy gradients, and finally addressing reward engineering in sparse reward environments.
 
