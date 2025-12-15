@@ -92,8 +92,11 @@ We engineered a dense reward function by directly accessing the Atari RAM states
 
 Videos of the trained agents can be found in the respective folders:
 * [Part 1 Videos](./Part_1/test_video)
+  
 * [Part 2 Videos](./Part_2/test_video)
-* [Part 3 Videos](https://github.com/user-attachments/assets/fb40b2f9-ca0f-404c-a485-cfc0359764b6)
+
+* [Part 3 Videos]
+https://github.com/user-attachments/assets/fb40b2f9-ca0f-404c-a485-cfc0359764b6
 
 
 
@@ -108,9 +111,11 @@ git clone https://github.com/quejimista/Project-PML-Pong.git
 cd Project-PML-Pong
 pip install gymnasium[atari] "gymnasium[accept-rom-license]" pettingzoo stable-baselines3 torch opencv-python
 ```
-👥 Authors
-[Ivan Martin]
 
-[Aina Navarro]
+## 👥 Authors
 
-[David Galindo]
+| Name | Role | GitHub |
+| :--- | :--- | :--- |
+| **Ivan Martin** | Team Member | [@ivan](https://github.com/quejimista) |
+| **Aina Navarro** | Team Member | [@aina](https://github.com/Aiinins06) |
+| **David Galindo** | Team Member | [@david](https://github.com/DavidGaMu) |
