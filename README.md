@@ -93,7 +93,7 @@ We engineered a dense reward function by directly accessing the Atari RAM states
 Videos of the trained agents can be found in the respective folders:
 * [Part 1 Videos](./Part_1/test_video)
 * [Part 2 Videos](./Part_2/test_video)
-* [Part 3 Videos](./Part_3/test_video)
+* [Part 3 Videos](https://drive.google.com/file/d/1nTCQbVrLavVUYNQR2-pNmFBAqB1f6uso/view?usp=drive_link)
 
 ## 💻 Installation
 
