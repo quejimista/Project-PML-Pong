@@ -91,7 +91,7 @@ We engineered a dense reward function by directly accessing the Atari RAM states
 ## 🎥 Demos & Visualizations
 
 Videos of the trained agents can be found in the respective folders:
-** Part 1:**
+**Part 1:**
 <video src="https://github.com/user-attachments/assets/f19a7809-8ff7-4c65-ba28-8f4d25b205cf" controls="controls" style="max-width: 100%;">
 </video>
 
@@ -101,7 +101,7 @@ Videos of the trained agents can be found in the respective folders:
 <video src="https://github.com/user-attachments/assets/c78ea780-83f5-4d35-8b7c-084659acd6b8" controls="controls" style="max-width: 100%;">
 </video>
 
-** Part 2:**
+**Part 2:**
 <video src="https://github.com/user-attachments/assets/67c80d24-4a9b-41f1-ae41-a068ca2135e1" controls="controls" style="max-width: 100%;">
 </video>
 <video src="https://github.com/user-attachments/assets/64a28dd4-86ed-4cd1-b6fb-15fce6389b3a" controls="controls" style="max-width: 100%;">
