@@ -87,23 +87,23 @@ def run_game(left_agent, right_agent, title="Game Test"):
 if __name__ == "__main__":
     
     # ---------------------------------------------------------
-    # CONFIGURATION: Update these paths to your actual files
+    # CONFIGURATION
     # ---------------------------------------------------------
     
     # PATH 1: Your Best "Part 1" Model (Right-side specialist)
     # This is used for the "Right" side in all tests, and for the "Left" side in the Mirror test.
-    PATH_RIGHT_MODEL = "./exports/pong/best_model/best_model.zip"
+    PATH_RIGHT_MODEL = r"\Project-PML-Pong\Part_2\exports\right_best_model.zip"
     
     # PATH 2: Your "Left Specialist" Model (from train_left.py)
     # Only used if you trained a dedicated left agent.
-    PATH_LEFT_SPECIALIST = "./exports/pong_left/best_model/best_model.zip"
+    PATH_LEFT_SPECIALIST = r"\Project-PML-Pong\Part_2\exports\leftred_best_model.zip"
     
     # PATH 3: Your "Generalist" Model (from train_generalist.py)
     # Only used if you ran the self-play script.
-    PATH_GENERALIST = "./exports/pong_generalist/best_model/best_model.zip"
+    PATH_GENERALIST = r"\Project-PML-Pong\Part_2\exports\generalist_best_model.zip"
 
     # ---------------------------------------------------------
-    # UNCOMMENT THE TEST YOU WANT TO RUN
+    # TESTS
     # ---------------------------------------------------------
 
     # === TEST A: MIRROR STRATEGY (Recommended) ===
